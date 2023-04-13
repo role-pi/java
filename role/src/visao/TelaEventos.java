@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import controle.EventoDAO;
 import modelo.Evento;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,6 +19,8 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class TelaEventos extends JFrame implements ActionListener {
 	private JTextField textField;
@@ -34,6 +35,10 @@ public class TelaEventos extends JFrame implements ActionListener {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
+	private Component verticalStrut;
+	private Component verticalStrut_1;
+	private Component verticalStrut_2;
+	private Component verticalStrut_3;
 	
 	public TelaEventos() {
 		getContentPane().setBackground(new Color(231, 235, 255));
@@ -56,6 +61,9 @@ public class TelaEventos extends JFrame implements ActionListener {
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
+		verticalStrut = Box.createVerticalStrut(5);
+		panel_4.add(verticalStrut);
+		
 		panel_2 = new JPanel();
 		panel_4.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
@@ -66,6 +74,9 @@ public class TelaEventos extends JFrame implements ActionListener {
 		textField_1 = new JTextField();
 		panel_2.add(textField_1);
 		textField_1.setColumns(10);
+		
+		verticalStrut_1 = Box.createVerticalStrut(5);
+		panel_4.add(verticalStrut_1);
 		
 		panel_3 = new JPanel();
 		panel_4.add(panel_3);
@@ -79,9 +90,12 @@ public class TelaEventos extends JFrame implements ActionListener {
 		panel_3.add(textField_2);
 		textField_2.setColumns(10);
 		
+		verticalStrut_2 = Box.createVerticalStrut(5);
+		panel_4.add(verticalStrut_2);
+		
 		panel = new JPanel();
 		panel_4.add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
+		panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		
 		btnInserir = new JButton("Inserir");
 		panel.add(btnInserir);
@@ -94,6 +108,9 @@ public class TelaEventos extends JFrame implements ActionListener {
 		
 		btnDispose = new JButton("Dispose");
 		panel.add(btnDispose);
+		
+		verticalStrut_3 = Box.createVerticalStrut(5);
+		panel_4.add(verticalStrut_3);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel_4.add(scrollPane);
