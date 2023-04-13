@@ -23,18 +23,20 @@ import java.awt.Component;
 import javax.swing.Box;
 
 public class TelaEventos extends JFrame implements ActionListener {
+	private EventoDAO eventoDAO = new EventoDAO();
+	
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JButton btnInserir, btnListar, btnDispose;
 	private JTable table;
 	
-	private EventoDAO eventoDAO = new EventoDAO();
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
+	
 	private Component verticalStrut;
 	private Component verticalStrut_1;
 	private Component verticalStrut_2;
