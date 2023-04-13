@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class TelaEventos extends JFrame implements ActionListener {
 	private JTextField textField;
@@ -28,72 +30,83 @@ public class TelaEventos extends JFrame implements ActionListener {
 	
 	private EventoDAO eventoDAO = new EventoDAO();
 	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JPanel panel_4;
 	
 	public TelaEventos() {
 		getContentPane().setBackground(new Color(231, 235, 255));
 		setResizable(false);
-		getContentPane().setLayout(null);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		panel_4 = new JPanel();
+		getContentPane().add(panel_4);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
+		
+		panel_1 = new JPanel();
+		panel_4.add(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
 		
 		JLabel lblNewLabel = new JLabel("Nome");
-		lblNewLabel.setBounds(18, 11, 61, 16);
-		getContentPane().add(lblNewLabel);
+		panel_1.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(69, 6, 375, 26);
-		getContentPane().add(textField);
+		panel_1.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(117, 39, 327, 26);
-		getContentPane().add(textField_1);
+		panel_2 = new JPanel();
+		panel_4.add(panel_2);
+		panel_2.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
 		
 		JLabel lblDataDeIncio = new JLabel("Data de início");
-		lblDataDeIncio.setBounds(18, 44, 93, 16);
-		getContentPane().add(lblDataDeIncio);
+		panel_2.add(lblDataDeIncio);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(117, 79, 327, 26);
-		getContentPane().add(textField_2);
+		textField_1 = new JTextField();
+		panel_2.add(textField_1);
+		textField_1.setColumns(10);
+		
+		panel_3 = new JPanel();
+		panel_4.add(panel_3);
+		FlowLayout fl_panel_3 = new FlowLayout(FlowLayout.LEADING, 5, 0);
+		panel_3.setLayout(fl_panel_3);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Data de fim");
-		lblNewLabel_1_1.setBounds(18, 84, 93, 16);
-		getContentPane().add(lblNewLabel_1_1);
+		panel_3.add(lblNewLabel_1_1);
+		
+		textField_2 = new JTextField();
+		panel_3.add(textField_2);
+		textField_2.setColumns(10);
 		
 		panel = new JPanel();
-		panel.setBounds(16, 116, 337, 30);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		panel_4.add(panel);
+		panel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
 		
 		btnInserir = new JButton("Inserir");
-		btnInserir.setBounds(0, 0, 117, 29);
 		panel.add(btnInserir);
 		btnInserir.setForeground(new Color(51, 0, 102));
 		
 		btnListar = new JButton("Listar");
-		btnListar.setBounds(111, 1, 117, 29);
 		panel.add(btnListar);
 		btnListar.setForeground(new Color(0, 102, 0));
 		btnListar.setBackground(new Color(204, 255, 204));
 		
 		btnDispose = new JButton("Dispose");
-		btnDispose.setBounds(220, 0, 117, 29);
 		panel.add(btnDispose);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_4.add(scrollPane);
+		
 		btnDispose.addActionListener(this);
 		btnListar.addActionListener(this);
 		btnInserir.addActionListener(this);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(18, 161, 426, 243);
-		getContentPane().add(scrollPane);
 		
 		DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Nome");
         model.addColumn("Data de início");
         model.addColumn("Data de fim");
-		
+
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 	}
@@ -130,12 +143,14 @@ public class TelaEventos extends JFrame implements ActionListener {
 	public void listar() {
 		ArrayList<Evento> eventos = eventoDAO.listaEventos();
 		
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		model.setNumRows(0);
+		
 		for (Evento evento: eventos) {
 			String nome = evento.getNome();
 			String dataInicio = evento.getDataInicio();
 			String dataFim = evento.getDataFim();
-			
-			DefaultTableModel model = (DefaultTableModel) table.getModel();
 	        model.addRow(new Object[]{nome, dataInicio, dataFim});
 		}
 	}
