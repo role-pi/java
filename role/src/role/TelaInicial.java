@@ -34,12 +34,6 @@ public class TelaInicial extends JFrame {
 		getContentPane().add(panel);
 		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
 		
-		//setUndecorated(true);
-	    //getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
-		System.setProperty( "apple.awt.application.appearance", "NSAppearanceNameDarkAqua" );
-		//if( SystemInfo.isMacFullWindowContentSupported )
-		    getRootPane().putClientProperty( "apple.awt.transparentTitleBar", true );
-		
 		UIDefaults uiDefaults = UIManager.getDefaults();
 		uiDefaults.put("activeCaption", new javax.swing.plaf.ColorUIResource(Color.black));
 		uiDefaults.put("activeCaptionText", new javax.swing.plaf.ColorUIResource(Color.white));
@@ -54,7 +48,12 @@ public class TelaInicial extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua");
+	    
 		TelaInicial tela = new TelaInicial();
+
+	    tela.getRootPane().putClientProperty("apple.awt.transparentTitleBar", true);
+	    
 		tela.setVisible(true);
         tela.setBounds(40,40,700,600); 
 	}
