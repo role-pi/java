@@ -34,4 +34,9 @@ public class InsumoDAO {
 	public ArrayList<InsumoModel> listaInsumos() {
 		return insumos;
 	}
+
+	public int getSelectedRow() {
+		return 0;
+	}
+	
 }

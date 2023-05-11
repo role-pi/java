@@ -9,6 +9,7 @@ import modelo.Evento;
 import modelo.InsumoModel;
 
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.List;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,7 @@ public class InsumoView extends JFrame {
 
     public InsumoView() {
         setTitle("Cadastro de Insumo");
-        setSize(500, 300);
+        setSize(600, 350);
         setLocationRelativeTo(null);
 
         JPanel contentPane = new JPanel();
@@ -68,12 +69,12 @@ public class InsumoView extends JFrame {
 
             eventosComboBox = new JComboBox<>(nomesEventos);
         } else {
-            // Tratar caso em que a lista de eventos está vazia ou nula
             eventosComboBox = new JComboBox<>();
         }
 
         JLabel eventosLabel = new JLabel("Eventos:");
-        // eventosComboBox = new JComboBox<String>(new String[] { "Evento 1", "Evento 2", "Evento 3" });
+        // eventosComboBox = new JComboBox<String>(new String[] { "Evento 1", "Evento
+        // 2", "Evento 3" });
         contentPane.add(eventosLabel);
         contentPane.add(eventosComboBox);
 
@@ -85,19 +86,52 @@ public class InsumoView extends JFrame {
             }
         });
         contentPane.add(new JLabel());
-
         contentPane.add(cadastrarButton);
 
         JButton visualizarButton = new JButton("Visualizar Insumos");
+        JButton removerInsumoButton = new JButton("Remover Insumo");
+
+        removerInsumoButton.setEnabled(false); 
+
         visualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 visualizarInsumos();
+                removerInsumoButton.setEnabled(true);
             }
         });
-        contentPane.add(new JLabel());
-        contentPane.add(visualizarButton);
 
+        removerInsumoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removerInsumo();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.add(visualizarButton);
+        buttonPanel.add(removerInsumoButton);
+
+        contentPane.add(buttonPanel);
+    }
+
+    private void removerInsumo(int rowIndex) {
+        insumoDAO.delete(rowIndex);
+    }
+
+    private void removerInsumo() {
+        int selectedRow = insumoDAO.getSelectedRow();
+        if (selectedRow != -1) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o insumo?", "Remover Insumo",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                removerInsumo(selectedRow);
+                JOptionPane.showMessageDialog(null, "Insumo removido com sucesso!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
+        }
     }
 
     private void cadastrarInsumo() {
