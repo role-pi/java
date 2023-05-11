@@ -14,6 +14,10 @@ public class InsumoDAO {
 		}
 		return false;
 	}
+
+	public ArrayList<InsumoModel> listaInsumos() {
+		return insumos;
+	}
 	
 	public boolean update(InsumoModel insum, Integer insumoID) {
 		if (insum != null) {
@@ -31,10 +35,6 @@ public class InsumoDAO {
 		return true;
 	}
 	
-	public ArrayList<InsumoModel> listaInsumos() {
-		return insumos;
-	}
-
 	public int getSelectedRow() {
 		return 0;
 	}

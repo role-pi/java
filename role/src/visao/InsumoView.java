@@ -91,7 +91,7 @@ public class InsumoView extends JFrame {
         JButton visualizarButton = new JButton("Visualizar Insumos");
         JButton removerInsumoButton = new JButton("Remover Insumo");
 
-        removerInsumoButton.setEnabled(false); 
+        removerInsumoButton.setEnabled(false);
 
         visualizarButton.addActionListener(new ActionListener() {
             @Override
@@ -139,52 +139,60 @@ public class InsumoView extends JFrame {
         String nome = nomeTextField.getText();
         String descricao = descricaoTextField.getText();
         double valor = Double.parseDouble(valorTextField.getText());
-        String evento = (String) eventosComboBox.getSelectedItem();
+        Evento evento = (Evento) eventosComboBox.getSelectedItem();
+    
+        InsumoModel insumo = new InsumoModel(tipo, nome, descricao, valor, evento);
+        boolean cadastrado = insumoDAO.insert(insumo);
 
-        System.out.println("Insumo cadastrado:");
-        System.out.println("Tipo: " + tipo);
-        System.out.println("Nome: " + nome);
-        System.out.println("Descrição: " + descricao);
-        System.out.println("Valor: " + valor);
-        System.out.println("Evento: " + evento);
+        if (cadastrado) {
+            System.out.println("Insumo cadastrado:");
+            System.out.println("Tipo: " + tipo);
+            System.out.println("Nome: " + nome);
+            System.out.println("Descrição: " + descricao);
+            System.out.println("Valor: " + valor);
+            System.out.println("Evento: " + evento);
+    
+            nomeTextField.setText("");
+            descricaoTextField.setText("");
+            valorTextField.setText("");
+        } else {
+            System.out.println("Erro ao cadastrar insumo.");
+        }
     }
+    
 
     private void visualizarInsumos() {
+    // TABELA DE INSUMOS
+    JFrame tabelaFrame = new JFrame("Tabela de Insumos");
+    tabelaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    tabelaFrame.setSize(700, 600);
 
-        // TABELA DE INUSMOS
-        JFrame tabelaFrame = new JFrame("Tabela de Insumos");
-        tabelaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tabelaFrame.setSize(700, 600);
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Tipo");
+    model.addColumn("Nome");
+    model.addColumn("Descrição");
+    model.addColumn("Valor");
+    model.addColumn("Eventos");
 
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Tipo");
-        model.addColumn("Nome");
-        model.addColumn("Descricao");
-        model.addColumn("Valor");
-        model.addColumn("Eventos");
+    ArrayList<InsumoModel> insumos = insumoDAO.listaInsumos();
 
-        table = new JTable(model);
+    for (InsumoModel insumo : insumos) {
+        String tipo = insumo.getTipo();
+        String nome = insumo.getNome();
+        String descricao = insumo.getDescricao();
+        double valor = insumo.getValor();
+        Evento eventos = insumo.getEventos();
 
-        ArrayList<InsumoModel> insumos = insumoDAO.listaInsumos();
-
-        model.setNumRows(0);
-
-        for (InsumoModel insumo : insumos) {
-            String tipo = insumo.getNome();
-            String nome = insumo.getNome();
-            String descricao = insumo.getNome();
-            double valor = insumo.getValor();
-            Evento eventos = insumo.getEventos();
-
-            model.addRow(new Object[] { tipo, nome, descricao, valor, eventos });
-        }
-
-        JTable tabela = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(tabela);
-        tabelaFrame.getContentPane().add(scrollPane);
-
-        tabelaFrame.setVisible(true);
+        model.addRow(new Object[]{tipo, nome, descricao, valor, eventos});
     }
+
+    JTable tabela = new JTable(model);
+    JScrollPane scrollPane = new JScrollPane(tabela);
+    tabelaFrame.getContentPane().add(scrollPane);
+
+    tabelaFrame.setVisible(true);
+}
+
 
     public static void main(String[] args) {
         InsumoView insumoView = new InsumoView();
