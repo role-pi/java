@@ -1,71 +1,75 @@
 package visao;
 
 import javax.swing.JFrame;
-import java.awt.Color;
-import java.awt.Dimension;
 
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.event.ActionListener;
+
 import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
 
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class TelaInicial extends JFrame {
+
 	public TelaInicial() {
-		getContentPane().setBackground(Color.WHITE);
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setVgap(0);
-		flowLayout.setHgap(0);
-		panel.setBackground(Color.BLACK);
-		getContentPane().add(panel);
-		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
-		
-		UIDefaults uiDefaults = UIManager.getDefaults();
-		uiDefaults.put("activeCaption", new javax.swing.plaf.ColorUIResource(Color.black));
-		uiDefaults.put("activeCaptionText", new javax.swing.plaf.ColorUIResource(Color.white));
-		setDefaultLookAndFeelDecorated(true);
-		
-		JLabel lblNewLabel = new JLabel("Rolê");
-		lblNewLabel.setForeground(Color.WHITE);
-		panel.add(lblNewLabel);
-//		ImageIcon icon = new ImageIcon(TelaInicial.class.getResource("/role/Logo.png"));
-//		lblNewLabel.setIcon(new ImageIcon(getScaledImage(icon.getImage(), 450/3, 228/3)));
-		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 13));
+		setTitle("Tela Inicial");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(500, 400);
+		setLocationRelativeTo(null);
+
+		JPanel contentPane = new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Image image = new ImageIcon("role/src/role/Logo.png").getImage();
+				g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+			}
+		};
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout());
+
+		JPanel panelBotoes = new JPanel();
+		contentPane.add(panelBotoes, BorderLayout.CENTER);
+
+		JButton btnCadastrarInsumo = new JButton("Cadastrar Insumo");
+		btnCadastrarInsumo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaCadastroInsumo();
+			}
+		});
+		panelBotoes.add(btnCadastrarInsumo);
+
+		JButton btnCadastrarEvento = new JButton("Cadastrar Evento");
+		btnCadastrarEvento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaCadastroEvento();
+			}
+		});
+		panelBotoes.add(btnCadastrarEvento);
+
+		setVisible(true);
+	}
+
+	private void abrirTelaCadastroInsumo() {
+		InsumoView telaDeInsumo = new InsumoView();
+		telaDeInsumo.setVisible(true);
+	}
+
+	private void abrirTelaCadastroEvento() {
+		TelaEventos telaDeEventos = new TelaEventos();
+		telaDeEventos.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua");
-	    
-		TelaInicial tela = new TelaInicial();
-
-	    tela.getRootPane().putClientProperty("apple.awt.transparentTitleBar", true);
-	    
-		tela.setVisible(true);
-        tela.setBounds(40,40,700,600); 
-	}
-
-	private Image getScaledImage(Image srcImg, int w, int h){
-	    BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-	    Graphics2D g2 = resizedImg.createGraphics();
-	
-	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    g2.drawImage(srcImg, 0, 0, w, h, null);
-	    g2.dispose();
-	
-	    return resizedImg;
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new TelaInicial();
+			}
+		});
 	}
 }
