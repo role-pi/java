@@ -35,8 +35,11 @@ public class InsumoDAO {
 		return true;
 	}
 	
-	public int getSelectedRow() {
-		return 0;
+	public boolean removerInsumo(int selectedRow) {
+		if (selectedRow >= 0 && selectedRow < insumos.size()) {
+			insumos.remove(selectedRow);
+			return true;
+		}
+		return false;
 	}
-	
 }

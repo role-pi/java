@@ -8,6 +8,7 @@ import controle.InsumoDAO;
 import modelo.Evento;
 import modelo.InsumoModel;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -26,8 +27,7 @@ public class InsumoView extends JFrame {
     private JComboBox<String> tipoComboBox;
     private JComboBox<String> eventosComboBox;
     private JTable table;
-
-    private Component verticalStrutVizuInsumos;
+    private JTable tabela;
 
     public InsumoView() {
         setTitle("Cadastro de Insumo");
@@ -89,29 +89,17 @@ public class InsumoView extends JFrame {
         contentPane.add(cadastrarButton);
 
         JButton visualizarButton = new JButton("Visualizar Insumos");
-        JButton removerInsumoButton = new JButton("Remover Insumo");
-
-        removerInsumoButton.setEnabled(false);
 
         visualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 visualizarInsumos();
-                removerInsumoButton.setEnabled(true);
-            }
-        });
-
-        removerInsumoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                removerInsumo();
             }
         });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(visualizarButton);
-        buttonPanel.add(removerInsumoButton);
 
         contentPane.add(buttonPanel);
     }
@@ -120,27 +108,13 @@ public class InsumoView extends JFrame {
         insumoDAO.delete(rowIndex);
     }
 
-    private void removerInsumo() {
-        int selectedRow = insumoDAO.getSelectedRow();
-        if (selectedRow != -1) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o insumo?", "Remover Insumo",
-                    JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                removerInsumo(selectedRow);
-                JOptionPane.showMessageDialog(null, "Insumo removido com sucesso!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
-        }
-    }
-
     private void cadastrarInsumo() {
         String tipo = (String) tipoComboBox.getSelectedItem();
         String nome = nomeTextField.getText();
         String descricao = descricaoTextField.getText();
         double valor = Double.parseDouble(valorTextField.getText());
         Evento evento = (Evento) eventosComboBox.getSelectedItem();
-    
+
         InsumoModel insumo = new InsumoModel(tipo, nome, descricao, valor, evento);
         boolean cadastrado = insumoDAO.insert(insumo);
 
@@ -151,7 +125,7 @@ public class InsumoView extends JFrame {
             System.out.println("Descrição: " + descricao);
             System.out.println("Valor: " + valor);
             System.out.println("Evento: " + evento);
-    
+
             nomeTextField.setText("");
             descricaoTextField.setText("");
             valorTextField.setText("");
@@ -159,40 +133,70 @@ public class InsumoView extends JFrame {
             System.out.println("Erro ao cadastrar insumo.");
         }
     }
-    
 
     private void visualizarInsumos() {
-    // TABELA DE INSUMOS
-    JFrame tabelaFrame = new JFrame("Tabela de Insumos");
-    tabelaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    tabelaFrame.setSize(700, 600);
 
-    DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("Tipo");
-    model.addColumn("Nome");
-    model.addColumn("Descrição");
-    model.addColumn("Valor");
-    model.addColumn("Eventos");
+        // TABELA DE INSUMOS
+        JFrame tabelaFrame = new JFrame("Tabela de Insumos");
+        tabelaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        tabelaFrame.setSize(700, 600);
 
-    ArrayList<InsumoModel> insumos = insumoDAO.listaInsumos();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Tipo");
+        model.addColumn("Nome");
+        model.addColumn("Descrição");
+        model.addColumn("Valor");
+        model.addColumn("Eventos");
 
-    for (InsumoModel insumo : insumos) {
-        String tipo = insumo.getTipo();
-        String nome = insumo.getNome();
-        String descricao = insumo.getDescricao();
-        double valor = insumo.getValor();
-        Evento eventos = insumo.getEventos();
+        ArrayList<InsumoModel> insumos = insumoDAO.listaInsumos();
 
-        model.addRow(new Object[]{tipo, nome, descricao, valor, eventos});
+        for (InsumoModel insumo : insumos) {
+            String tipo = insumo.getTipo();
+            String nome = insumo.getNome();
+            String descricao = insumo.getDescricao();
+            double valor = insumo.getValor();
+            Evento eventos = insumo.getEventos();
+
+            model.addRow(new Object[] { tipo, nome, descricao, valor, eventos });
+        }
+
+        tabela = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        tabelaFrame.getContentPane().add(scrollPane);
+
+        tabelaFrame.setVisible(true);
+
+        JButton removerInsumoButton = new JButton("Remover Insumo");
+        removerInsumoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removerInsumo();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.add(removerInsumoButton);
+
+        tabelaFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
+        tabelaFrame.setVisible(true);
     }
 
-    JTable tabela = new JTable(model);
-    JScrollPane scrollPane = new JScrollPane(tabela);
-    tabelaFrame.getContentPane().add(scrollPane);
-
-    tabelaFrame.setVisible(true);
-}
-
+    private void removerInsumo() {
+        int selectedRow = tabela.getSelectedRow();
+        if (selectedRow != -1) {
+            int confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o insumo?", "Remover Insumo",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+                model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(null, "Insumo removido com sucesso!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
+        }
+    }
 
     public static void main(String[] args) {
         InsumoView insumoView = new InsumoView();
