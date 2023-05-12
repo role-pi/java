@@ -28,7 +28,6 @@ public class InsumoView extends JFrame {
     private JComboBox<String> eventosComboBox;
     private JTable table;
     private JTable tabela;
-    private JFrame tabelaFrame;
 
     public InsumoView() {
         setTitle("Cadastro de Insumo");
@@ -120,22 +119,25 @@ public class InsumoView extends JFrame {
         boolean cadastrado = insumoDAO.insert(insumo);
 
         if (cadastrado) {
-            JOptionPane.showMessageDialog(null, "Insumo Cadastrado!");
+            System.out.println("Insumo cadastrado:");
+            System.out.println("Tipo: " + tipo);
+            System.out.println("Nome: " + nome);
+            System.out.println("Descrição: " + descricao);
+            System.out.println("Valor: " + valor);
+            System.out.println("Evento: " + evento);
 
             nomeTextField.setText("");
             descricaoTextField.setText("");
             valorTextField.setText("");
         } else {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar insumo.");
+            System.out.println("Erro ao cadastrar insumo.");
         }
     }
 
     private void visualizarInsumos() {
-        if (tabelaFrame != null && tabelaFrame.isVisible()) {
-            tabelaFrame.dispose();
-        }
 
-        tabelaFrame = new JFrame("Tabela de Insumos");
+        // TABELA DE INSUMOS
+        JFrame tabelaFrame = new JFrame("Tabela de Insumos");
         tabelaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         tabelaFrame.setSize(700, 600);
 
@@ -163,6 +165,22 @@ public class InsumoView extends JFrame {
         tabelaFrame.getContentPane().add(scrollPane);
 
         tabelaFrame.setVisible(true);
+
+        JButton removerInsumoButton = new JButton("Remover Insumo");
+        removerInsumoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removerInsumo();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.add(removerInsumoButton);
+
+        tabelaFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
+        tabelaFrame.setVisible(true);
     }
 
     private void removerInsumo() {
@@ -177,25 +195,6 @@ public class InsumoView extends JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
-        }
-    }
-
-    private void atualizarInsumos() {
-        int selectedRow = tabela.getSelectedRow();
-        if (selectedRow != -1) {
-            String tipo = (String) tabela.getValueAt(selectedRow, 0);
-            String nome = (String) tabela.getValueAt(selectedRow, 1);
-            String descricao = (String) tabela.getValueAt(selectedRow, 2);
-            double valor = (double) tabela.getValueAt(selectedRow, 3);
-            Evento evento = (Evento) tabela.getValueAt(selectedRow, 4);
-
-            tipoComboBox.setSelectedItem(tipo);
-            nomeTextField.setText(nome);
-            descricaoTextField.setText(descricao);
-            valorTextField.setText(String.valueOf(valor));
-            eventosComboBox.setSelectedItem(evento);
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para atualizar.");
         }
     }
 
