@@ -17,24 +17,25 @@ import java.awt.*;
 public class TelaInicial extends JFrame {
 
 	public TelaInicial() {
-		setTitle("Tela Inicial");
+        setTitle("Tela Inicial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
 		setLocationRelativeTo(null);
 
-		JPanel contentPane = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				Image image = new ImageIcon("role/src/role/Logo.png").getImage();
-				g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-			}
-		};
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout());
+        JPanel contentPane = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Image image = new ImageIcon("role/src/visao/Logo.png").getImage();
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout());
 
-		JPanel panelBotoes = new JPanel();
-		contentPane.add(panelBotoes, BorderLayout.CENTER);
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.setOpaque(false);
+        contentPane.add(panelBotoes, BorderLayout.CENTER);
 
 		JButton btnCadastrarInsumo = new JButton("Cadastrar Insumo");
 		btnCadastrarInsumo.addActionListener(new ActionListener() {
