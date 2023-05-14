@@ -34,22 +34,10 @@ public class TelaInicial extends JFrame {
             }
         };
         setContentPane(contentPane);
-        contentPane.setLayout(new MigLayout("ins 0, wrap 1", "[500px,grow]", "[grow][grow][372px,grow]"));
+        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][grow][372px,grow]"));
         
-        JPanel panel = new JPanel();
-        FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-        flowLayout.setAlignment(FlowLayout.LEFT);
-        flowLayout.setVgap(10);
-        flowLayout.setHgap(20);
+        JPanel panel = new HeaderView();
         contentPane.add(panel, "cell 0 0,grow");
-        
-		panel.setBackground(Color.BLACK);
-		panel.setMinimumSize(new Dimension(Integer.MIN_VALUE, 75));
-		
-		JLabel lblNewLabel = new JLabel("rolê");
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 38));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		panel.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -70,26 +58,6 @@ public class TelaInicial extends JFrame {
 		panel_1.add(panel_3);
 		panel_1.add(panel_4);
 
-        JPanel panelBotoes = new JPanel();
-        panelBotoes.setOpaque(false);
-//        contentPane.add(panelBotoes, "cell 0 2,grow");
-
-		JButton btnCadastrarInsumo = new JButton("Cadastrar Insumo 🪩");
-		btnCadastrarInsumo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirTelaCadastroInsumo();
-			}
-		});
-		panelBotoes.add(btnCadastrarInsumo);
-
-		JButton btnCadastrarEvento = new JButton("Cadastrar Evento");
-		btnCadastrarEvento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirTelaCadastroEvento();
-			}
-		});
-		panelBotoes.add(btnCadastrarEvento);
-
 		setVisible(true);
 	}
 
@@ -104,7 +72,6 @@ public class TelaInicial extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(System.getProperty("java.version"));
 		TelaInicial tela = new TelaInicial();
 		tela.setVisible(true);
 	}
