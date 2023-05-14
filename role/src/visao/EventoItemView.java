@@ -40,6 +40,6 @@ public class EventoItemView extends RoundedPanel {
 		
 		JButton btnNewButton = new JButton("Editar");
 		add(btnNewButton);
-//		setMaximumSize(new Dimension(Integer.MIN_VALUE, 75));
+		setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
 	}
 }

@@ -15,11 +15,12 @@ import javax.swing.*;
 import java.awt.*;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.EmptyBorder;
 
 public class TelaInicial extends JFrame {
 
 	public TelaInicial() {
-        setTitle("Tela Inicial");
+        setTitle("rolê");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
 		setLocationRelativeTo(null);
@@ -46,48 +47,28 @@ public class TelaInicial extends JFrame {
 		panel.setMinimumSize(new Dimension(Integer.MIN_VALUE, 75));
 		
 		JLabel lblNewLabel = new JLabel("rolê");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 38));
+		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 38));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		panel.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		contentPane.add(scrollPane, "cell 0 1 1 2,grow");
-		scrollPane.setViewportBorder(null);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+//		scrollPane.setViewportBorder(null);
 		
 		JPanel panel_1 = new JPanel();
 		scrollPane.setViewportView(panel_1);
 		panel_1.setBackground(Color.WHITE);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{477, 0};
-		gbl_panel_1.rowHeights = new int[]{63, 63, 63, 63, 63, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
+		panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		JPanel panel_2 = new EventoItemView("✨", "Rolê na fac", "23 de maio • 7 participantes");
-		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-		gbc_panel_2.fill = GridBagConstraints.BOTH;
-		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_2.gridx = 0;
-		gbc_panel_2.gridy = 0;
-		panel_1.add(panel_2, gbc_panel_2);
-		
 		JPanel panel_3 = new EventoItemView("🌱", "Churrasco vegano", "06 de junho • 15 participantes");
-		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
-		gbc_panel_3.fill = GridBagConstraints.BOTH;
-		gbc_panel_3.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_3.gridx = 0;
-		gbc_panel_3.gridy = 1;
-		panel_1.add(panel_3, gbc_panel_3);
-		
 		JPanel panel_4 = new EventoItemView("🎡", "Parque de diversões", "12 de junho • 3 participantes");
-		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
-		gbc_panel_4.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_4.fill = GridBagConstraints.BOTH;
-		gbc_panel_4.gridx = 0;
-		gbc_panel_4.gridy = 2;
-		panel_1.add(panel_4, gbc_panel_4);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		panel_1.add(panel_2);
+		panel_1.add(panel_3);
+		panel_1.add(panel_4);
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.setOpaque(false);
