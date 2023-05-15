@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
@@ -49,10 +50,18 @@ public class InsumosDetailView extends RoundedPanel {
 		lblX.setBackground(Color.WHITE);
 		panel_1.add(lblX);
 		
+		DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nome");
+        model.addColumn("Data de início");
+        model.addColumn("Data de fim");
+        
+
+        model.addRow(new Object[]{"Teste", "", ""});
+
+		JTable table = new JTable(model);
+		panel.add(table);
+		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
-		
-		JTable table = new JTable();
-		panel.add(table);
 	}
 }

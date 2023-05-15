@@ -16,6 +16,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
 public class TelaInicial extends JFrame {
+	private JTextField textField;
 
 	public TelaInicial() {
         setTitle("rolê");
@@ -70,6 +71,21 @@ public class TelaInicial extends JFrame {
 		panel_1.add(panel_2);
 		panel_1.add(panel_3);
 		panel_1.add(panel_4);
+		
+		JPanel newEventPanel = new RoundedPanel();
+		panel_1.add(newEventPanel);
+		newEventPanel.setLayout(new BoxLayout(newEventPanel, BoxLayout.X_AXIS));
+		
+		textField = new JTextField();
+		textField.setToolTipText("");
+		newEventPanel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Adicionar");
+		newEventPanel.add(btnNewButton);
+		
+		newEventPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
+		newEventPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		setVisible(true);
 	}
