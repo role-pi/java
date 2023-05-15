@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import java.awt.SystemColor;
 
 public class ParticipantesDetailView extends RoundedPanel {
-	public ParticipantesDetailView (String emoji, String titulo, String data) {
+	public ParticipantesDetailView () {
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -33,11 +33,6 @@ public class ParticipantesDetailView extends RoundedPanel {
 		verticalBox.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 17));
 		
-		JLabel lblNewLabel_2 = new JLabel(data);
-		verticalBox.add(lblNewLabel_2);
-		lblNewLabel_2.setForeground(new Color(83, 83, 83));
-		lblNewLabel_2.setFont(new Font("SF Compact Display", Font.PLAIN, 12));
-		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
 		
@@ -46,6 +41,5 @@ public class ParticipantesDetailView extends RoundedPanel {
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
-//		setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
 	}
 }

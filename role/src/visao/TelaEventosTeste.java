@@ -22,7 +22,7 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class TelaEventos extends JFrame implements ActionListener {
+public class TelaEventosTeste extends JFrame implements ActionListener {
 	private EventoDAO eventoDAO = new EventoDAO();
 	
 	private JTextField textField;
@@ -42,7 +42,7 @@ public class TelaEventos extends JFrame implements ActionListener {
 	private Component verticalStrut_2;
 	private Component verticalStrut_3;
 	
-	public TelaEventos() {
+	public TelaEventosTeste() {
 		getContentPane().setBackground(new Color(231, 235, 255));
 		setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -131,7 +131,7 @@ public class TelaEventos extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		TelaEventos tela = new TelaEventos();
+		TelaEventosTeste tela = new TelaEventosTeste();
 		tela.setVisible(true);
 	}
 

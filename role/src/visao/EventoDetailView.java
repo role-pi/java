@@ -10,7 +10,8 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 
 public class EventoDetailView extends RoundedPanel {
-	public EventoDetailView (String emoji, String titulo, String data) {
+	public EventoDetailView (String emoji, String titulo, String data, Color color) {
+		super(color);
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(10, 10, 10, 10));
