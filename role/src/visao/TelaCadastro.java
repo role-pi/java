@@ -21,8 +21,11 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class TelaCadastro extends JFrame {
 
@@ -30,6 +33,8 @@ public class TelaCadastro extends JFrame {
 	private JTextField nometxt;
 	private JLabel InserirNome;
 	private JButton BotaoEntrar;
+	private JPanel panel;
+	private JPanel panel_1;
 	
 	public TelaCadastro() {
 		setBackground(SystemColor.window);
@@ -45,28 +50,45 @@ public class TelaCadastro extends JFrame {
 	            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		  }
 		};
+		contentPane.setBackground(SystemColor.window);
 		setContentPane(contentPane);
-        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][][grow][][372px,grow][]"));
+        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][]"));
         
         JPanel bordaLogo = new HeaderView();
         contentPane.add(bordaLogo, "cell 0 0,grow");
 		
-		JLabel BemVindotxt = new JLabel("Bem Vindo!");
-		contentPane.add(BemVindotxt, "cell 0 3,alignx center");
-		BemVindotxt.setFont(new Font("Dialog", Font.BOLD, 20));
+		panel_1 = new JPanel();
+		contentPane.add(panel_1, "cell 0 1,grow");
+		panel_1.setLayout(new MigLayout("", "[500px,grow]", "[][372px,grow][]"));
 		
-		InserirNome = new JLabel("Insira o seu nome:");
-		InserirNome.setFont(new Font("Dialog", Font.BOLD, 15));
-		contentPane.add(InserirNome, "flowx,cell 0 4,alignx center,aligny center");
+		JLabel BemVindotxt = new JLabel("desejamos as boas vindas");
+		panel_1.add(BemVindotxt, "cell 0 0,alignx center");
+		BemVindotxt.setFont(new Font("Inter", Font.BOLD, 20));
 		
-		BotaoEntrar = new JButton("Entrar");
-		BotaoEntrar.setFont(new Font("Dialog", Font.BOLD, 14));
-		contentPane.add(BotaoEntrar, "cell 0 5,alignx center,aligny center");
+		panel = new JPanel();
+		panel_1.add(panel, "cell 0 1,grow");
+		panel.setBackground(SystemColor.window);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		InserirNome = new JLabel("como você se chama?");
+		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
+		InserirNome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		InserirNome.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(InserirNome);
+		InserirNome.setFont(new Font("Inter", Font.BOLD, 15));
+		
+		panel.setMaximumSize( new Dimension(200, 60));
 		
 		nometxt = new JTextField();
-		nometxt.setFont(new Font("Dialog", Font.PLAIN, 15));
-		contentPane.add(nometxt, "cell 0 4,alignx center,aligny center");
+		nometxt.setBackground(SystemColor.menu);
+		nometxt.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(nometxt);
+		nometxt.setFont(new Font("Inter", Font.PLAIN, 15));
 		nometxt.setColumns(10);
+		
+		BotaoEntrar = new JButton("Entrar");
+		panel_1.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
+		BotaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
 		
 	}
 	public static void main(String[] args) {
