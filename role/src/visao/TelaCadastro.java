@@ -60,7 +60,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(InserirNome, "flowx,cell 0 4,alignx center,aligny center");
 		
 		BotaoEntrar = new JButton("Entrar");
-		BotaoEntrar.setFont(new Font("Dialog", Font.BOLD, 15));
+		BotaoEntrar.setFont(new Font("Dialog", Font.BOLD, 14));
 		contentPane.add(BotaoEntrar, "cell 0 5,alignx center,aligny center");
 		
 		nometxt = new JTextField();
