@@ -16,7 +16,7 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 
 public class InsumosDetailView extends RoundedPanel {
-	public InsumosDetailView (String emoji, String titulo, String data) {
+	public InsumosDetailView () {
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(10, 10, 10, 10));

@@ -3,8 +3,6 @@ package visao;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
-
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
@@ -34,26 +32,41 @@ public class TelaInicial extends JFrame {
             }
         };
         setContentPane(contentPane);
-        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][grow][372px,grow]"));
+        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[80px][grow]"));
         
         JPanel panel = new HeaderView();
         contentPane.add(panel, "cell 0 0,grow");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		contentPane.add(scrollPane, "cell 0 1 1 2,grow");
+		contentPane.add(scrollPane, "cell 0 1,grow");
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 //		scrollPane.setViewportBorder(null);
 		
 		JPanel panel_1 = new JPanel();
 		scrollPane.setViewportView(panel_1);
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panel_1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		
-		JPanel panel_2 = new EventoItemView("✨", "Rolê na fac", "23 de maio • 7 participantes");
-		JPanel panel_3 = new EventoItemView("🌱", "Churrasco vegano", "06 de junho • 15 participantes");
-		JPanel panel_4 = new EventoItemView("🎡", "Parque de diversões", "12 de junho • 3 participantes");
+		JPanel panel_2 = new EventoItemView("✨", "Rolê na fac", "23 de maio • 7 participantes", new Color(249, 236, 170));
+		JPanel panel_3 = new EventoItemView("🌱", "Churrasco vegano", "06 de junho • 15 participantes", new Color(212, 229, 195));
+		JPanel panel_4 = new EventoItemView("🎡", "Parque de diversões", "12 de junho • 3 participantes", new Color(216, 197, 243));
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		
+		JPanel panel_5 = new JPanel();
+		panel_1.add(panel_5);
+		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
+		panel_5.setBackground(new Color(0, 0, 0, 0));
+		JLabel lblNewLabel = new JLabel("próximos rolês");
+		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 24));
+		panel_5.add(lblNewLabel);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		panel_5.add(horizontalGlue);
+		
+		Component verticalStrut = Box.createVerticalStrut(10);
+		panel_1.add(verticalStrut);
+		
 		panel_1.add(panel_2);
 		panel_1.add(panel_3);
 		panel_1.add(panel_4);
@@ -67,7 +80,7 @@ public class TelaInicial extends JFrame {
 	}
 
 	private void abrirTelaCadastroEvento() {
-		TelaEventos telaDeEventos = new TelaEventos();
+		TelaEventosTeste telaDeEventos = new TelaEventosTeste();
 		telaDeEventos.setVisible(true);
 	}
 
