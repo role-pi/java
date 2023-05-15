@@ -16,7 +16,7 @@ public class ParticipantesDetailView extends RoundedPanel {
 	public ParticipantesDetailView () {
 		setBackground(new Color(236, 236, 236));
 		
-		setBorder(new EmptyBorder(10, 10, 10, 10));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -31,7 +31,7 @@ public class ParticipantesDetailView extends RoundedPanel {
 		lblNewLabel.setForeground(SystemColor.scrollbar);
 		lblNewLabel.setBackground(new Color(255, 255, 255));
 		verticalBox.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 17));
+		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 17));
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);

@@ -28,7 +28,7 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 		
 		JLabel lblNewLabel_1 = new JLabel(emoji);
 		add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("SF Pro Display", Font.BOLD, 35));
+		lblNewLabel_1.setFont(new Font("Inter", Font.BOLD, 35));
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(8);
 		add(horizontalStrut_1);
@@ -38,12 +38,12 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel(titulo);
 		verticalBox.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 14));
+		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 14));
 		
 		JLabel lblNewLabel_2 = new JLabel(descricao);
 		verticalBox.add(lblNewLabel_2);
 		lblNewLabel_2.setForeground(new Color(83, 83, 83));
-		lblNewLabel_2.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
+		lblNewLabel_2.setFont(new Font("Inter", Font.PLAIN, 13));
 		
 		Component horizontalStrut = Box.createHorizontalGlue();
 		add(horizontalStrut);

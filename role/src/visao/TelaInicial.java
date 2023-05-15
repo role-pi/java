@@ -59,7 +59,7 @@ public class TelaInicial extends JFrame {
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		panel_5.setBackground(new Color(0, 0, 0, 0));
 		JLabel lblNewLabel = new JLabel("próximos rolês");
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 24));
+		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
 		panel_5.add(lblNewLabel);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();

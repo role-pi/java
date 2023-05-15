@@ -20,7 +20,7 @@ public class InsumosDetailView extends RoundedPanel {
 	public InsumosDetailView () {
 		setBackground(new Color(236, 236, 236));
 		
-		setBorder(new EmptyBorder(10, 10, 10, 10));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -39,24 +39,23 @@ public class InsumosDetailView extends RoundedPanel {
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setForeground(SystemColor.scrollbar);
 		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 17));
+		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 17));
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
 		JLabel lblX = new JLabel("+");
 		lblX.setForeground(UIManager.getColor("Button.darkShadow"));
-		lblX.setFont(new Font("SF Pro Display", Font.BOLD, 17));
+		lblX.setFont(new Font("Inter", Font.BOLD, 17));
 		lblX.setBackground(Color.WHITE);
 		panel_1.add(lblX);
 		
 		DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Nome");
-        model.addColumn("Data de início");
-        model.addColumn("Data de fim");
-        
+        model.addColumn("Tipo");
+        model.addColumn("Valor");
 
-        model.addRow(new Object[]{"Teste", "", ""});
+        model.addRow(new Object[]{"Ingresso", "", "R$ 20,00"});
 
 		JTable table = new JTable(model);
 		panel.add(table);

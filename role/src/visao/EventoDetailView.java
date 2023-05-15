@@ -14,7 +14,7 @@ public class EventoDetailView extends RoundedPanel {
 		super(color);
 		setBackground(new Color(236, 236, 236));
 		
-		setBorder(new EmptyBorder(10, 10, 10, 10));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel panel = new JPanel();

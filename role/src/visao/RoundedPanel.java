@@ -49,7 +49,7 @@ public class RoundedPanel extends JPanel {
         } else {
         	graphics.setColor(getBackground());
         }
-        graphics.fillRoundRect(0, 0, width - shadowGap,
+        graphics.fillRoundRect(shadowGap, shadowGap, width - shadowGap,
         height - shadowGap, arcs.width, arcs.height);
 //        graphics.setColor(getForeground());
 //        graphics.setStroke(new BasicStroke(strokeSize));
