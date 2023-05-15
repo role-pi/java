@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 
 public class EventoDetailView extends RoundedPanel {
-	public EventoDetailView (String emoji, String titulo, String data, Color color) {
+	public EventoDetailView (String emoji, String titulo, String data, String local, Color color) {
 		super(color);
 		setBackground(new Color(236, 236, 236));
 		
@@ -37,6 +37,12 @@ public class EventoDetailView extends RoundedPanel {
 		verticalBox.add(lblNewLabel_2);
 		lblNewLabel_2.setForeground(new Color(83, 83, 83));
 		lblNewLabel_2.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
+		
+
+		JLabel lblNewLabel_3 = new JLabel(local);
+		verticalBox.add(lblNewLabel_3);
+		lblNewLabel_3.setForeground(new Color(83, 83, 83));
+		lblNewLabel_3.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);

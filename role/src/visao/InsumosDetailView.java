@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.SystemColor;
@@ -51,14 +52,18 @@ public class InsumosDetailView extends RoundedPanel {
 		panel_1.add(lblX);
 		
 		DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Nome");
         model.addColumn("Tipo");
+        model.addColumn("Nome");
         model.addColumn("Valor");
 
-        model.addRow(new Object[]{"Ingresso", "", "R$ 20,00"});
+        model.addRow(new Object[]{"🎟️", "Ingressos", "R$ 40,00"});
+        model.addRow(new Object[]{"🚗️", "Uber", "R$ 56,72"});
 
-		JTable table = new JTable(model);
-		panel.add(table);
+        JTable table = new JTable(model);
+		table.setFont(new Font("Inter", Font.PLAIN, 13));
+		
+		JScrollPane scrollPane = new  JScrollPane(table);
+		panel.add(scrollPane);
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);

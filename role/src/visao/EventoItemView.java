@@ -15,12 +15,20 @@ import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
 
 public class EventoItemView extends RoundedPanel implements ActionListener {
+	String emoji, titulo, descricao;
+	Color cor;
 	
 	public EventoItemView (String emoji,
 			String titulo,
 			String descricao,
-			Color color) {
-		super(color);
+			Color cor) {
+		super(cor);
+		
+		this.emoji = emoji;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.cor = cor;
+		
 		setBackground(new Color(245, 245, 245));
 		
 		setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -56,7 +64,11 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JFrame tela = new EventoView();
+		JFrame tela = new EventoView(emoji,
+				titulo,
+				"de 23 de maio às 22:00 a 24 de maio às 4:00",
+				"Factory Antônio da Veiga",
+				cor);
 		tela.setVisible(true);
 	}
 }

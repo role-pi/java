@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import java.awt.Component;
+import javax.swing.Box;
 
 public class HeaderView extends JPanel {
 	public HeaderView() {
@@ -18,17 +19,19 @@ public class HeaderView extends JPanel {
 		setMinimumSize(new Dimension(Integer.MIN_VALUE, 75));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		setBorder(new EmptyBorder(0, 30, 10, 0));
+		setBorder(new EmptyBorder(0, 20, 0, 20));
 		
-//		JLabel lblNewLabel = new JLabel("rolê");
-//		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 38));
-//		lblNewLabel.setForeground(new Color(255, 255, 255));
-//		add(lblNewLabel);
-		
-		JPanel imagem = new ImagePanel();
+		JPanel imagem = new ImagePanel("src/visao/Logo.png", new Dimension(83, 33), 0.0);
 		imagem.setAlignmentX(Component.LEFT_ALIGNMENT);
-		imagem.setMaximumSize(new Dimension(83, 57));
-		imagem.setBackground(Color.BLACK);
+		imagem.setBackground(new Color(0, 0, 0, 0));
 		add(imagem);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		add(horizontalGlue);
+		
+		JPanel perfil = new ImagePanel("src/visao/Perfil.png", new Dimension(52, 52), 1.0);
+		perfil.setSize(new Dimension(52, 52));
+		perfil.setBackground(new Color(0, 0, 0, 0));
+		add(perfil);
 	}
 }
