@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.Box;
+import java.awt.Component;
 
 public class EventoView extends JFrame {
 	public EventoView() {
@@ -41,8 +43,14 @@ public class EventoView extends JFrame {
 		JPanel panel_3 = new EventoDetailView("✨", "Rolê na Fac", "de 23 de maio às 22:00 a 24 de maio às 4:00", new Color(249, 236, 170));
 		panel_2.add(panel_3);
 		
+		Component horizontalStrut = Box.createHorizontalStrut(10);
+		panel_2.add(horizontalStrut);
+		
 		JPanel panel_4 = new InsumosDetailView();
 		panel_2.add(panel_4);
+		
+		Component verticalStrut = Box.createVerticalStrut(10);
+		panel_1.add(verticalStrut);
 		
 		JPanel panel_5 = new ParticipantesDetailView();
 		panel_1.add(panel_5);
