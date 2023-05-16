@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -27,8 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class TelaCadastro extends JFrame {
-
+public class TelaCadastro extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JTextField nometxt;
 	private JLabel InserirNome;
@@ -41,14 +42,7 @@ public class TelaCadastro extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 536, 322);
 		
-		contentPane = new JPanel() {
-		  @Override
-	        protected void paintComponent(Graphics g) {
-	            super.paintComponent(g);
-	            Image image = new ImageIcon("role/src/visao/Logo.png").getImage();
-	            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-		  }
-		};
+		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.window);
 		setContentPane(contentPane);
         contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][]"));
@@ -87,16 +81,17 @@ public class TelaCadastro extends JFrame {
 		nometxt.setColumns(10);
 		
 	}
+	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastro frame = new TelaCadastro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		TelaCadastro cadastro = new TelaCadastro();
+		cadastro.setVisible(true);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		setVisible(false);
+		
+		TelaInicial tela = new TelaInicial();
+		tela.setVisible(true);
 	}
+}

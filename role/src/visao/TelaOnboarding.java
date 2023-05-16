@@ -1,5 +1,6 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,43 +11,55 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-public class TelaOnboarding extends JFrame {
-	
+public class TelaOnboarding extends JFrame implements ActionListener {
 	public TelaOnboarding() {
 		setTitle("rolê");
 		setResizable(false);
 		setSize(new Dimension(400, 400));
 		
         JPanel contentPane = new JPanel();
-        	setContentPane(contentPane);
-        	contentPane.setLayout(null);
-        	
-        	
-      //  JPanel fundo = new ImagePanel("src/visao/Background.png", new Dimension(400, 400), 0.5);
-       // fundo.setSize(400, 400);
-	//	contentPane.add(fundo); 
-        	
-        	JButton EntrarCadastro = new JButton("Entrar");
-        	EntrarCadastro.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e) {
-					TelaCadastro telaCad = new TelaCadastro();
-					telaCad.setVisible(true);
-				}
-        	});
-        	EntrarCadastro.setBackground(UIManager.getColor("Button.highlight"));
-        	EntrarCadastro.setFont(new Font("Inter", Font.BOLD, 15));
-        	EntrarCadastro.setBounds(107, 95, 173, 49);
-        	contentPane.add(EntrarCadastro);
-        	
-        	
-		}
-      
+    	setContentPane(contentPane);
+    	contentPane.setLayout(null);
+    	
+    	JLabel texto = new JLabel("boas-vindas ao");
+    	texto.setLocation(80, 60);
+    	texto.setSize(new Dimension(400, 100));
+    	texto.setForeground(Color.WHITE);
+    	texto.setFont(new Font("SF Pro Display", Font.BOLD, 33));
+    	contentPane.add(texto);
+    	
+    	JPanel logo = new ImagePanel("src/visao/Logo.png", new Dimension(83, 33), 0.0);
+    	logo.setLocation(80, 130);
+    	logo.setSize(new Dimension(83, 33));
+    	logo.setBackground(new Color(0, 0, 0, 0));
+    	contentPane.add(logo);
+    	
+    	JButton next = new JButton("prosseguir");
+    	next.setLocation(80, 180);
+    	next.setSize(new Dimension(83, 33));
+    	contentPane.add(next);
+    	
+    	next.addActionListener(this);
+        
+        JPanel fundo = new ImagePanel("src/visao/Background.png", new Dimension(400, 400), 0.5);
+        fundo.setSize(400, 400);
+		contentPane.add(fundo);
+	}
 	
 	public static void main(String[] args) {
 		TelaOnboarding tela = new TelaOnboarding();
 		tela.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		setVisible(false);
+		
+		TelaCadastro cadastro = new TelaCadastro();
+		cadastro.setVisible(true);
 	}
 }

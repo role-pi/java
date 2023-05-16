@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -15,8 +16,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ParticipantesDetailView extends RoundedPanel {
+public class ParticipantesDetailView extends RoundedPanel implements ActionListener {
 	public ParticipantesDetailView (Color cor) {
 		setBackground(new Color(236, 236, 236));
 		
@@ -36,10 +39,14 @@ public class ParticipantesDetailView extends RoundedPanel {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
+		JButton btnRemoveButton = new JButton("Remover");
+		panel_1.add(btnRemoveButton);
+		btnRemoveButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
+		
 		JButton btnNewButton = new JButton("Adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
-//		btnNewButton.addActionListener(this);
+		btnNewButton.addActionListener(this);
 		
 		JPanel panel = new JPanel();
 		add(panel);
@@ -61,5 +68,11 @@ public class ParticipantesDetailView extends RoundedPanel {
 		
 		JScrollPane scrollPane = new  JScrollPane(table);
 		panel.add(scrollPane);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JFrame insumo = new ParticipanteView();
+		insumo.setVisible(true);
 	}
 }
