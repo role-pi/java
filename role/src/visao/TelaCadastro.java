@@ -59,8 +59,8 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		
 		panel = new JPanel();
 		panel_1.add(panel, "cell 0 1,grow");
-		panel.setBackground(SystemColor.window);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBackground(Color.WHITE);
 		
 		InserirNome = new JLabel("como você se chama?");
 		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);

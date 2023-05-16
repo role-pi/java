@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 	
-public class InsumoView extends JFrame {
+public class InsumoView extends JFrame implements ActionListener {
     private InsumoDAO insumoDAO = new InsumoDAO();
 
     private JTextField nomeTextField;
@@ -112,26 +112,42 @@ public class InsumoView extends JFrame {
         
         Component verticalGlue_1 = Box.createVerticalGlue();
         contentPane.add(verticalGlue_1);
-        cadastrarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarInsumo();
-            }
-        });
-	
-	    EventoDAO eventoDAO = new EventoDAO();
-	    ArrayList<Evento> eventos = eventoDAO.listaEventos();
-	
-	    if (eventos != null && !eventos.isEmpty()) {
-	        String[] nomesEventos = new String[eventos.size()];
-	        for (int i = 0; i < eventos.size(); i++) {
-	            nomesEventos[i] = eventos.get(i).getNome();
-	        }
-	
-	        eventosComboBox = new JComboBox<>(nomesEventos);
-	    } else {
-	        eventosComboBox = new JComboBox<>();
-	    }
+
+        cadastrarButton.addActionListener(this);
+        
+//        cadastrarButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                cadastrarInsumo();
+//            }
+//        });
+//	
+//	    EventoDAO eventoDAO = new EventoDAO();
+//	    ArrayList<Evento> eventos = eventoDAO.listaEventos();
+//	
+//	    if (eventos != null && !eventos.isEmpty()) {
+//	        String[] nomesEventos = new String[eventos.size()];
+//	        for (int i = 0; i < eventos.size(); i++) {
+//	            nomesEventos[i] = eventos.get(i).getNome();
+//	        }
+//	
+//	        eventosComboBox = new JComboBox<>(nomesEventos);
+//	    } else {
+//	        eventosComboBox = new JComboBox<>();
+//	    }
+	}
+    
+    @Override
+	public void actionPerformed(ActionEvent e) {
+		if (nomeTextField.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Nome não pode estar vazio."); 
+		} else if (descricaoTextField.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Descrição não pode estar vazia."); 
+		} else if (valorTextField.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Valor não pode estar vazio."); 
+		} else {
+			setVisible(false);
+		}
 	}
 	
 	private void removerInsumo(int rowIndex) {

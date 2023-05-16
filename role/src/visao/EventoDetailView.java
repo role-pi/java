@@ -1,6 +1,8 @@
 package visao;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,7 +11,7 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 
-public class EventoDetailView extends RoundedPanel {
+public class EventoDetailView extends RoundedPanel implements ActionListener {
 	public EventoDetailView (String emoji, String titulo, String data, String local, Color color) {
 		super(color);
 		setBackground(new Color(236, 236, 236));
@@ -50,8 +52,15 @@ public class EventoDetailView extends RoundedPanel {
 		JButton btnNewButton = new JButton("Editar");
 		panel.add(btnNewButton);
 		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
+		btnNewButton.addActionListener(this);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		EventoView evento = new EventoView();
+		evento.setVisible(true);
 	}
 }
