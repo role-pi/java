@@ -39,6 +39,10 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
+		JButton btnRemoveButton = new JButton("Remover");
+		panel_1.add(btnRemoveButton);
+		btnRemoveButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
+		
 		JButton btnNewButton = new JButton("Adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
