@@ -14,8 +14,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.Box;
 import java.awt.Component;
 
-public class EventoView extends JFrame {
-	public EventoView(String emoji, String titulo, String data, String local, Color cor) {
+public class TelaEvento extends JFrame {
+	public TelaEvento(String emoji, String titulo, String data, String local, Color cor) {
         setTitle(titulo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
@@ -59,7 +59,7 @@ public class EventoView extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		EventoView tela = new EventoView("✨", "Rolê na Fac", "de 23 de maio às 22:00 a 24 de maio às 4:00", "Factory Antônio da Veiga", new Color(249, 236, 170));
+		TelaEvento tela = new TelaEvento("✨", "Rolê na Fac", "de 23 de maio às 22:00 a 24 de maio às 4:00", "Factory Antônio da Veiga", new Color(249, 236, 170));
 		tela.setVisible(true);
 	}
 }
