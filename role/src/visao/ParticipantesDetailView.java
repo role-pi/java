@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import java.awt.SystemColor;
 
 public class ParticipantesDetailView extends RoundedPanel {
-	public ParticipantesDetailView () {
+	public ParticipantesDetailView (Color cor) {
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -36,6 +36,11 @@ public class ParticipantesDetailView extends RoundedPanel {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
+		JButton btnNewButton = new JButton("Adicionar");
+		panel_1.add(btnNewButton);
+		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
+//		btnNewButton.addActionListener(this);
+		
 		JPanel panel = new JPanel();
 		add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -50,7 +55,9 @@ public class ParticipantesDetailView extends RoundedPanel {
         model.addRow(new Object[]{"Maiara", "maiara@role.com"});
 
 		JTable table = new JTable(model);
-		table.setFont(new Font("Inter", Font.PLAIN, 13));
+		table.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
+		
+		table.setSelectionBackground(cor.darker());
 		
 		JScrollPane scrollPane = new  JScrollPane(table);
 		panel.add(scrollPane);

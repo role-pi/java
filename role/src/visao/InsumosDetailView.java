@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 import javax.swing.UIManager;
 
 public class InsumosDetailView extends RoundedPanel implements ActionListener {
-	public InsumosDetailView () {
+	public InsumosDetailView (Color cor) {
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -52,6 +52,7 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener {
 		JButton btnNewButton = new JButton("Adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(this);
+		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
 		
 		DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Tipo");
@@ -62,9 +63,11 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener {
         model.addRow(new Object[]{"🚗️", "Uber", "R$ 56,72"});
 
         JTable table = new JTable(model);
-		table.setFont(new Font("Inter", Font.PLAIN, 13));
+		table.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
+
+		table.setSelectionBackground(cor.darker());
 		
-		JScrollPane scrollPane = new  JScrollPane(table);
+		JScrollPane scrollPane = new JScrollPane(table);
 		panel.add(scrollPane);
 		
 		Component verticalGlue = Box.createVerticalGlue();

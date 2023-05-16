@@ -46,13 +46,13 @@ public class EventoView extends JFrame {
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		panel_2.add(horizontalStrut);
 		
-		JPanel panel_4 = new InsumosDetailView();
+		JPanel panel_4 = new InsumosDetailView(cor);
 		panel_2.add(panel_4);
 		
 		Component verticalStrut = Box.createVerticalStrut(10);
 		panel_1.add(verticalStrut);
 		
-		JPanel panel_5 = new ParticipantesDetailView();
+		JPanel panel_5 = new ParticipantesDetailView(cor);
 		panel_1.add(panel_5);
 
 		setVisible(true);

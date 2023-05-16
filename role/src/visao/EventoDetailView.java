@@ -24,7 +24,7 @@ public class EventoDetailView extends RoundedPanel {
 		
 		JLabel lblNewLabel_1 = new JLabel(emoji);
 		panel.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("SF Pro", Font.BOLD, 50));
+		lblNewLabel_1.setFont(new Font("SF Pro Display", Font.BOLD, 50));
 		
 		Box verticalBox = Box.createVerticalBox();
 		panel.add(verticalBox);
@@ -35,13 +35,13 @@ public class EventoDetailView extends RoundedPanel {
 		
 		JLabel lblNewLabel_2 = new JLabel(data);
 		verticalBox.add(lblNewLabel_2);
-		lblNewLabel_2.setForeground(new Color(83, 83, 83));
+		lblNewLabel_2.setForeground(new Color(0, 0, 0, 150));
 		lblNewLabel_2.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
 		
 
 		JLabel lblNewLabel_3 = new JLabel(local);
 		verticalBox.add(lblNewLabel_3);
-		lblNewLabel_3.setForeground(new Color(83, 83, 83));
+		lblNewLabel_3.setForeground(new Color(0, 0, 0, 150));
 		lblNewLabel_3.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
 		
 		Component verticalGlue = Box.createVerticalGlue();
@@ -49,6 +49,7 @@ public class EventoDetailView extends RoundedPanel {
 		
 		JButton btnNewButton = new JButton("Editar");
 		panel.add(btnNewButton);
+		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
