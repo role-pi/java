@@ -25,9 +25,9 @@ public class TelaOnboarding extends JFrame {
         	contentPane.setLayout(null);
         	
         	
-        JPanel fundo = new ImagePanel("src/visao/Background.png", new Dimension(400, 400), 0.5);
-        fundo.setSize(400, 400);
-		contentPane.add(fundo); 
+      //  JPanel fundo = new ImagePanel("src/visao/Background.png", new Dimension(400, 400), 0.5);
+       // fundo.setSize(400, 400);
+	//	contentPane.add(fundo); 
         	
         	JButton EntrarCadastro = new JButton("Entrar");
         	EntrarCadastro.addActionListener(new ActionListener(){

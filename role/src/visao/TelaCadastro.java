@@ -33,7 +33,6 @@ public class TelaCadastro extends JFrame {
 	private JTextField nometxt;
 	private JLabel InserirNome;
 	private JButton BotaoEntrar;
-	private JPanel panel;
 	private JPanel panel_1;
 	
 	public TelaCadastro() {
@@ -54,41 +53,38 @@ public class TelaCadastro extends JFrame {
 		setContentPane(contentPane);
         contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][]"));
         
-        JPanel bordaLogo = new HeaderView();
-        contentPane.add(bordaLogo, "cell 0 0,grow");
+       JPanel logoLogo = new LogoView();
+        contentPane.add(logoLogo, "cell 0 0,grow");
 		
 		panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.window);
 		contentPane.add(panel_1, "cell 0 1,grow");
 		panel_1.setLayout(new MigLayout("", "[500px,grow]", "[][372px,grow][]"));
 		
-		JLabel BemVindotxt = new JLabel("desejamos as boas vindas");
+		JLabel BemVindotxt = new JLabel("Bem-vindo ao Rolê!");
+		BemVindotxt.setBackground(SystemColor.window);
 		panel_1.add(BemVindotxt, "cell 0 0,alignx center");
-		BemVindotxt.setFont(new Font("Inter", Font.BOLD, 20));
-		
-		panel = new JPanel();
-		panel_1.add(panel, "cell 0 1,grow");
-		panel.setBackground(SystemColor.window);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		
-		InserirNome = new JLabel("como você se chama?");
-		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
-		InserirNome.setAlignmentX(Component.CENTER_ALIGNMENT);
-		InserirNome.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(InserirNome);
-		InserirNome.setFont(new Font("Inter", Font.BOLD, 15));
-		
-		panel.setMaximumSize( new Dimension(200, 60));
-		
-		nometxt = new JTextField();
-		nometxt.setBackground(SystemColor.menu);
-		nometxt.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(nometxt);
-		nometxt.setFont(new Font("Inter", Font.PLAIN, 15));
-		nometxt.setColumns(10);
+		BemVindotxt.setFont(new Font("Inter", Font.BOLD, 34));
 		
 		BotaoEntrar = new JButton("Entrar");
 		panel_1.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
 		BotaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
+		
+		InserirNome = new JLabel("como você se chama?");
+		panel_1.add(InserirNome, "flowx,cell 0 1,alignx center,aligny center");
+		InserirNome.setBackground(SystemColor.window);
+		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
+		InserirNome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		InserirNome.setHorizontalAlignment(SwingConstants.CENTER);
+		InserirNome.setFont(new Font("Inter", Font.BOLD, 20));
+		
+		nometxt = new JTextField();
+		nometxt.setToolTipText("");
+		panel_1.add(nometxt, "cell 0 1,alignx center,aligny center");
+		nometxt.setBackground(SystemColor.menu);
+		nometxt.setHorizontalAlignment(SwingConstants.CENTER);
+		nometxt.setFont(new Font("Inter", Font.PLAIN, 20));
+		nometxt.setColumns(10);
 		
 	}
 	public static void main(String[] args) {
