@@ -25,12 +25,12 @@ public class TelaOnboarding extends JFrame {
         };
         	setContentPane(contentPane);
         	contentPane.setLayout(null);
-        }
+	       //  JPanel fundo = new ImagePanel("src/visao/Background.png", new Dimension(400, 400), 0.5);
+	       // fundo.setSize(400, 400);
+			//contentPane.add(fundo); 
+		}
         
-        JPanel fundo = new ImagePanel("src/visao/Background.png", new Dimension(400, 400), 0.5);
-        fundo.setSize(400, 400);
-		contentPane.add(fundo);
-	}
+      
 	
 	public static void main(String[] args) {
 		TelaOnboarding tela = new TelaOnboarding();
