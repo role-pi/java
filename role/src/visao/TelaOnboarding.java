@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class TelaOnboarding extends JFrame {
+	
 	public TelaOnboarding() {
 		setTitle("rolê");
 		setResizable(false);
