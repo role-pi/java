@@ -53,6 +53,5 @@ public class EventoDetailView extends RoundedPanel {
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
-//		setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
 	}
 }
