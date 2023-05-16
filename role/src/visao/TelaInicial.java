@@ -24,16 +24,6 @@ public class TelaInicial extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
 		setLocationRelativeTo(null);
-		
-		try {
-			Font inter = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("visao/Inter.ttf"));
-	        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	        ge.registerFont(inter);
-		} catch (FontFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
         JPanel contentPane = new JPanel();
         setContentPane(contentPane);
@@ -102,16 +92,6 @@ public class TelaInicial extends JFrame {
 		newEvent.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		setVisible(true);
-	}
-
-	private void abrirTelaCadastroInsumo() {
-		InsumoView telaDeInsumo = new InsumoView();
-		telaDeInsumo.setVisible(true);
-	}
-
-	private void abrirTelaCadastroEvento() {
-		TelaEventosTeste telaDeEventos = new TelaEventosTeste();
-		telaDeEventos.setVisible(true);
 	}
 
 	public static void main(String[] args) {

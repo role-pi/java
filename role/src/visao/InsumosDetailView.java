@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +16,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.UIManager;
 
-public class InsumosDetailView extends RoundedPanel {
+public class InsumosDetailView extends RoundedPanel implements ActionListener {
 	public InsumosDetailView () {
 		setBackground(new Color(236, 236, 236));
 		
@@ -45,11 +49,9 @@ public class InsumosDetailView extends RoundedPanel {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
-		JLabel lblX = new JLabel("+");
-		lblX.setForeground(UIManager.getColor("Button.darkShadow"));
-		lblX.setFont(new Font("Inter", Font.BOLD, 17));
-		lblX.setBackground(Color.WHITE);
-		panel_1.add(lblX);
+		JButton btnNewButton = new JButton("Adicionar");
+		panel_1.add(btnNewButton);
+		btnNewButton.addActionListener(this);
 		
 		DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Tipo");
@@ -67,5 +69,11 @@ public class InsumosDetailView extends RoundedPanel {
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JFrame insumo = new InsumoView();
+		insumo.setVisible(true);
 	}
 }
