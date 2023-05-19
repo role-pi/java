@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import controle.EventoDAO;
 import controle.InsumoDAO;
 import modelo.Evento;
-import modelo.InsumoModel;
+import modelo.Insumo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -161,7 +161,7 @@ public class InsumoView extends JFrame implements ActionListener {
 	    double valor = Double.parseDouble(valorTextField.getText());
 	    Evento evento = (Evento) eventosComboBox.getSelectedItem();
 	
-	    InsumoModel insumo = new InsumoModel(tipo, nome, descricao, valor, evento);
+	    Insumo insumo = new Insumo(tipo, nome, descricao, valor, evento);
 	    boolean cadastrado = insumoDAO.insert(insumo);
 	
 	    if (cadastrado) {
@@ -192,9 +192,9 @@ public class InsumoView extends JFrame implements ActionListener {
 	    model.addColumn("Valor");
 	    model.addColumn("Eventos");
 	
-	    ArrayList<InsumoModel> insumos = insumoDAO.listaInsumos();
+	    ArrayList<Insumo> insumos = insumoDAO.listaInsumos();
 	
-	    for (InsumoModel insumo : insumos) {
+	    for (Insumo insumo : insumos) {
 	        String tipo = insumo.getTipo();
 	        String nome = insumo.getNome();
 	        String descricao = insumo.getDescricao();

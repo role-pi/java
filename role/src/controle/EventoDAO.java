@@ -1,11 +1,17 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import modelo.Evento;
 
-public class EventoDAO {
-	private ArrayList<Evento> eventos = new ArrayList();
+public class EventoDAO implements DAO<Evento> {
+	private ArrayList<Evento> eventos = new ArrayList<Evento>();
+
+	@Override
+	public List<Evento> list() {
+		return eventos;
+	}
 	
 	public boolean insert(Evento event) {
 		if (event != null) {
@@ -15,7 +21,7 @@ public class EventoDAO {
 		return false;
 	}
 	
-	public boolean update(Evento event, Integer eventoID) {
+	public boolean update(Evento event, String[] params) {
 		if (event != null) {
 			eventos.add(event);
 			return true;
@@ -23,15 +29,7 @@ public class EventoDAO {
 		return false;
 	}
 	
-	public boolean update(Integer eventoID) {
+	public boolean delete(Evento t) {
 		return true;
-	}
-	
-	public boolean delete(Integer eventoID) {
-		return true;
-	}
-	
-	public ArrayList<Evento> listaEventos() {
-		return eventos;
 	}
 }

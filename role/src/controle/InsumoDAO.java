@@ -2,12 +2,12 @@ package controle;
 
 import java.util.ArrayList;
 
-import modelo.InsumoModel;
+import modelo.Insumo;
 
 public class InsumoDAO {
-    private ArrayList<InsumoModel> insumos = new ArrayList();
+    private ArrayList<Insumo> insumos = new ArrayList();
 	
-	public boolean insert(InsumoModel insum) {
+	public boolean insert(Insumo insum) {
 		if (insum != null) {
 			insumos.add(insum);
 			return true;
@@ -15,11 +15,11 @@ public class InsumoDAO {
 		return false;
 	}
 
-	public ArrayList<InsumoModel> listaInsumos() {
+	public ArrayList<Insumo> listaInsumos() {
 		return insumos;
 	}
 	
-	public boolean update(InsumoModel insum, Integer insumoID) {
+	public boolean update(Insumo insum, Integer insumoID) {
 		if (insum != null) {
 			insumos.add(insum);
 			return true;

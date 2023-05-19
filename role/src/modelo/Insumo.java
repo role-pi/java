@@ -1,13 +1,13 @@
 package modelo;
 
-public class InsumoModel {
+public class Insumo {
     private String tipo;
     private String nome;
     private String descricao;
     private double valor;
     private Evento eventos;
 
-    public InsumoModel(String tipo, String nome, String descricao, double valor, Evento eventos) {
+    public Insumo(String tipo, String nome, String descricao, double valor, Evento eventos) {
         this.tipo = tipo;
         this.nome = nome;
         this.descricao = descricao;

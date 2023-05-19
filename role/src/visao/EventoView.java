@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import controle.EventoDAO;
 import controle.InsumoDAO;
 import modelo.Evento;
-import modelo.InsumoModel;
+import modelo.Insumo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
