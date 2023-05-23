@@ -32,4 +32,19 @@ public class EventoDAO implements DAO<Evento> {
 	public boolean delete(Evento t) {
 		return true;
 	}
+
+	// Singleton
+	
+	private static EventoDAO instance = null;
+	
+	private EventoDAO() {
+        this.instance = new EventoDAO();
+    }
+
+    public static EventoDAO getInstance() {
+        if (instance == null) {
+            instance = new EventoDAO();
+        }
+        return instance;
+    }
 }

@@ -32,4 +32,19 @@ public class UsuarioDAO implements DAO<Usuario> {
 	public boolean delete(Usuario t) {
 		return true;
 	}
+	
+	// Singleton
+	
+	private static UsuarioDAO instance = null;
+	
+	private UsuarioDAO() {
+        this.instance = new UsuarioDAO();
+    }
+
+    public static UsuarioDAO getInstance() {
+        if (instance == null) {
+            instance = new UsuarioDAO();
+        }
+        return instance;
+    }
 }

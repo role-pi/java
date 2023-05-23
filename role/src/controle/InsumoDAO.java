@@ -32,4 +32,19 @@ public class InsumoDAO implements DAO<Insumo> {
 	public boolean delete(Insumo t) {
 		return true;
 	}
+
+	// Singleton
+	
+	private static InsumoDAO instance = null;
+	
+	private InsumoDAO() {
+        this.instance = new InsumoDAO();
+    }
+
+    public static InsumoDAO getInstance() {
+        if (instance == null) {
+            instance = new InsumoDAO();
+        }
+        return instance;
+    }
 }
