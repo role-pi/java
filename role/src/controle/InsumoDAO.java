@@ -1,45 +1,35 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import modelo.Insumo;
 
-public class InsumoDAO {
-    private ArrayList<Insumo> insumos = new ArrayList();
-	
-	public boolean insert(Insumo insum) {
-		if (insum != null) {
-			insumos.add(insum);
-			return true;
-		}
-		return false;
-	}
+public class InsumoDAO implements DAO<Insumo> {
+    private ArrayList<Insumo> insumos = new ArrayList<Insumo>();
 
-	public ArrayList<Insumo> listaInsumos() {
+	@Override
+	public List<Insumo> list() {
 		return insumos;
 	}
 	
-	public boolean update(Insumo insum, Integer insumoID) {
-		if (insum != null) {
-			insumos.add(insum);
+	public boolean insert(Insumo insumo) {
+		if (insumo != null) {
+			insumos.add(insumo);
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean update(Integer insumoID) {
-		return true;
-	}
-	
-	public boolean delete(Integer insumoID) {
-		return true;
-	}
-	
-	public boolean removerInsumo(int selectedRow) {
-		if (selectedRow >= 0 && selectedRow < insumos.size()) {
-			insumos.remove(selectedRow);
+	public boolean update(Insumo insumo, String[] params) {
+		if (insumo != null) {
+			insumos.add(insumo);
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean delete(Insumo t) {
+		return true;
 	}
 }
