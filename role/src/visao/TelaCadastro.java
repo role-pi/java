@@ -32,7 +32,7 @@ import javax.swing.SwingConstants;
 public class TelaCadastro extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JTextField nometxt;
-	private JLabel InserirNome;
+	private JLabel inserirNome;
 	private JButton BotaoEntrar;
 	private JPanel panel_1;
 	
@@ -57,10 +57,10 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		contentPane.add(panel_1, "cell 0 1,grow");
 		panel_1.setLayout(new MigLayout("", "[500px,grow]", "[][372px,grow][]"));
 		
-		JLabel BemVindotxt = new JLabel("Tela de Cadastro");
-		BemVindotxt.setBackground(SystemColor.window);
-		panel_1.add(BemVindotxt, "cell 0 0,alignx center");
-		BemVindotxt.setFont(new Font("Inter", Font.BOLD, 30));
+		JLabel Cadastrotxt = new JLabel("Tela de Cadastro");
+		Cadastrotxt.setBackground(SystemColor.window);
+		panel_1.add(Cadastrotxt, "cell 0 0,alignx center");
+		Cadastrotxt.setFont(new Font("Inter", Font.BOLD, 30));
 		
 		BotaoEntrar = new JButton("Entrar");
 		BotaoEntrar.setForeground(SystemColor.window);
@@ -68,13 +68,13 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		panel_1.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
 		BotaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
 		
-		InserirNome = new JLabel("Como podemos te chamar?");
-		panel_1.add(InserirNome, "flowx,cell 0 1,alignx center,aligny center");
-		InserirNome.setBackground(SystemColor.window);
-		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
-		InserirNome.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		InserirNome.setHorizontalAlignment(SwingConstants.CENTER);
-		InserirNome.setFont(new Font("Inter", Font.BOLD, 18));
+		inserirNome = new JLabel("Como podemos te chamar?");
+		panel_1.add(inserirNome, "flowx,cell 0 1,alignx center,aligny center");
+		inserirNome.setBackground(SystemColor.window);
+		inserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
+		inserirNome.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		inserirNome.setHorizontalAlignment(SwingConstants.CENTER);
+		inserirNome.setFont(new Font("Inter", Font.BOLD, 18));
 		
 		nometxt = new JTextField();
 		nometxt.setIgnoreRepaint(true);
