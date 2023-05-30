@@ -12,7 +12,7 @@ Ao acessar o sistema, o usuário será primeiramente apresentado a uma tela de c
 Há também uma única opção de visualização: visualizar eventos. Esta tela apresenta todos os eventos em uma lista de seleção. Quando um evento é selecionado, ele exibe todas as informações do evento e todos os insumos associados a este evento, com um relatório de gastos.
 
 Fluxograma de uso do sistema:
-
+role/Fluxograma.drawio.png 
 
 
 Diagrama de casos de uso:
