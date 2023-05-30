@@ -72,16 +72,20 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		panel_1.add(InserirNome, "flowx,cell 0 1,alignx center,aligny center");
 		InserirNome.setBackground(SystemColor.window);
 		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
-		InserirNome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		InserirNome.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		InserirNome.setHorizontalAlignment(SwingConstants.CENTER);
-		InserirNome.setFont(new Font("Inter", Font.BOLD, 20));
+		InserirNome.setFont(new Font("Inter", Font.BOLD, 18));
 		
 		nometxt = new JTextField();
+		nometxt.setIgnoreRepaint(true);
+		nometxt.setInheritsPopupMenu(true);
+		nometxt.setDisabledTextColor(Color.LIGHT_GRAY);
+		nometxt.setSelectionColor(Color.WHITE);
 		nometxt.setToolTipText("");
 		panel_1.add(nometxt, "cell 0 1,alignx center,aligny center");
 		nometxt.setBackground(SystemColor.menu);
 		nometxt.setHorizontalAlignment(SwingConstants.CENTER);
-		nometxt.setFont(new Font("Inter", Font.PLAIN, 20));
+		nometxt.setFont(new Font("Inter", Font.PLAIN, 15));
 		nometxt.setColumns(10);
 		
 	}
