@@ -38,14 +38,16 @@ public class TelaCadastro extends JFrame implements ActionListener {
 	
 	public TelaCadastro() {
 		setBackground(SystemColor.window);
-		setTitle("rolê");
+		setTitle("TelaCadastro");
+		setResizable(false);
+		setSize(new Dimension(400, 400));;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 536, 322);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.window);
 		setContentPane(contentPane);
-        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][]"));
+        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][][]"));
         
        JPanel logoLogo = new LogoView();
         contentPane.add(logoLogo, "cell 0 0,grow");
@@ -55,16 +57,18 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		contentPane.add(panel_1, "cell 0 1,grow");
 		panel_1.setLayout(new MigLayout("", "[500px,grow]", "[][372px,grow][]"));
 		
-		JLabel BemVindotxt = new JLabel("Bem-vindo ao Rolê!");
+		JLabel BemVindotxt = new JLabel("Tela de Cadastro");
 		BemVindotxt.setBackground(SystemColor.window);
 		panel_1.add(BemVindotxt, "cell 0 0,alignx center");
-		BemVindotxt.setFont(new Font("Inter", Font.BOLD, 34));
+		BemVindotxt.setFont(new Font("Inter", Font.BOLD, 30));
 		
 		BotaoEntrar = new JButton("Entrar");
+		BotaoEntrar.setForeground(SystemColor.window);
+		BotaoEntrar.setBackground(SystemColor.textHighlight);
 		panel_1.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
 		BotaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
 		
-		InserirNome = new JLabel("como você se chama?");
+		InserirNome = new JLabel("Como podemos te chamar?");
 		panel_1.add(InserirNome, "flowx,cell 0 1,alignx center,aligny center");
 		InserirNome.setBackground(SystemColor.window);
 		InserirNome.setAlignmentY(Component.TOP_ALIGNMENT);

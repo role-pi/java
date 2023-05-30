@@ -3,6 +3,7 @@ package modelo;
 import java.awt.Color;
 
 public class Evento {
+	private Integer id;
 	private String emoji;
 	private Color color;
 	private String nome;
@@ -11,6 +12,7 @@ public class Evento {
 	
 	public Evento(String emoji, Color color, String nome, String dataInicio, String dataFim) {
 		super();
+		this.id = 0;
 		this.emoji = emoji;
 		this.color = color;
 		this.nome = nome;
