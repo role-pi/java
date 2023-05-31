@@ -34,9 +34,10 @@ public class TelaCadastro extends JFrame implements ActionListener {
 	private JTextField nometxt;
 	private JLabel inserirNome;
 	private JButton BotaoEntrar;
-	private JPanel panel_1;
+	private JPanel painel;
 	
 	public TelaCadastro() {
+		
 		setBackground(SystemColor.window);
 		setTitle("TelaCadastro");
 		setResizable(false);
@@ -49,27 +50,27 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		setContentPane(contentPane);
         contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[grow][][]"));
         
-       JPanel logoLogo = new LogoView();
-        contentPane.add(logoLogo, "cell 0 0,grow");
+      // JPanel logoLogo = new LogoView();
+       // contentPane.add(logoLogo, "cell 0 0,grow");
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(SystemColor.window);
-		contentPane.add(panel_1, "cell 0 1,grow");
-		panel_1.setLayout(new MigLayout("", "[500px,grow]", "[][372px,grow][]"));
+		painel = new JPanel();
+		painel.setBackground(SystemColor.window);
+		contentPane.add(painel, "cell 0 1,grow");
+		painel.setLayout(new MigLayout("", "[500px,grow]", "[][372px,grow][]"));
 		
 		JLabel Cadastrotxt = new JLabel("Tela de Cadastro");
 		Cadastrotxt.setBackground(SystemColor.window);
-		panel_1.add(Cadastrotxt, "cell 0 0,alignx center");
+		painel.add(Cadastrotxt, "cell 0 0,alignx center");
 		Cadastrotxt.setFont(new Font("Inter", Font.BOLD, 30));
 		
 		BotaoEntrar = new JButton("Entrar");
 		BotaoEntrar.setForeground(SystemColor.window);
 		BotaoEntrar.setBackground(SystemColor.textHighlight);
-		panel_1.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
+		painel.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
 		BotaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
 		
 		inserirNome = new JLabel("Como podemos te chamar?");
-		panel_1.add(inserirNome, "flowx,cell 0 1,alignx center,aligny center");
+		painel.add(inserirNome, "flowx,cell 0 1,alignx center,aligny center");
 		inserirNome.setBackground(SystemColor.window);
 		inserirNome.setAlignmentY(Component.TOP_ALIGNMENT);
 		inserirNome.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -82,19 +83,22 @@ public class TelaCadastro extends JFrame implements ActionListener {
 		nometxt.setDisabledTextColor(Color.LIGHT_GRAY);
 		nometxt.setSelectionColor(Color.WHITE);
 		nometxt.setToolTipText("");
-		panel_1.add(nometxt, "cell 0 1,alignx center,aligny center");
+		painel.add(nometxt, "cell 0 1,alignx center,aligny center");
 		nometxt.setBackground(SystemColor.menu);
 		nometxt.setHorizontalAlignment(SwingConstants.CENTER);
 		nometxt.setFont(new Font("Inter", Font.PLAIN, 15));
-		nometxt.setColumns(10);
+		nometxt.setColumns(10); 
 		
+		contentPane.getRootPane().add(painel);
+      	contentPane.setVisible(true);	
 	}
 	
 	public static void main(String[] args) {
 		TelaCadastro cadastro = new TelaCadastro();
 		cadastro.setVisible(true);
 	}
-
+	
+	  
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		setVisible(false);
