@@ -18,6 +18,8 @@ import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.util.List;
+
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.Box;
@@ -155,12 +157,12 @@ public class TelaEventosTeste extends JFrame implements ActionListener {
 		String dataInicio = textField_1.getText();
 		String dataFim = textField_2.getText();
 		
-		Evento evento = new Evento(nome, dataInicio, dataFim);
+		Evento evento = new Evento(dataFim, getForeground(), nome, dataInicio, dataFim);
 		eventoDAO.insert(evento);
 	}
 	
 	public void listar() {
-		ArrayList<Evento> eventos = eventoDAO.listaEventos();
+		List<Evento> eventos = eventoDAO.listaEventos();
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		

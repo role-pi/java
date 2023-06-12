@@ -1,6 +1,7 @@
 package modelo;
 
 import java.awt.Color;
+import java.awt.List;
 
 public class Evento {
 	private Integer id;
@@ -19,7 +20,7 @@ public class Evento {
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 	}
-	
+
 	public String getEmoji() {
 		return emoji;
 	}
@@ -50,4 +51,5 @@ public class Evento {
 	public void setDataFim(String dataFim) {
 		this.dataFim = dataFim;
 	}
+
 }
