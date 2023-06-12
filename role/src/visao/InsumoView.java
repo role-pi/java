@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class InsumoView extends JFrame implements ActionListener {
     private InsumoDAO insumoDAO;
+    private EventoDAO eventoDAO;
 
     private JTextField nomeTextField;
     private JTextField descricaoTextField;
@@ -38,6 +39,7 @@ public class InsumoView extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
         insumoDAO = InsumoDAO.getInstance();
+        eventoDAO = EventoDAO.getInstance();
 
         JPanel contentPane = new JPanel();
         setContentPane(contentPane);
@@ -88,6 +90,11 @@ public class InsumoView extends JFrame implements ActionListener {
         valorTextField = new JTextField();
         panel.add(valorTextField);
 
+        JLabel eventoLabel = new JLabel("Evento");
+        panel_4.add(eventoLabel);
+        eventosComboBox = new JComboBox<>();
+        panel_4.add(eventosComboBox);
+
         JButton cadastrarButton = new JButton("Adicionar");
         cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel_4.add(cadastrarButton);
@@ -106,6 +113,15 @@ public class InsumoView extends JFrame implements ActionListener {
         });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        carregarEventos();
+    }
+
+    private void carregarEventos() {
+        List<Evento> eventos = eventoDAO.list();
+
+        if (eventos != null && !eventos.isEmpty()) {
+            eventosComboBox.setModel(new DefaultComboBoxModel<>(eventos.toArray(new Evento[0])));
+        }
     }
 
     @Override
@@ -150,7 +166,7 @@ public class InsumoView extends JFrame implements ActionListener {
         model.addColumn("Nome");
         model.addColumn("Descrição");
         model.addColumn("Valor");
-        model.addColumn("Eventos");
+        model.addColumn("Evento");
 
         List<Insumo> insumos = insumoDAO.list();
 
@@ -159,9 +175,9 @@ public class InsumoView extends JFrame implements ActionListener {
             String nome = insumo.getNome();
             String descricao = insumo.getDescricao();
             double valor = insumo.getValor();
-            Evento eventos = insumo.getEventos();
+            Evento evento = insumo.getEventos();
 
-            model.addRow(new Object[] { tipo, nome, descricao, valor, eventos });
+            model.addRow(new Object[] { tipo, nome, descricao, valor, evento });
         }
 
         tabela = new JTable(model);
