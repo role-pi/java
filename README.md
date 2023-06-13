@@ -4,7 +4,7 @@
 <h1 align="center">Estudo de caso</h1> 
 
  ```javascript
-this.alunos = ["Ana Clara Castellain", "João Gabriel Pozzobon dos Santos", "Maiara Junches Seemann"]
+this.alunos = ["Ana Clara Castellain", "João Gabriel Pozzobon dos Santos", "Maiara Junches Seemann"];
 ```
 
 ### Descrição textual das funcionalidades do sistema
