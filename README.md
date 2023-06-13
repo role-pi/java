@@ -1,7 +1,7 @@
 
  ![userlmn_dc3d4e250a9659938baca81f68182ed6 (1)](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/b04f637e-e97a-4eac-90c1-9bfbd9e23eb0)
 
-<h1 align="center">estudo-de-caso-pds1/java</h1> 
+<h1 align="center">Estudo de caso</h1> 
 
  ```javascript
 this.alunos = ["Ana Clara Castellain", "João Gabriel Pozzobon dos Santos", "Maiara Junches Seemann"]
