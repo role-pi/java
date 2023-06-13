@@ -1,5 +1,7 @@
-<h1 align="center">estudo-de-caso-pds1/java</h1>  
 
+ 
+![Logo](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/242b76cc-41b6-4c01-9539-7e3fe3bde78e)
+<h1 align="center">estudo-de-caso-pds1/java</h1> 
  ```javascript
 this.alunos = ["Ana Clara Castellain", "João Gabriel Pozzobon dos Santos", "Maiara Junches Seemann"]
 ```
