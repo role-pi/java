@@ -96,12 +96,13 @@ public class TelaInicial extends JFrame implements ActionListener {
 		
 		newEvent.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 		newEvent.setBorder(new EmptyBorder(10, 10, 10, 10));
+		
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		TelaInicial tela = new TelaInicial();
-		tela.setVisible(true);
 	}
 	
 	public void update() {

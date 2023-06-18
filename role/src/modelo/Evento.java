@@ -18,6 +18,7 @@ public class Evento {
 	private String dataInicio;
 	private String dataFim;
 	private ArrayList<Integer> idUsuarios = new ArrayList<>();
+	private ArrayList<Insumo> insumos = new ArrayList<>();
 	
 	public Evento(String emoji, Color color, String nome, String dataInicio, String dataFim) {
 		super();
@@ -64,6 +65,14 @@ public class Evento {
 	}
 	public void setDataFim(String dataFim) {
 		this.dataFim = dataFim;
+	}
+	
+	public ArrayList<Insumo> getInsumos() {
+		return insumos;
+	}
+
+	public void setInsumos(ArrayList<Insumo> insumos) {
+		this.insumos = insumos;
 	}
 	
 	public String descricaoSimples() {

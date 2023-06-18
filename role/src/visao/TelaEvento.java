@@ -49,7 +49,7 @@ public class TelaEvento extends JFrame {
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		panel_2.add(horizontalStrut);
 		
-		JPanel panel_4 = new InsumosDetailView(event.getColor());
+		JPanel panel_4 = new InsumosDetailView(event);
 		panel_2.add(panel_4);
 		
 		Component verticalStrut = Box.createVerticalStrut(10);
@@ -57,7 +57,8 @@ public class TelaEvento extends JFrame {
 		
 		JPanel panel_5 = new ParticipantesDetailView(event.getColor());
 		panel_1.add(panel_5);
-
+		
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 	

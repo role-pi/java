@@ -1,6 +1,7 @@
 package visao;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.awt.Component;
 import java.awt.Font;
 
@@ -9,8 +10,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
+
+import modelo.Evento;
+import modelo.Insumo;
+import modelo.Transacao;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,11 +27,19 @@ import javax.swing.JTable;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
-import javax.swing.UIManager;
-
-public class InsumosDetailView extends RoundedPanel implements ActionListener {
-	public InsumosDetailView (Color cor) {
+public class InsumosDetailView extends RoundedPanel implements ActionListener, CellEditorListener {
+	Evento evento;
+	DefaultTableModel model;
+	JTable table;
+	
+	JButton btnRemoveButton;
+	JButton btnNewButton;
+	
+	public InsumosDetailView (Evento event) {
+		this.evento = event;
+		
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -49,27 +66,29 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
-		JButton btnRemoveButton = new JButton("Remover");
+		btnRemoveButton = new JButton("Remover");
 		panel_1.add(btnRemoveButton);
+		btnRemoveButton.addActionListener(this);
 		btnRemoveButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
 		
-		JButton btnNewButton = new JButton("Adicionar");
+		btnNewButton = new JButton("Adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(this);
 		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
 		
-		DefaultTableModel model = new DefaultTableModel();
+		model = new DefaultTableModel();
         model.addColumn("Tipo");
         model.addColumn("Nome");
+        model.addColumn("Descrição");
         model.addColumn("Valor");
+        
+        update();
 
-        model.addRow(new Object[]{"🎟️", "Ingressos", "R$ 40,00"});
-        model.addRow(new Object[]{"🚗️", "Uber", "R$ 56,72"});
-
-        JTable table = new JTable(model);
+        table = new JTable(model);
+        table.getDefaultEditor(String.class).addCellEditorListener(this);
 		table.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
 
-		table.setSelectionBackground(cor.darker());
+		table.setSelectionBackground(event.getColor().darker());
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		panel.add(scrollPane);
@@ -77,10 +96,64 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener {
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
 	}
+	
+	public void update() {
+		model.setRowCount(0);
+		for (Insumo insumo : evento.getInsumos()) {
+			DecimalFormat df = new DecimalFormat("#,00");
+			model.addRow(new Object[]{"🎟️", insumo.getNome(), insumo.getDescricao(), "R$ "+df.format(insumo.getTransacao().getValor())});
+		}
+	}
+	
+	private void removerInsumo() {
+      int selectedRow = table.getSelectedRow();
+      if (selectedRow != -1) {
+          int confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o insumo?", "Remover Insumo",
+                  JOptionPane.YES_NO_OPTION);
+          if (confirm == JOptionPane.YES_OPTION) {
+              evento.getInsumos().remove(selectedRow);
+              update();
+              JOptionPane.showMessageDialog(null, "Insumo removido com sucesso!");
+          }
+      } else {
+          JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
+      }
+  }
+	
+	public void editarTabela() {
+		ArrayList<Insumo> insumos = new ArrayList<>();
+		for (int i = 0; i <= model.getRowCount() - 1; i++) {
+			Insumo oldInsumo = evento.getInsumos().get(i);
+			Transacao oldTransacao = oldInsumo.getTransacao();
+			oldTransacao.setValor(20);
+			Insumo insumo = new Insumo(String.valueOf(model.getValueAt(i, 0)),
+					String.valueOf(model.getValueAt(i, 1)),
+					String.valueOf(model.getValueAt(i, 2)),
+					oldTransacao);
+			insumos.add(insumo);
+        }
+		evento.setInsumos(insumos);
+		System.out.println(insumos);
+		update();
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JFrame insumo = new InsumoView();
-		insumo.setVisible(true);
+		if (e.getSource() == btnNewButton) {
+			JFrame insumo = new InsumoView(evento, this);
+			insumo.setVisible(true);
+		} else if (e.getSource() == btnRemoveButton) {
+			removerInsumo();
+		}
+	}
+
+	@Override
+	public void editingStopped(ChangeEvent e) {
+		editarTabela();
+	}
+
+	@Override
+	public void editingCanceled(ChangeEvent e) {
+		editarTabela();
 	}
 }

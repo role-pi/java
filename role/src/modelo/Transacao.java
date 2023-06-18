@@ -1,11 +1,13 @@
 package modelo;
 
+import java.util.Date;
+
 public class Transacao {
 	private double valor;
-    private String data;
+    private Date data;
     private Usuario usuario;
     
-	public Transacao(double valor, String data, Usuario usuario) {
+	public Transacao(double valor, Date data, Usuario usuario) {
 		this.valor = valor;
 		this.data = data;
 		this.setUsuario(usuario);
@@ -17,10 +19,10 @@ public class Transacao {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	public Usuario getUsuario() {

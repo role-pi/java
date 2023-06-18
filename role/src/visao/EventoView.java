@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controle.EventoDAO;
-import controle.InsumoDAO;
 import modelo.Evento;
 import modelo.Insumo;
 
