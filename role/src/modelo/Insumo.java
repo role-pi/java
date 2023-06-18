@@ -1,18 +1,18 @@
 package modelo;
 
+import java.util.UUID;
+
 public class Insumo {
     private String tipo;
     private String nome;
     private String descricao;
-    private double valor;
-    private Evento eventos;
+    private Transacao transacao;
 
-    public Insumo(String tipo, String nome, String descricao, double valor, Evento eventos) {
+    public Insumo(String tipo, String nome, String descricao, Transacao transacao) {
         this.tipo = tipo;
         this.nome = nome;
         this.descricao = descricao;
-        this.valor = valor;
-        this.eventos = eventos;
+        this.setTransacao(transacao);
     }
 
     public String getTipo() {
@@ -39,19 +39,11 @@ public class Insumo {
         this.descricao = descricao;
     }
 
-    public double getValor() {
-        return valor;
-    }
+	public Transacao getTransacao() {
+		return transacao;
+	}
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public Evento getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(Evento eventos) {
-        this.eventos = eventos;
-    }
+	public void setTransacao(Transacao transacao) {
+		this.transacao = transacao;
+	}
 }

@@ -10,13 +10,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Evento;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.Box;
 import java.awt.Component;
 
 public class TelaEvento extends JFrame {
-	public TelaEvento(String emoji, String titulo, String data, String local, Color cor) {
-        setTitle(titulo);
+	Evento event;
+	
+	public TelaEvento(Evento event) {
+        setTitle(event.getNome());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
 		setLocationRelativeTo(null);
@@ -40,26 +43,26 @@ public class TelaEvento extends JFrame {
 		panel_1.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
-		JPanel panel_3 = new EventoDetailView(emoji, titulo, data, local, cor);
+		JPanel panel_3 = new EventoDetailView(event.getEmoji(), event.getNome(), event.getDataInicio(), "", event.getColor());
 		panel_2.add(panel_3);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		panel_2.add(horizontalStrut);
 		
-		JPanel panel_4 = new InsumosDetailView(cor);
+		JPanel panel_4 = new InsumosDetailView(event.getColor());
 		panel_2.add(panel_4);
 		
 		Component verticalStrut = Box.createVerticalStrut(10);
 		panel_1.add(verticalStrut);
 		
-		JPanel panel_5 = new ParticipantesDetailView(cor);
+		JPanel panel_5 = new ParticipantesDetailView(event.getColor());
 		panel_1.add(panel_5);
 
 		setVisible(true);
 	}
 	
 	public static void main(String[] args) {
-		TelaEvento tela = new TelaEvento("✨", "Rolê na Fac", "de 23 de maio às 22:00 a 24 de maio às 4:00", "Factory Antônio da Veiga", new Color(249, 236, 170));
-		tela.setVisible(true);
+//		TelaEvento tela = new TelaEvento("✨", "Rolê na Fac", "de 23 de maio às 22:00 a 24 de maio às 4:00", "Factory Antônio da Veiga", new Color(249, 236, 170));
+//		tela.setVisible(true);
 	}
 }

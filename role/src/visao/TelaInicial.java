@@ -1,10 +1,14 @@
 package visao;
 
+import modelo.Evento;
+import controle.EventoDAO;
+
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,9 +20,13 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
-public class TelaInicial extends JFrame {
+public class TelaInicial extends JFrame implements ActionListener {
 	private JTextField textField;
-
+	private JPanel contentPanel;
+	private JPanel eventsPanel;
+	
+	private JButton newEventButton;
+	
 	public TelaInicial() {
         setTitle("rolê");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,17 +44,12 @@ public class TelaInicial extends JFrame {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		contentPane.add(scrollPane, "cell 0 1,grow");
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-//		scrollPane.setViewportBorder(null);
 		
-		JPanel contentPanel = new JPanel();
+		contentPanel = new JPanel();
 		scrollPane.setViewportView(contentPanel);
 		contentPanel.setBackground(Color.WHITE);
-		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-		
-		JPanel event1 = new EventoItemView("✨", "Rolê na fac", "23 de maio • 7 participantes", new Color(249, 236, 170));
-		JPanel event2 = new EventoItemView("🌱", "Churrasco vegano", "06 de junho • 15 participantes", new Color(212, 229, 195));
-		JPanel event3 = new EventoItemView("🎡", "Parque de diversões", "12 de junho • 3 participantes", new Color(216, 197, 243));
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		
 		JPanel titlePanel = new JPanel();
 		contentPanel.add(titlePanel);
@@ -63,15 +66,11 @@ public class TelaInicial extends JFrame {
 		Component verticalStrut = Box.createVerticalStrut(10);
 		contentPanel.add(verticalStrut);
 		
-		contentPanel.add(event1);
-		
-		Component verticalStrut_1 = Box.createVerticalStrut(5);
-		contentPanel.add(verticalStrut_1);
-		contentPanel.add(event2);
-		
-		Component verticalStrut_2 = Box.createVerticalStrut(5);
-		contentPanel.add(verticalStrut_2);
-		contentPanel.add(event3);
+		eventsPanel = new JPanel();
+		eventsPanel.setBackground(Color.WHITE);
+		eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
+		update();
+		contentPanel.add(eventsPanel);
 		
 		Component verticalStrut_3 = Box.createVerticalStrut(5);
 		contentPanel.add(verticalStrut_3);
@@ -81,21 +80,54 @@ public class TelaInicial extends JFrame {
 		newEvent.setLayout(new BoxLayout(newEvent, BoxLayout.X_AXIS));
 		
 		textField = new JTextField();
-		textField.setToolTipText("");
+		textField.setToolTipText("...digite um evento");
 		newEvent.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Adicionar");
-		newEvent.add(btnNewButton);
+		newEventButton = new JButton("Adicionar");
+		newEventButton.addActionListener(this);
+		newEventButton.setEnabled(!textField.getText().isEmpty());
+		
+		textField.addCaretListener(e -> {
+			newEventButton.setEnabled(!textField.getText().isEmpty());
+		});
+		
+		newEvent.add(newEventButton);
 		
 		newEvent.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 		newEvent.setBorder(new EmptyBorder(10, 10, 10, 10));
-
 		setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		TelaInicial tela = new TelaInicial();
 		tela.setVisible(true);
+	}
+	
+	public void update() {
+		List<Evento> events = EventoDAO.getInstance().list();
+		eventsPanel.removeAll();
+		for (Evento event : events) {
+			JPanel eventListItem = new EventoItemView(event);
+			eventsPanel.add(eventListItem);
+			Component verticalStrut = Box.createVerticalStrut(5);
+			eventsPanel.add(verticalStrut);
+		}
+
+		SwingUtilities.updateComponentTreeUI(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == newEventButton) {
+			if (textField.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Por favor, digite um nome para o evento.");
+			} else {
+				Evento event = new Evento("", new Color(200, 200, 200), textField.getText(), "", "");
+				EventoDAO.getInstance().insert(event);
+				System.out.print("TEST");
+				update();
+			}
+		}
 	}
 }

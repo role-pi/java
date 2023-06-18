@@ -3,10 +3,15 @@ package visao;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Evento;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,26 +20,18 @@ import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
 
 public class EventoItemView extends RoundedPanel implements ActionListener {
-	String emoji, titulo, descricao;
-	Color cor;
+	Evento event;
 	
-	public EventoItemView (String emoji,
-			String titulo,
-			String descricao,
-			Color cor) {
-		super(cor);
-		
-		this.emoji = emoji;
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.cor = cor;
+	public EventoItemView (Evento event) {
+		super(event.getColor());
+		this.event = event;
 		
 		setBackground(new Color(245, 245, 245));
 		
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel_1 = new JLabel(emoji);
+		JLabel lblNewLabel_1 = new JLabel(event.getEmoji());
 		add(lblNewLabel_1);
 		lblNewLabel_1.setFont(new Font("Inter", Font.BOLD, 35));
 		
@@ -44,11 +41,11 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 		
-		JLabel lblNewLabel = new JLabel(titulo);
+		JLabel lblNewLabel = new JLabel(event.getNome());
 		verticalBox.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 14));
 		
-		JLabel lblNewLabel_2 = new JLabel(descricao);
+		JLabel lblNewLabel_2 = new JLabel(event.descricaoSimples());
 		verticalBox.add(lblNewLabel_2);
 		lblNewLabel_2.setForeground(new Color(83, 83, 83));
 		lblNewLabel_2.setFont(new Font("Inter", Font.PLAIN, 13));
@@ -64,11 +61,12 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JFrame tela = new TelaEvento(emoji,
-				titulo,
-				"de 23 de maio às 22:00 a 24 de maio às 4:00",
-				"Factory Antônio da Veiga",
-				cor);
+//		JFrame tela = new TelaEvento(emoji,
+//				titulo,
+//				"de 23 de maio às 22:00 a 24 de maio às 4:00",
+//				"Factory Antônio da Veiga",
+//				cor);
+		JFrame tela = new TelaEvento(event);
 		tela.setVisible(true);
 	}
 }

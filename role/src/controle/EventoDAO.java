@@ -1,5 +1,6 @@
 package controle;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,9 @@ public class EventoDAO implements DAO<Evento> {
     private static EventoDAO instance = null;
 
     public EventoDAO() {
-        
+		eventos.add(new Evento("✨", new Color(249, 236, 170), "Rolê na fac", "", ""));
+		eventos.add(new Evento("🌱", new Color(212, 229, 195), "Churrasco vegano", "", ""));
+		eventos.add(new Evento("🎡", new Color(216, 197, 243), "Parque de diversões", "", ""));
     }
 
     public static EventoDAO getInstance() {
