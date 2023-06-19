@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -21,7 +22,7 @@ public class TelaCadastro extends JFrame implements ActionListener {
     private JPanel contentPane;
     private JTextField nometxt;
     private JLabel inserirNome;
-    private JButton BotaoEntrar;
+    private JButton botaoEntrar;
     private JPanel painel;
 
     public TelaCadastro() {
@@ -60,13 +61,13 @@ public class TelaCadastro extends JFrame implements ActionListener {
         nometxt.setColumns(10);
         painel.add(nometxt, "cell 0 1,alignx center,aligny center");
 
-        BotaoEntrar = new JButton("Entrar");
-        BotaoEntrar.setForeground(UIManager.getColor("window"));
-        BotaoEntrar.setBackground(UIManager.getColor("textHighlight"));
-        BotaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
-        painel.add(BotaoEntrar, "cell 0 2,alignx center,aligny center");
+        botaoEntrar = new JButton("Entrar");
+        botaoEntrar.setForeground(UIManager.getColor("window"));
+        botaoEntrar.setBackground(UIManager.getColor("textHighlight"));
+        botaoEntrar.setFont(new Font("Inter", Font.BOLD, 14));
+        painel.add(botaoEntrar, "cell 0 2,alignx center,aligny center");
 
-        BotaoEntrar.addActionListener(this);
+        botaoEntrar.addActionListener(this);
     }
 
     public static void main(String[] args) {
@@ -76,9 +77,20 @@ public class TelaCadastro extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        setVisible(false);
-
-        MainWindow tela = new MainWindow();
+        setVisible(false); 
+   
+        TelaCadastro cadastro = new TelaCadastro();
+        cadastro.setVisible(true);
+        
+    	if (e.getSource() == botaoEntrar) {
+			if (nometxt.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Por favor, digite um nome de usuário para entrar!");
+			}
+			
+		else {
+				MainWindow tela = new MainWindow();
         tela.setVisible(true);
+			}
+        }
     }
 }
