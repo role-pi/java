@@ -23,10 +23,6 @@ public class EventoDAO implements DAO<Evento> {
     }
 
     public boolean update(Evento event, String[] params) {
-        if (event != null) {
-			eventos.add(event);
-            return true;
-        }
         return false;
     }
 

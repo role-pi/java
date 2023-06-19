@@ -38,7 +38,7 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 	JButton btnRemoveButton;
 	JButton btnNewButton;
 	
-	public InsumosDetailView (Evento event) {
+	public InsumosDetailView(Evento event) {
 		this.evento = event;
 		
 		setBackground(new Color(236, 236, 236));
@@ -156,13 +156,12 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 			
 			Insumo insumo = new Insumo(
 					String.valueOf(model.getValueAt(i, 0)),
-					String.valueOf(model.getValueAt(i, 1)),
+					nome,
 					String.valueOf(model.getValueAt(i, 2)),
 					oldTransacao);
 			insumos.add(insumo);
         }
 		evento.setInsumos(insumos);
-		System.out.println(insumos);
 		update();
 	}
 
