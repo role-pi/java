@@ -9,9 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class LogoView extends JPanel {
-
 	public LogoView() {
-		
 		setBackground(Color.BLACK);
 		setMinimumSize(new Dimension(Integer.MIN_VALUE, 75));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));

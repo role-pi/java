@@ -16,11 +16,11 @@ import javax.swing.Box;
 import java.awt.Component;
 
 public class EventoWindow extends JFrame {
-	Evento event;
+	Evento evento;
 	
-	public EventoWindow(Evento event) {
-        setTitle(event.getNome());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public EventoWindow(Evento evento) {
+        setTitle(evento.getNome());
+        
 		setSize(500, 400);
 		setLocationRelativeTo(null);
 
@@ -43,19 +43,19 @@ public class EventoWindow extends JFrame {
 		panel_1.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
-		JPanel panel_3 = new EventoDetailView(event.getEmoji(), event.getNome(), event.getDataInicio(), "", event.getColor());
+		JPanel panel_3 = new EventoDetailView(evento);
 		panel_2.add(panel_3);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(10);
 		panel_2.add(horizontalStrut);
 		
-		JPanel panel_4 = new InsumosDetailView(event);
+		JPanel panel_4 = new InsumosDetailView(evento);
 		panel_2.add(panel_4);
 		
 		Component verticalStrut = Box.createVerticalStrut(10);
 		panel_1.add(verticalStrut);
 		
-		JPanel panel_5 = new ParticipantesDetailView(event.getColor());
+		JPanel panel_5 = new ParticipantesDetailView(evento.getColor());
 		panel_1.add(panel_5);
 		
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);

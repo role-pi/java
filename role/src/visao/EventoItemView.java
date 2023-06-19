@@ -61,11 +61,6 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		JFrame tela = new TelaEvento(emoji,
-//				titulo,
-//				"de 23 de maio às 22:00 a 24 de maio às 4:00",
-//				"Factory Antônio da Veiga",
-//				cor);
 		JFrame tela = new EventoWindow(event);
 		tela.setVisible(true);
 	}

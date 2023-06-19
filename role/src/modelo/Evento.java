@@ -12,21 +12,24 @@ import java.util.UUID;
 
 public class Evento {
 	private UUID id;
+	
 	private String emoji;
 	private Color color;
 	private String nome;
+	private String local;
 	private String dataInicio;
 	private String dataFim;
 	
 	private ArrayList<Insumo> insumos = new ArrayList<>();
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
-	
-	public Evento(String emoji, Color color, String nome, String dataInicio, String dataFim) {
+
+	public Evento(String emoji, Color color, String nome, String local, String dataInicio, String dataFim) {
 		super();
 		this.id = UUID.randomUUID();
 		this.emoji = emoji;
 		this.color = color;
 		this.nome = nome;
+		this.setLocal(local);
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 	}
@@ -67,13 +70,23 @@ public class Evento {
 	public void setDataFim(String dataFim) {
 		this.dataFim = dataFim;
 	}
-	
 	public ArrayList<Insumo> getInsumos() {
 		return insumos;
 	}
-
 	public void setInsumos(ArrayList<Insumo> insumos) {
 		this.insumos = insumos;
+	}
+	public ArrayList<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	public String getLocal() {
+		return local;
+	}
+	public void setLocal(String local) {
+		this.local = local;
 	}
 	
 	public String descricaoSimples() {

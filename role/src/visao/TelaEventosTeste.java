@@ -157,8 +157,8 @@ public class TelaEventosTeste extends JFrame implements ActionListener {
 		String dataInicio = textField_1.getText();
 		String dataFim = textField_2.getText();
 		
-		Evento evento = new Evento(dataFim, getForeground(), nome, dataInicio, dataFim);
-		eventoDAO.insert(evento);
+//		Evento evento = new Evento(dataFim, getForeground(), nome, dataInicio, dataFim);
+//		eventoDAO.insert(evento);
 	}
 	
 	public void listar() {

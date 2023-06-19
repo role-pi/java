@@ -124,7 +124,7 @@ public class MainWindow extends JFrame implements ActionListener {
 			if (textField.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Por favor, digite um nome para o evento.");
 			} else {
-				Evento event = new Evento("", new Color(200, 200, 200), textField.getText(), "", "");
+				Evento event = new Evento("", new Color(200, 200, 200), textField.getText(), "", "", "");
 				EventoDAO.getInstance().insert(event);
 				System.out.print("TEST");
 				update();

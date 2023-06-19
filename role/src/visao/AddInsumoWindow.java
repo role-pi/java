@@ -69,7 +69,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
 
         JLabel tipoLabel = new JLabel("Tipo");
         panel_3.add(tipoLabel);
-        tipoComboBox = new JComboBox<>(new String[] { "Ingresso", "Comida", "Bebida", "Transporte" });
+        tipoComboBox = new JComboBox<>(Insumo.allTipos());
         panel_3.add(tipoComboBox);
 
         JPanel panel_1 = new JPanel();
@@ -95,8 +95,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         panel_4.add(cadastrarButton);
 
         cadastrarButton.addActionListener(this);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     @Override
@@ -124,8 +123,5 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
 
         Insumo insumo = new Insumo(tipo, nome, descricao, new Transacao(valor, new Date(), new Usuario("João", "")));
         event.getInsumos().add(insumo);
-    }
-
-    public static void main(String[] args) {
     }
 }

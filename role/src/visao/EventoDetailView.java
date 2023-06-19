@@ -7,13 +7,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Evento;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 
 public class EventoDetailView extends RoundedPanel implements ActionListener {
-	public EventoDetailView (String emoji, String titulo, String data, String local, Color color) {
-		super(color);
+	Evento evento;
+	
+	public EventoDetailView (Evento evento) {
+		super(evento.getColor());
+		this.evento = evento;
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -24,24 +30,24 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(new Color(0, 0, 0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel(emoji);
+		JLabel lblNewLabel_1 = new JLabel(evento.getEmoji());
 		panel.add(lblNewLabel_1);
 		lblNewLabel_1.setFont(new Font("SF Pro Display", Font.BOLD, 50));
 		
 		Box verticalBox = Box.createVerticalBox();
 		panel.add(verticalBox);
 		
-		JLabel lblNewLabel = new JLabel(titulo);
+		JLabel lblNewLabel = new JLabel(evento.getNome());
 		verticalBox.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 24));
 		
-		JLabel lblNewLabel_2 = new JLabel(data);
-		verticalBox.add(lblNewLabel_2);
-		lblNewLabel_2.setForeground(new Color(0, 0, 0, 150));
-		lblNewLabel_2.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
+//		JLabel lblNewLabel_2 = new JLabel(data);
+//		verticalBox.add(lblNewLabel_2);
+//		lblNewLabel_2.setForeground(new Color(0, 0, 0, 150));
+//		lblNewLabel_2.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
 		
 
-		JLabel lblNewLabel_3 = new JLabel(local);
+		JLabel lblNewLabel_3 = new JLabel(evento.getLocal());
 		verticalBox.add(lblNewLabel_3);
 		lblNewLabel_3.setForeground(new Color(0, 0, 0, 150));
 		lblNewLabel_3.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
@@ -60,7 +66,7 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		EditEventoWindow evento = new EditEventoWindow();
-		evento.setVisible(true);
+		EditEventoWindow window = new EditEventoWindow(evento);
+		window.setVisible(true);
 	}
 }

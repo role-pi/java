@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import modelo.Evento;
 import modelo.Insumo;
@@ -85,9 +86,16 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
         update();
 
         table = new JTable(model);
+        
         table.getDefaultEditor(String.class).addCellEditorListener(this);
 		table.setFont(new Font("SF Pro Display", Font.PLAIN, 16));
 		table.setRowHeight(30);
+		
+        TableColumn comboCol1 = table.getColumnModel().getColumn(0);
+        
+        CustomComboBoxEditor editor = new CustomComboBoxEditor(Insumo.allTipos());
+        editor.addCellEditorListener(this);
+        comboCol1.setCellEditor(editor);
 
 		table.setSelectionBackground(event.getColor().darker());
 		
@@ -106,7 +114,11 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 		}
 	}
 	
-	private void removerInsumo() {
+	private void adicionarInsumo() {
+		JFrame insumo = new AddInsumoWindow(evento, this);
+	}
+	
+	private void removerInsumos() {
       int[] selectedRows = table.getSelectedRows();
       if (selectedRows.length > 0) {
     	  int confirm;
@@ -128,12 +140,20 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
       }
   }
 	
-	public void editarTabela() {
+	public void editarInsumos() {
 		ArrayList<Insumo> insumos = new ArrayList<>();
 		for (int i = 0; i <= model.getRowCount() - 1; i++) {
 			Insumo oldInsumo = evento.getInsumos().get(i);
 			Transacao oldTransacao = oldInsumo.getTransacao();
-			oldTransacao.setValor(Double.valueOf(String.valueOf(model.getValueAt(i, 3))));
+			
+			Double valor = Double.valueOf(String.valueOf(model.getValueAt(i, 3)).replaceAll("[^-\\d.]", ""));
+			oldTransacao.setValor(valor);
+			
+			String nome = String.valueOf(model.getValueAt(i, 2));
+			if (nome.isEmpty()) {
+				nome = oldInsumo.getNome();
+			}
+			
 			Insumo insumo = new Insumo(
 					String.valueOf(model.getValueAt(i, 0)),
 					String.valueOf(model.getValueAt(i, 1)),
@@ -149,20 +169,19 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnNewButton) {
-			JFrame insumo = new AddInsumoWindow(evento, this);
-			insumo.setVisible(true);
+			adicionarInsumo();
 		} else if (e.getSource() == btnRemoveButton) {
-			removerInsumo();
+			removerInsumos();
 		}
 	}
 
 	@Override
 	public void editingStopped(ChangeEvent e) {
-		editarTabela();
+		editarInsumos();
 	}
 
 	@Override
 	public void editingCanceled(ChangeEvent e) {
-		editarTabela();
+		editarInsumos();
 	}
 }

@@ -46,4 +46,8 @@ public class Insumo {
 	public void setTransacao(Transacao transacao) {
 		this.transacao = transacao;
 	}
+	
+	public static String[] allTipos() {
+		return new String[] { "Ingresso", "Comida", "Bebida", "Transporte" };
+	}
 }
