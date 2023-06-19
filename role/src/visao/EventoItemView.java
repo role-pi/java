@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.EventoDAO;
 import modelo.Evento;
 
 import javax.swing.Box;
@@ -22,9 +23,15 @@ import javax.swing.JMenuItem;
 public class EventoItemView extends RoundedPanel implements ActionListener {
 	Evento event;
 	
-	public EventoItemView (Evento event) {
+	JButton btnVisualizar;
+	JButton btnRemover;
+	
+	MainWindow parentWindow;
+	
+	public EventoItemView (Evento event, MainWindow parentWindow) {
 		super(event.getColor());
 		this.event = event;
+		this.parentWindow = parentWindow;
 		
 		setBackground(new Color(245, 245, 245));
 		
@@ -53,15 +60,30 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 		Component horizontalStrut = Box.createHorizontalGlue();
 		add(horizontalStrut);
 		
-		JButton btnNewButton = new JButton("Visualizar");
-		add(btnNewButton);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 0, 0));
+		add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panel.add(btnVisualizar);
+		
+		btnRemover = new JButton("Remover");
+		btnRemover.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panel.add(btnRemover);
+		btnRemover.addActionListener(this);
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
-		btnNewButton.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JFrame tela = new EventoWindow(event);
-		tela.setVisible(true);
+		if (e.getSource() == btnVisualizar) {
+			JFrame tela = new EventoWindow(event);
+			tela.setVisible(true);
+		} else if (e.getSource() == btnRemover) {
+			EventoDAO.getInstance().delete(event);
+			parentWindow.update();
+		}
 	}
 }

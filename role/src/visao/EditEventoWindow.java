@@ -144,11 +144,11 @@ public class EditEventoWindow extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (nomeTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nome não pode estar vazio."); 
-		}
+//		}
 //		} else if (dataInicioTextField.getText().isEmpty()) {
 //			JOptionPane.showMessageDialog(this, "Data de início não pode estar vazia."); 
 //		} else if (dataFimTextField.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Data de fim não pode estar vazia."); 
+//			JOptionPane.showMessageDialog(this, "Data de fim não pode estar vazia."); 
 		} else {
 			evento.setNome(nomeTextField.getText());
 			evento.setLocal(localTextField.getText());

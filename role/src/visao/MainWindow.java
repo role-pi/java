@@ -2,6 +2,7 @@ package visao;
 
 import modelo.Evento;
 import controle.EventoDAO;
+import controle.UsuarioManager;
 
 import javax.swing.JFrame;
 
@@ -56,7 +57,8 @@ public class MainWindow extends JFrame implements ActionListener {
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
 		titlePanel.setBackground(new Color(0, 0, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("próximos rolês");
+		String nome = UsuarioManager.getInstance().getUsuarioCadastrado().getNome();
+		JLabel lblNewLabel = new JLabel(nome+", esses são seus próximos rolês");
 		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
 		titlePanel.add(lblNewLabel);
 		
@@ -109,7 +111,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		List<Evento> events = EventoDAO.getInstance().list();
 		eventsPanel.removeAll();
 		for (Evento event : events) {
-			JPanel eventListItem = new EventoItemView(event);
+			JPanel eventListItem = new EventoItemView(event, this);
 			eventsPanel.add(eventListItem);
 			Component verticalStrut = Box.createVerticalStrut(5);
 			eventsPanel.add(verticalStrut);
@@ -126,7 +128,7 @@ public class MainWindow extends JFrame implements ActionListener {
 			} else {
 				Evento event = new Evento("", new Color(200, 200, 200), textField.getText(), "", "", "");
 				EventoDAO.getInstance().insert(event);
-				System.out.print("TEST");
+				textField.setText("");
 				update();
 			}
 		}
