@@ -10,11 +10,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 	
-public class ParticipanteView extends JFrame implements ActionListener {
+public class AddParticipanteWindow extends JFrame implements ActionListener {
     private JTextField nomeTextField;
     private JTextField emailTextField;
 
-    public ParticipanteView() {
+    public AddParticipanteWindow() {
         setTitle("adicionar participante");
 	    setSize(600, 350);
 	    setLocationRelativeTo(null);

@@ -18,7 +18,7 @@ public class LogoView extends JPanel {
 
 		setBorder(new EmptyBorder(0, 20, 0, 20));
 		
-		JPanel imagem = new ImagePanel("src/visao/Logo.png", new Dimension(83, 33), 0.0);
+		JPanel imagem = new ImageView("src/visao/Logo.png", new Dimension(83, 33), 0.0);
 		imagem.setAlignmentX(Component.LEFT_ALIGNMENT);
 		imagem.setBackground(new Color(0, 0, 0, 0));
 		add(imagem);

@@ -20,14 +20,14 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
-public class TelaInicial extends JFrame implements ActionListener {
+public class MainWindow extends JFrame implements ActionListener {
 	private JTextField textField;
 	private JPanel contentPanel;
 	private JPanel eventsPanel;
 	
 	private JButton newEventButton;
 	
-	public TelaInicial() {
+	public MainWindow() {
         setTitle("rolê");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
@@ -102,7 +102,7 @@ public class TelaInicial extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		TelaInicial tela = new TelaInicial();
+		MainWindow tela = new MainWindow();
 	}
 	
 	public void update() {

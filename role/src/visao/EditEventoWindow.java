@@ -20,13 +20,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 	
-public class EventoView extends JFrame implements ActionListener {
+public class EditEventoWindow extends JFrame implements ActionListener {
     private JTextField nomeTextField;
     private JTextField localTextField;
     private JTextField dataInicioTextField;
     private JTextField dataFimTextField;
 
-    public EventoView() {
+    public EditEventoWindow() {
         setTitle("editar evento");
 	    setSize(600, 350);
 	    setLocationRelativeTo(null);

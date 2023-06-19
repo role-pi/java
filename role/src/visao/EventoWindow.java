@@ -15,10 +15,10 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.Box;
 import java.awt.Component;
 
-public class TelaEvento extends JFrame {
+public class EventoWindow extends JFrame {
 	Evento event;
 	
-	public TelaEvento(Evento event) {
+	public EventoWindow(Evento event) {
         setTitle(event.getNome());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);

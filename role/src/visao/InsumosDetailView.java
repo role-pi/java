@@ -61,7 +61,7 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setForeground(SystemColor.scrollbar);
 		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 17));
+		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 18));
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
@@ -69,12 +69,12 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 		btnRemoveButton = new JButton("Remover");
 		panel_1.add(btnRemoveButton);
 		btnRemoveButton.addActionListener(this);
-		btnRemoveButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
+		btnRemoveButton.setFont(new Font("SF Pro Display", Font.PLAIN, 17));
 		
 		btnNewButton = new JButton("Adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(this);
-		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 14));
+		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 17));
 		
 		model = new DefaultTableModel();
         model.addColumn("Tipo");
@@ -86,7 +86,8 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 
         table = new JTable(model);
         table.getDefaultEditor(String.class).addCellEditorListener(this);
-		table.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
+		table.setFont(new Font("SF Pro Display", Font.PLAIN, 16));
+		table.setRowHeight(30);
 
 		table.setSelectionBackground(event.getColor().darker());
 		
@@ -101,20 +102,27 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 		model.setRowCount(0);
 		for (Insumo insumo : evento.getInsumos()) {
 			DecimalFormat df = new DecimalFormat("#,00");
-			model.addRow(new Object[]{"🎟️", insumo.getNome(), insumo.getDescricao(), "R$ "+df.format(insumo.getTransacao().getValor())});
+			model.addRow(new Object[]{insumo.getTipo(), insumo.getNome(), insumo.getDescricao(), "R$ "+df.format(insumo.getTransacao().getValor())});
 		}
 	}
 	
 	private void removerInsumo() {
-      int selectedRow = table.getSelectedRow();
-      if (selectedRow != -1) {
-          int confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o insumo?", "Remover Insumo",
-                  JOptionPane.YES_NO_OPTION);
+      int[] selectedRows = table.getSelectedRows();
+      if (selectedRows.length > 0) {
+    	  int confirm;
+    	  if (selectedRows.length > 1) {
+	          confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover os insumos?", "Remover Insumos",
+	                  JOptionPane.YES_NO_OPTION);
+    	  } else {
+    		  confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o insumo?", "Remover Insumo",
+	                  JOptionPane.YES_NO_OPTION);
+    	  }
           if (confirm == JOptionPane.YES_OPTION) {
-              evento.getInsumos().remove(selectedRow);
-              update();
-              JOptionPane.showMessageDialog(null, "Insumo removido com sucesso!");
+        	  for (int i = 0; i < selectedRows.length; i++){
+	              evento.getInsumos().remove(selectedRows[selectedRows.length-i-1]);
+	          }
           }
+          update();
       } else {
           JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
       }
@@ -125,8 +133,9 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 		for (int i = 0; i <= model.getRowCount() - 1; i++) {
 			Insumo oldInsumo = evento.getInsumos().get(i);
 			Transacao oldTransacao = oldInsumo.getTransacao();
-			oldTransacao.setValor(20);
-			Insumo insumo = new Insumo(String.valueOf(model.getValueAt(i, 0)),
+			oldTransacao.setValor(Double.valueOf(String.valueOf(model.getValueAt(i, 3))));
+			Insumo insumo = new Insumo(
+					String.valueOf(model.getValueAt(i, 0)),
 					String.valueOf(model.getValueAt(i, 1)),
 					String.valueOf(model.getValueAt(i, 2)),
 					oldTransacao);
@@ -140,7 +149,7 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnNewButton) {
-			JFrame insumo = new InsumoView(evento, this);
+			JFrame insumo = new AddInsumoWindow(evento, this);
 			insumo.setVisible(true);
 		} else if (e.getSource() == btnRemoveButton) {
 			removerInsumo();

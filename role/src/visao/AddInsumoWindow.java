@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InsumoView extends JFrame implements ActionListener {
+public class AddInsumoWindow extends JFrame implements ActionListener {
     private JButton cadastrarButton;
     private JTextField nomeTextField;
     private JTextField descricaoTextField;
@@ -33,11 +33,11 @@ public class InsumoView extends JFrame implements ActionListener {
     private Evento event;
     private InsumosDetailView parentWindow;
 
-    public InsumoView(Evento event, InsumosDetailView parentWindow) {
+    public AddInsumoWindow(Evento event, InsumosDetailView parentWindow) {
     	this.event = event;
     	this.parentWindow = parentWindow;
     	
-        setTitle("adicionar Insumo");
+        setTitle("Adicionar Insumo");
         setSize(600, 350);
         setLocationRelativeTo(null);
 
@@ -97,7 +97,6 @@ public class InsumoView extends JFrame implements ActionListener {
         cadastrarButton.addActionListener(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        carregarEventos();
     }
 
     @Override
@@ -126,32 +125,7 @@ public class InsumoView extends JFrame implements ActionListener {
         Insumo insumo = new Insumo(tipo, nome, descricao, new Transacao(valor, new Date(), new Usuario("João", "")));
         event.getInsumos().add(insumo);
     }
-    
-//    private void atualizarInsumos() {
-//        int selectedRow = tabela.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String tipo = (String) tabela.getValueAt(selectedRow, 0);
-//            String nome = (String) tabela.getValueAt(selectedRow, 1);
-//            String descricao = (String) tabela.getValueAt(selectedRow, 2);
-//            double valor = (double) tabela.getValueAt(selectedRow, 3);
-//            Evento evento = (Evento) tabela.getValueAt(selectedRow, 4);
-//
-//            tipoComboBox.setSelectedItem(tipo);
-//            nomeTextField.setText(nome);
-//            descricaoTextField.setText(descricao);
-//            valorTextField.setText(String.valueOf(valor));
-//            eventosComboBox.setSelectedItem(evento);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para atualizar.");
-//        }
-//    }
 
     public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                InsumoView insumoView = new InsumoView();
-//                insumoView.setVisible(true);
-//            }
-//        });
     }
 }

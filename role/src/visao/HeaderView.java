@@ -21,7 +21,7 @@ public class HeaderView extends JPanel {
 
 		setBorder(new EmptyBorder(0, 20, 0, 20));
 		
-		JPanel imagem = new ImagePanel("src/visao/Logo.png", new Dimension(83, 33), 0.0);
+		JPanel imagem = new ImageView("src/visao/Logo.png", new Dimension(83, 33), 0.0);
 		imagem.setAlignmentX(Component.LEFT_ALIGNMENT);
 		imagem.setBackground(new Color(0, 0, 0, 0));
 		add(imagem);
@@ -29,7 +29,7 @@ public class HeaderView extends JPanel {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
 		
-		JPanel perfil = new ImagePanel("src/visao/Perfil.png", new Dimension(52, 52), 1.0);
+		JPanel perfil = new ImageView("src/visao/Perfil.png", new Dimension(52, 52), 1.0);
 		perfil.setSize(new Dimension(52, 52));
 		perfil.setBackground(new Color(0, 0, 0, 0));
 		add(perfil);

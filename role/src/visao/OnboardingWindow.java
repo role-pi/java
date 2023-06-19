@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class TelaOnboarding extends JFrame implements ActionListener {
-    public TelaOnboarding() {
+public class OnboardingWindow extends JFrame implements ActionListener {
+    public OnboardingWindow() {
         setTitle("Rolê");
         setResizable(false);
         setSize(new Dimension(400, 400));
@@ -47,7 +47,7 @@ public class TelaOnboarding extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        TelaOnboarding tela = new TelaOnboarding();
+        OnboardingWindow tela = new OnboardingWindow();
         tela.setVisible(true);
     }
 

@@ -17,8 +17,9 @@ public class Evento {
 	private String nome;
 	private String dataInicio;
 	private String dataFim;
-	private ArrayList<Integer> idUsuarios = new ArrayList<>();
+	
 	private ArrayList<Insumo> insumos = new ArrayList<>();
+	private ArrayList<Usuario> usuarios = new ArrayList<>();
 	
 	public Evento(String emoji, Color color, String nome, String dataInicio, String dataFim) {
 		super();
@@ -87,6 +88,6 @@ public class Evento {
 			e.printStackTrace();
 		}
 		
-		return data + " • " + String.valueOf(idUsuarios.size()) + " participantes";
+		return data + " • " + String.valueOf(usuarios.size()) + " participantes";
 	}
 }

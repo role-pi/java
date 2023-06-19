@@ -60,7 +60,7 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		EventoView evento = new EventoView();
+		EditEventoWindow evento = new EditEventoWindow();
 		evento.setVisible(true);
 	}
 }

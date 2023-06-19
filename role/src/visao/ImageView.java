@@ -8,14 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class ImagePanel extends JPanel{
+public class ImageView extends JPanel{
 
     private BufferedImage image;
     
     Dimension size;
     Double alignment;
 
-    public ImagePanel(String src, Dimension size, Double alignment) {
+    public ImageView(String src, Dimension size, Double alignment) {
        try {                
           image = ImageIO.read(new File(src));
           this.size = size;

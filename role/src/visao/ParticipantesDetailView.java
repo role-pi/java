@@ -72,7 +72,7 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JFrame insumo = new ParticipanteView();
+		JFrame insumo = new AddParticipanteWindow();
 		insumo.setVisible(true);
 	}
 }

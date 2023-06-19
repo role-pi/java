@@ -78,7 +78,7 @@ public class TelaCadastro extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         setVisible(false);
 
-        TelaInicial tela = new TelaInicial();
+        MainWindow tela = new MainWindow();
         tela.setVisible(true);
     }
 }
