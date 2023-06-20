@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import java.awt.SystemColor;
 
 public class OnboardingWindow extends JFrame implements ActionListener {
+	
 	public OnboardingWindow() {
 		setTitle("rolê");
 		setResizable(false);
@@ -28,44 +29,47 @@ public class OnboardingWindow extends JFrame implements ActionListener {
     	setContentPane(contentPane);
     	contentPane.setLayout(null);
     	
-    	JTextArea texto = new JTextArea("para prosseguir, crie sua conta");
+    	JTextArea texto = new JTextArea("clique em 'prosseguir' para fazer o login.");
+    	texto.setEditable(false);
     	texto.setLineWrap(true);
     	texto.setWrapStyleWord(true);
     	texto.setBackground(new Color(0, 0, 0));
-    	texto.setLocation(50, 188);
-    	texto.setSize(new Dimension(242, 44));
+    	texto.setLocation(50, 140);
+    	texto.setSize(new Dimension(268, 44));
     	texto.setForeground(new Color(173, 173, 173));
     	texto.setFont(new Font("Inter", Font.PLAIN, 17));
     	contentPane.add(texto);
     	
     	JPanel logo = new ImageView("src/visao/Logo.png", new Dimension(83, 33), 0.0);
-    	logo.setLocation (50, 70);
+    	logo.setLocation (50, 10);
     	logo.setSize(new Dimension(83, 83));
     	logo.setBackground(new Color(0, 0, 0, 0));
     	contentPane.add(logo);
    	
     	JButton nextCadastro = new JButton("prosseguir");
+    	nextCadastro.setBackground(new Color(240, 255, 240));
     	nextCadastro.setForeground(Color.BLACK);
-    	nextCadastro.setFont(new Font("Inter", Font.BOLD, 17));
-    	nextCadastro.setLocation(114, 273);
+    	nextCadastro.setFont(new Font("Inter", Font.BOLD | Font.ITALIC, 17));
+    	nextCadastro.setLocation(114, 200);
     	nextCadastro.setSize(new Dimension(154, 37));
     	contentPane.add(nextCadastro);
     	
-    	JTextArea texto_1 = new JTextArea("boas-vindas ao seu novo aplicativo de eventos");
+    	JTextArea texto_1 = new JTextArea("boas-vindas ao seu novo aplicativo de eventos!");
+    	texto_1.setEditable(false);
     	texto_1.setWrapStyleWord(true);
-    	texto_1.setSize(new Dimension(242, 44));
+    	texto_1.setSize(new Dimension(242, 35));
     	texto_1.setLineWrap(true);
     	texto_1.setForeground(Color.WHITE);
     	texto_1.setFont(new Font("Inter", Font.PLAIN, 17));
     	texto_1.setBackground(Color.BLACK);
-    	texto_1.setBounds(50, 132, 242, 44);
+    	texto_1.setBounds(50, 90, 274, 44);
     	contentPane.add(texto_1);
     	
     	nextCadastro.addActionListener(this);
         
-//        JPanel fundo = new ImageView("src/visao/Background.png", new Dimension(400, 400), 0.5);
-//        fundo.setSize(400, 400);
-//		contentPane.add(fundo);
+        JPanel fundo = new ImageView("src/visao/Background.png", new Dimension(400, 400), 0.5);
+        fundo.setSize(400, 400);
+		contentPane.add(fundo);
 	}
 	
 	public static void main(String[] args) {

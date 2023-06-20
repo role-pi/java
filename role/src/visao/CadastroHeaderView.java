@@ -29,8 +29,8 @@ public class CadastroHeaderView extends JPanel {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
 		
-		JPanel perfil = new ImageView("src/visao/foto sem rosto.png", new Dimension(90, 90), 1.0);
-		perfil.setSize(new Dimension(90, 90));
+		JPanel perfil = new ImageView("src/visao/foto sem rosto.png", new Dimension(52, 52), 1.0);
+		perfil.setSize(new Dimension(52, 52));
 		perfil.setBackground(new Color(0, 0, 0, 0));
 		add(perfil);
 	}
