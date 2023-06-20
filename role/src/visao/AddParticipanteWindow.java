@@ -62,7 +62,7 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
 	    panel_4.add(panel_1);
 	    panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 	
-	    JLabel localLabel = new JLabel("Local");
+	    JLabel localLabel = new JLabel("Email");
 	    panel_1.add(localLabel);
 	    emailTextField = new JTextField();
 	    panel_1.add(emailTextField);
