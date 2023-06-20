@@ -25,11 +25,11 @@ Após o cadastro inicial, o usuário é apresentado com uma lista de seus evento
 
 **Fluxograma de uso do sistema**
 
-![Fluxograma drawio](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/bbdd0b34-ab37-4b5f-8b33-1472916ead12)
+![Fluxograma](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/65da35f1-9273-49fe-98ff-f9d4502e3527)
 
 **Diagrama de casos de uso**
 
-![Casos de uso drawio](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/3a6ec8a3-375e-420d-9c37-55e150c57302)
+![Casos de uso](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/3a6ec8a3-375e-420d-9c37-55e150c57302)
 
 [⬆ Voltar ao topo](#estudo-de-caso)<br>
 
