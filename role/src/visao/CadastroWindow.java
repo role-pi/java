@@ -49,30 +49,30 @@ public class CadastroWindow extends JFrame implements ActionListener {
         cadastroPanel.setLayout(null);
         
         inserirNome = new JLabel("Como podemos te chamar?");
-        inserirNome.setBounds(62, 54, 250, 23);
+        inserirNome.setBounds(127, 54, 250, 23);
         cadastroPanel.add(inserirNome);
         inserirNome.setForeground(Color.WHITE);
         inserirNome.setHorizontalAlignment(SwingConstants.LEFT);
         inserirNome.setFont(new Font("Inter", Font.BOLD, 18));
 
         nometxt = new JTextField();
-        nometxt.setBounds(62, 87, 304, 25);
+        nometxt.setBounds(95, 88, 304, 25);
         cadastroPanel.add(nometxt);
         nometxt.setHorizontalAlignment(SwingConstants.LEFT);
         nometxt.setFont(new Font("Inter", Font.PLAIN, 15));
         nometxt.setColumns(10);
 
         botaoEntrar = new JButton("Prosseguir");
-        botaoEntrar.setBounds(62, 124, 129, 27);
+        botaoEntrar.setBounds(176, 124, 129, 27);
         botaoEntrar.setBackground(new Color(240, 255, 240));
         botaoEntrar.setForeground(Color.BLACK);
         cadastroPanel.add(botaoEntrar);
-        botaoEntrar.setFont(new Font("Inter", Font.BOLD, 16));
+        botaoEntrar.setFont(new Font("Inter", Font.BOLD | Font.ITALIC, 16));
         
         JTextArea inserirNome_1 = new JTextArea("Para entrar no sistema, precisamos que você insira um nome de usuário");
-        inserirNome_1.setEditable(false);
-        inserirNome_1.setBounds(62, 11, 356, 44);
         inserirNome_1.setWrapStyleWord(true);
+        inserirNome_1.setEditable(false);
+        inserirNome_1.setBounds(62, -1, 390, 44);
         inserirNome_1.setLineWrap(true);
         inserirNome_1.setForeground(Color.WHITE);
         inserirNome_1.setFont(new Font("Inter", Font.PLAIN, 14));
