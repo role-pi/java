@@ -81,7 +81,7 @@ public class OnboardingWindow extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		setVisible(false);
 		
-//		OnboardingWindow cadastro = new TelaCadastro();
-//		cadastro.setVisible(true);
+		CadastroWindow cadastro = new CadastroWindow();
+		cadastro.setVisible(true);
 	}
 }

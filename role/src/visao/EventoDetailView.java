@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import modelo.Evento;
@@ -76,6 +77,7 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		lblLocal.setText(evento.getLocal());
 		lblData.setText(evento.dataCompleta());
 		this.gradient = evento.getColor();
+		SwingUtilities.updateComponentTreeUI(this);
 	}
 
 	@Override

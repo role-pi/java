@@ -94,7 +94,7 @@ public class Evento {
 	public String dataCompleta() {
 		if (dataInicio != null) {
 			String data = "";
-			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd 'de' MMM 'de' yyyy 'às' HH:mm");
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd 'de' MMM 'de' yyyy 'às' HH:mm", new Locale("pt", "BR"));
 			data = df.format(dataInicio);
 			
 			if (dataFim != null) {
@@ -111,7 +111,7 @@ public class Evento {
 		String data = null;
 		
 		if (dataInicio != null) {
-			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd 'de' MMM 'de' yyyy 'às' HH:mm");
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd 'de' MMM 'de' yyyy 'às' HH:mm", new Locale("pt", "BR"));
 			data = df.format(dataInicio);
 		} else {
 			data = "Sem data definida";
@@ -121,12 +121,14 @@ public class Evento {
 	}
 	
 	public static Color corEmoji(String emoji) {
-		if (emoji == "✨") {
+		if (emoji.contentEquals("✨")) {
 			return new Color(249, 236, 170);
-		} else if  (emoji == "🌱") {
+		} else if  (emoji.contentEquals("🌱")) {
 			return new Color(212, 229, 195);
-		} else if (emoji == "🎡") {
+		} else if (emoji.contentEquals("🎡")) {
 			return new Color(216, 197, 243);
+		} else if (emoji.contentEquals("🥶")) {
+			return new Color(156, 179, 255);
 		}
 		return new Color(200, 200, 200);
 	}
