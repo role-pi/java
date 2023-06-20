@@ -68,6 +68,7 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 		btnVisualizar = new JButton("Visualizar");
 		btnVisualizar.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panel.add(btnVisualizar);
+		btnVisualizar.addActionListener(this);
 		
 		btnRemover = new JButton("Remover");
 		btnRemover.setAlignmentX(Component.RIGHT_ALIGNMENT);

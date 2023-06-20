@@ -41,9 +41,9 @@ public class EventoDAO implements DAO<Evento> {
     private static EventoDAO instance = null;
 
     public EventoDAO() {
-		eventos.add(new Evento("✨", new Color(249, 236, 170), "Rolê na fac", "Factory Antônio da Veiga", "", ""));
-		eventos.add(new Evento("🌱", new Color(212, 229, 195), "Churrasco vegano", "Bela Vista Country Club", "", ""));
-		eventos.add(new Evento("🎡", new Color(216, 197, 243), "Parque de diversões", "Beto Carrero", "", ""));
+		eventos.add(new Evento("✨", new Color(249, 236, 170), "Rolê na fac", "Factory Antônio da Veiga", null, null));
+		eventos.add(new Evento("🌱", new Color(212, 229, 195), "Churrasco vegano", "Bela Vista Country Club", null, null));
+		eventos.add(new Evento("🎡", new Color(216, 197, 243), "Parque de diversões", "Beto Carrero", null, null));
     }
 
     public static EventoDAO getInstance() {

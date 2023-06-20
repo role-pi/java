@@ -55,7 +55,7 @@ public class EventoWindow extends JFrame {
 		Component verticalStrut = Box.createVerticalStrut(10);
 		panel_1.add(verticalStrut);
 		
-		JPanel panel_5 = new ParticipantesDetailView(evento.getColor());
+		JPanel panel_5 = new ParticipantesDetailView(evento);
 		panel_1.add(panel_5);
 		
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);

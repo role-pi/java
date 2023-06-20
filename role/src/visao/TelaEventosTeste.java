@@ -170,9 +170,9 @@ public class TelaEventosTeste extends JFrame implements ActionListener {
 		
 		for (Evento evento: eventos) {
 			String nome = evento.getNome();
-			String dataInicio = evento.getDataInicio();
-			String dataFim = evento.getDataFim();
-	        model.addRow(new Object[]{nome, dataInicio, dataFim});
+//			String dataInicio = evento.getDataInicio();
+//			String dataFim = evento.getDataFim();
+	        model.addRow(new Object[]{nome});
 		}
 	}
 }
