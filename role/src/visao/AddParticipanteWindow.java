@@ -3,29 +3,42 @@ package visao;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import org.httprpc.sierra.DatePicker;
+import org.httprpc.sierra.TimePicker;
+import org.httprpc.sierra.VerticalAlignment;
+
+import modelo.Evento;
+import modelo.Insumo;
+import modelo.Transacao;
+import modelo.Usuario;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 	
 public class AddParticipanteWindow extends JFrame implements ActionListener {
     private JTextField nomeTextField;
     private JTextField emailTextField;
+    
+    private Evento event;
+    private ParticipantesDetailView parentWindow;
 
-    public AddParticipanteWindow() {
-        setTitle("adicionar participante");
-	    setSize(600, 350);
+    public AddParticipanteWindow(Evento event, ParticipantesDetailView parentWindow) {
+    	setTitle("Adicionar Participante");
+	    setSize(418, 303);
+        setResizable(false);
 	    setLocationRelativeTo(null);
 	
 	    JPanel contentPane = new JPanel();
 	    setContentPane(contentPane);
 	    contentPane.setBackground(Color.WHITE);
 	    contentPane.setBorder(new EmptyBorder(20, 20, 20, 20));
-	    
-	    Component verticalGlue = Box.createVerticalGlue();
-	    contentPane.add(verticalGlue);
 	    
 	    JPanel panel_4 = new RoundedPanel();
 	    contentPane.add(panel_4);
@@ -45,22 +58,19 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
         nomeTextField = new JTextField();
         panel_2.add(nomeTextField);
 	    
-	    Component verticalStrut_1_2 = Box.createVerticalStrut(5);
-	    panel_4.add(verticalStrut_1_2);
-	    
 	    JPanel panel_1 = new JPanel();
 	    panel_4.add(panel_1);
 	    panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 	
-	    JLabel descricaoLabel = new JLabel("Email");
-	    panel_1.add(descricaoLabel);
+	    JLabel localLabel = new JLabel("Local");
+	    panel_1.add(localLabel);
 	    emailTextField = new JTextField();
 	    panel_1.add(emailTextField);
-	        
+        
         Component verticalStrut = Box.createVerticalStrut(20);
         panel_4.add(verticalStrut);
     
-        JButton cadastrarButton = new JButton("Adicionar");
+        JButton cadastrarButton = new JButton("Atualizar");
         cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         cadastrarButton.addActionListener(this);
         panel_4.add(cadastrarButton);
@@ -73,7 +83,17 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
 		} else if (emailTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Email não pode estar vazio."); 
 		} else {
-			setVisible(false);
+			cadastrarParticipante();
+			parentWindow.update();
+			dispose();
 		}
 	}
+    
+    private void cadastrarParticipante() {
+        String nome = nomeTextField.getText();
+        String email = emailTextField.getText();
+
+        Usuario usuario = new Usuario(nome, email);
+        event.getUsuarios().add(usuario);
+    }
 }

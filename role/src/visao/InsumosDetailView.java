@@ -115,7 +115,8 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 	}
 	
 	private void adicionarInsumo() {
-		JFrame insumo = new AddInsumoWindow(evento, this);
+		JFrame window = new AddInsumoWindow(evento, this);
+		window.setVisible(true);
 	}
 	
 	private void removerInsumos() {

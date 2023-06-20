@@ -113,7 +113,8 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 	}
 	
 	private void adicionar() {
-//		JFrame usuario = new AddParticipanteWindow(evento, this);
+		JFrame window = new AddParticipanteWindow(evento, this);
+		window.setVisible(true);
 	}
 	
 	private void remover() {

@@ -16,6 +16,11 @@ import javax.swing.BoxLayout;
 
 public class EventoDetailView extends RoundedPanel implements ActionListener {
 	Evento evento;
+
+	JLabel lblEmoji;
+	JLabel lblNome;
+	JLabel lblLocal;
+	JLabel lblData;
 	
 	public EventoDetailView (Evento evento) {
 		super(evento.getColor());
@@ -30,27 +35,26 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(new Color(0, 0, 0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel(evento.getEmoji());
-		panel.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("SF Pro Display", Font.BOLD, 50));
+		lblEmoji = new JLabel(evento.getEmoji());
+		panel.add(lblEmoji);
+		lblEmoji.setFont(new Font("SF Pro Display", Font.BOLD, 50));
 		
 		Box verticalBox = Box.createVerticalBox();
 		panel.add(verticalBox);
 		
-		JLabel lblNewLabel = new JLabel(evento.getNome());
-		verticalBox.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 24));
-		
-//		JLabel lblNewLabel_2 = new JLabel(data);
-//		verticalBox.add(lblNewLabel_2);
-//		lblNewLabel_2.setForeground(new Color(0, 0, 0, 150));
-//		lblNewLabel_2.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
-		
+		lblNome = new JLabel(evento.getNome());
+		verticalBox.add(lblNome);
+		lblNome.setFont(new Font("SF Pro Display", Font.BOLD, 24));
 
-		JLabel lblNewLabel_3 = new JLabel(evento.getLocal());
-		verticalBox.add(lblNewLabel_3);
-		lblNewLabel_3.setForeground(new Color(0, 0, 0, 150));
-		lblNewLabel_3.setFont(new Font("SF Pro Display", Font.PLAIN, 15));
+		lblLocal = new JLabel(evento.getLocal());
+		verticalBox.add(lblLocal);
+		lblLocal.setForeground(new Color(0, 0, 0, 150));
+		lblLocal.setFont(new Font("SF Pro Display", Font.PLAIN, 18));
+		
+		lblData = new JLabel();
+		verticalBox.add(lblData);
+		lblData.setForeground(new Color(0, 0, 0, 150));
+		lblData.setFont(new Font("SF Pro Display", Font.PLAIN, 18));
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
@@ -62,11 +66,20 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
+		
+		update();
+	}
+	
+	public void update() {
+		lblEmoji.setText(evento.getEmoji());
+		lblNome.setText(evento.getNome());
+		lblLocal.setText(evento.getLocal());
+		lblData.setText(evento.dataCompleta());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		EditEventoWindow window = new EditEventoWindow(evento);
+		EditEventoWindow window = new EditEventoWindow(evento, this);
 		window.setVisible(true);
 	}
 }

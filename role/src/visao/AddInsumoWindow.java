@@ -74,8 +74,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         JLabel tipoLabel = new JLabel("Tipo");
         tipoLabel.setPreferredSize(labelSize);
         panel_3.add(tipoLabel);
-//        tipoComboBox = new JComboBox<>(Insumo.allTipos());
-        tipoComboBox = new JComboBox<>();
+        tipoComboBox = new JComboBox<>(Insumo.allTipos());
         panel_3.add(tipoComboBox);
 
         JPanel panel_1 = new JPanel();
@@ -106,7 +105,6 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         panel_4.add(cadastrarButton);
 
         cadastrarButton.addActionListener(this);
-        setVisible(true);
     }
 
     @Override

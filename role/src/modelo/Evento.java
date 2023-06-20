@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -90,16 +91,30 @@ public class Evento {
 		this.local = local;
 	}
 	
+	public String dataCompleta() {
+		if (dataInicio != null) {
+			String data = "";
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd 'de' MMM 'de' yyyy 'às' HH:mm");
+			data = df.format(dataInicio);
+			
+			if (dataFim != null) {
+				data+= " até ";
+				data+= df.format(dataFim);
+			}
+			return data;
+		} else {
+			return "Sem data definida";
+		}
+	}
+	
 	public String descricaoSimples() {
 		String data = null;
 		
-		SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		DateFormat df2 = DateFormat.getDateInstance(DateFormat.DEFAULT, new Locale("pt", "BR"));
-		try {
-			data = df2.format(df1.parse("2023-11-20 20:43:20"));
-		} catch (ParseException e) {
-			data = "sem data definida";
-			e.printStackTrace();
+		if (dataInicio != null) {
+			DateFormat df = DateFormat.getDateInstance(DateFormat.DEFAULT, new Locale("pt", "BR"));
+			data = df.format(dataInicio);
+		} else {
+			data = "Sem data definida";
 		}
 		
 		return data + " • " + String.valueOf(usuarios.size()) + " participantes";
