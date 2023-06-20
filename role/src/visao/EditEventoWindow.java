@@ -170,6 +170,7 @@ public class EditEventoWindow extends JFrame implements ActionListener {
 
 			evento.setEmoji(emojiTextField.getText());
 			evento.setNome(nomeTextField.getText());
+			evento.setColor(Evento.corEmoji(emojiTextField.getText()));
 			evento.setLocal(localTextField.getText());
 			evento.setDataInicio(dataInicio);
 			evento.setDataFim(dataFim);
@@ -189,6 +190,6 @@ public class EditEventoWindow extends JFrame implements ActionListener {
 	            "[\uD83C\uDE01\uD83C\uDE02\uD83C\uDE1A\uD83C\uDE2F\uD83C\uDE32-\uD83C\uDE3A\uD83C\uDE50\uD83C\uDE51]\uFE0F?|" +
 	            "[\u203C\u2049]\uFE0F?|[\u25AA\u25AB\u25B6\u25C0\u25FB-\u25FE]\uFE0F?|" +
 	            "[\u00A9\u00AE]\uFE0F?|[\u2122\u2139]\uFE0F?|\uD83C\uDC04\uFE0F?|\uD83C\uDCCF\uFE0F?|" +
-	            "[\u231A\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA]\uFE0F?)+");
+	            "[\u231A\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA]\uFE0F?)+") || message.isEmpty();
 	}
 }

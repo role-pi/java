@@ -75,6 +75,7 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		lblNome.setText(evento.getNome());
 		lblLocal.setText(evento.getLocal());
 		lblData.setText(evento.dataCompleta());
+		this.gradient = evento.getColor();
 	}
 
 	@Override

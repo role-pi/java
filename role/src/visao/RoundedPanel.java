@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public class RoundedPanel extends JPanel {
 	
-	protected Color gradient = null;
+	public Color gradient = null;
     /** Sets if it has an High Quality view */
     protected boolean highQuality = true;
     /** Double values for Horizontal and Vertical radius of corner arcs */

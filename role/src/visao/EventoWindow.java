@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +20,9 @@ import java.awt.Component;
 
 public class EventoWindow extends JFrame {
 	Evento evento;
+	MainWindow parentWindow;
 	
-	public EventoWindow(Evento evento) {
+	public EventoWindow(Evento evento, MainWindow parentWindow) {
         setTitle(evento.getNome());
         
 		setSize(500, 400);
@@ -60,10 +64,15 @@ public class EventoWindow extends JFrame {
 		
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
+		
+		addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                parentWindow.update();
+            }
+        });
 	}
 	
 	public static void main(String[] args) {
-//		TelaEvento tela = new TelaEvento("✨", "Rolê na Fac", "de 23 de maio às 22:00 a 24 de maio às 4:00", "Factory Antônio da Veiga", new Color(249, 236, 170));
-//		tela.setVisible(true);
+		
 	}
 }

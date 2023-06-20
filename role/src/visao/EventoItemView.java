@@ -80,7 +80,7 @@ public class EventoItemView extends RoundedPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnVisualizar) {
-			JFrame tela = new EventoWindow(event);
+			JFrame tela = new EventoWindow(event, parentWindow);
 			tela.setVisible(true);
 		} else if (e.getSource() == btnRemover) {
 			EventoDAO.getInstance().delete(event);

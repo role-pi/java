@@ -25,11 +25,11 @@ public class Evento {
 	private ArrayList<Insumo> insumos = new ArrayList<>();
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
 
-	public Evento(String emoji, Color color, String nome, String local, LocalDateTime dataInicio, LocalDateTime dataFim) {
+	public Evento(String emoji, String nome, String local, LocalDateTime dataInicio, LocalDateTime dataFim) {
 		super();
 		this.id = UUID.randomUUID();
 		this.emoji = emoji;
-		this.color = color;
+		this.color = Evento.corEmoji(emoji);
 		this.nome = nome;
 		this.setLocal(local);
 		this.dataInicio = dataInicio;
@@ -111,12 +111,23 @@ public class Evento {
 		String data = null;
 		
 		if (dataInicio != null) {
-			DateFormat df = DateFormat.getDateInstance(DateFormat.DEFAULT, new Locale("pt", "BR"));
+			DateTimeFormatter df = DateTimeFormatter.ofPattern("dd 'de' MMM 'de' yyyy 'às' HH:mm");
 			data = df.format(dataInicio);
 		} else {
 			data = "Sem data definida";
 		}
 		
 		return data + " • " + String.valueOf(usuarios.size()) + " participantes";
+	}
+	
+	public static Color corEmoji(String emoji) {
+		if (emoji == "✨") {
+			return new Color(249, 236, 170);
+		} else if  (emoji == "🌱") {
+			return new Color(212, 229, 195);
+		} else if (emoji == "🎡") {
+			return new Color(216, 197, 243);
+		}
+		return new Color(200, 200, 200);
 	}
 }
