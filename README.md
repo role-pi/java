@@ -25,7 +25,7 @@ Após o cadastro inicial, o usuário é apresentado com uma lista de seus evento
 
 **Fluxograma de uso do sistema**
 
-![Fluxograma](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/65da35f1-9273-49fe-98ff-f9d4502e3527)
+![Fluxograma](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/91def2c5-b999-4ecd-92cc-5ac7225c9415)
 
 **Diagrama de casos de uso**
 
