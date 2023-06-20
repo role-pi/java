@@ -150,7 +150,7 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 			Double valor = Double.valueOf(String.valueOf(model.getValueAt(i, 3)).replaceAll("[^-\\d.]", ""));
 			oldTransacao.setValor(valor);
 			
-			String nome = String.valueOf(model.getValueAt(i, 2));
+			String nome = String.valueOf(model.getValueAt(i, 1));
 			if (nome.isEmpty()) {
 				nome = oldInsumo.getNome();
 			}

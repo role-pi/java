@@ -109,6 +109,7 @@ public class MainWindow extends JFrame implements ActionListener {
 	
 	public void update() {
 		List<Evento> events = EventoDAO.getInstance().list();
+		
 		eventsPanel.removeAll();
 		for (Evento event : events) {
 			JPanel eventListItem = new EventoItemView(event, this);
