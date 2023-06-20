@@ -28,7 +28,7 @@ public class CadastroWindow extends JFrame implements ActionListener {
     private JLabel inserirNome;
     private JButton botaoEntrar;
     private JPanel painel;
-    private JPanel Cadastro;
+    private JPanel cadastroPanel;
 
     public CadastroWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,38 +39,37 @@ public class CadastroWindow extends JFrame implements ActionListener {
 
         contentPane = new JPanel();
         setContentPane(contentPane);
-        contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[80px][grow]"));
         contentPane.setBackground(Color.black);
-        JPanel cadastroHeaderPanel = new CadastroHeaderView();
-        contentPane.add(cadastroHeaderPanel, "cell 0 0,grow");
+        contentPane.setLayout(null);
         
-        Cadastro = new JPanel();
-        Cadastro.setBackground(new Color(0, 0, 0));
-        contentPane.add(Cadastro, "cell 0 1,grow");
-        Cadastro.setLayout(null);
+        cadastroPanel = new JPanel();
+        cadastroPanel.setBounds(0, 80, 500, 192);
+        cadastroPanel.setBackground(new Color(0, 0, 0, 0));
+        contentPane.add(cadastroPanel);
+        cadastroPanel.setLayout(null);
         
         inserirNome = new JLabel("Como podemos te chamar?");
-        inserirNome.setBounds(150, 66, 250, 23);
-        Cadastro.add(inserirNome);
+        inserirNome.setBounds(62, 54, 250, 23);
+        cadastroPanel.add(inserirNome);
         inserirNome.setForeground(Color.WHITE);
-        inserirNome.setHorizontalAlignment(SwingConstants.CENTER);
+        inserirNome.setHorizontalAlignment(SwingConstants.LEFT);
         inserirNome.setFont(new Font("Inter", Font.BOLD, 18));
 
         nometxt = new JTextField();
-        nometxt.setBounds(96, 100, 304, 25);
-        Cadastro.add(nometxt);
-        nometxt.setHorizontalAlignment(SwingConstants.CENTER);
+        nometxt.setBounds(62, 87, 304, 25);
+        cadastroPanel.add(nometxt);
+        nometxt.setHorizontalAlignment(SwingConstants.LEFT);
         nometxt.setFont(new Font("Inter", Font.PLAIN, 15));
         nometxt.setColumns(10);
 
         botaoEntrar = new JButton("Prosseguir");
-        botaoEntrar.setBounds(150, 136, 105, 27);
+        botaoEntrar.setBounds(62, 124, 129, 27);
         botaoEntrar.setBackground(new Color(240, 255, 240));
         botaoEntrar.setForeground(Color.BLACK);
-        Cadastro.add(botaoEntrar);
-        botaoEntrar.setFont(new Font("Inter", Font.ITALIC, 14));
+        cadastroPanel.add(botaoEntrar);
+        botaoEntrar.setFont(new Font("Inter", Font.BOLD, 16));
         
-        JTextArea inserirNome_1 = new JTextArea("Para entrar no sistema, precisamos que você insira um nome de usuário...");
+        JTextArea inserirNome_1 = new JTextArea("Para entrar no sistema, precisamos que você insira um nome de usuário");
         inserirNome_1.setEditable(false);
         inserirNome_1.setBounds(62, 11, 356, 44);
         inserirNome_1.setWrapStyleWord(true);
@@ -78,7 +77,11 @@ public class CadastroWindow extends JFrame implements ActionListener {
         inserirNome_1.setForeground(Color.WHITE);
         inserirNome_1.setFont(new Font("Inter", Font.PLAIN, 14));
         inserirNome_1.setBackground(Color.BLACK);
-        Cadastro.add(inserirNome_1);
+        cadastroPanel.add(inserirNome_1);
+        
+        HeaderView cadastroHeaderPanel = new HeaderView("src/visao/Usuário.png");
+        cadastroHeaderPanel.setBounds(0, 0, 500, 80);
+        contentPane.add(cadastroHeaderPanel);
 
         botaoEntrar.addActionListener(this);
     }

@@ -29,10 +29,11 @@ public class MainWindow extends JFrame implements ActionListener {
 	private JButton newEventButton;
 	
 	public MainWindow() {
-        setTitle("rolê");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("rolê");
 		setSize(500, 400);
 		setLocationRelativeTo(null);
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
         JPanel contentPane = new JPanel();
         setContentPane(contentPane);
@@ -99,7 +100,6 @@ public class MainWindow extends JFrame implements ActionListener {
 		newEvent.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 		newEvent.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 

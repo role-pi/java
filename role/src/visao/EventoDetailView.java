@@ -38,31 +38,31 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		
 		lblEmoji = new JLabel(evento.getEmoji());
 		panel.add(lblEmoji);
-		lblEmoji.setFont(new Font("SF Pro Display", Font.BOLD, 50));
+		lblEmoji.setFont(new Font("Inter", Font.BOLD, 50));
 		
 		Box verticalBox = Box.createVerticalBox();
 		panel.add(verticalBox);
 		
 		lblNome = new JLabel(evento.getNome());
 		verticalBox.add(lblNome);
-		lblNome.setFont(new Font("SF Pro Display", Font.BOLD, 24));
+		lblNome.setFont(new Font("Inter", Font.BOLD, 24));
 
 		lblLocal = new JLabel(evento.getLocal());
 		verticalBox.add(lblLocal);
 		lblLocal.setForeground(new Color(0, 0, 0, 150));
-		lblLocal.setFont(new Font("SF Pro Display", Font.PLAIN, 18));
+		lblLocal.setFont(new Font("Inter", Font.PLAIN, 18));
 		
 		lblData = new JLabel();
 		verticalBox.add(lblData);
 		lblData.setForeground(new Color(0, 0, 0, 150));
-		lblData.setFont(new Font("SF Pro Display", Font.PLAIN, 18));
+		lblData.setFont(new Font("Inter", Font.PLAIN, 18));
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
 		
 		JButton btnNewButton = new JButton("Editar");
 		panel.add(btnNewButton);
-		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 13));
+		btnNewButton.setFont(new Font("Inter", Font.PLAIN, 16));
 		btnNewButton.addActionListener(this);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();

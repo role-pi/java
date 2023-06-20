@@ -20,9 +20,11 @@ import java.awt.SystemColor;
 public class OnboardingWindow extends JFrame implements ActionListener {
 	
 	public OnboardingWindow() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("rolê");
 		setResizable(false);
 		setSize(new Dimension(400, 400));
+        setLocationRelativeTo(null);
 		
         JPanel contentPane = new JPanel();
         contentPane.setBackground(new Color(0, 0, 0));
@@ -49,7 +51,7 @@ public class OnboardingWindow extends JFrame implements ActionListener {
     	JButton nextCadastro = new JButton("prosseguir");
     	nextCadastro.setBackground(new Color(240, 255, 240));
     	nextCadastro.setForeground(Color.BLACK);
-    	nextCadastro.setFont(new Font("Inter", Font.BOLD | Font.ITALIC, 17));
+    	nextCadastro.setFont(new Font("Inter", Font.BOLD, 16));
     	nextCadastro.setLocation(114, 200);
     	nextCadastro.setSize(new Dimension(154, 37));
     	contentPane.add(nextCadastro);

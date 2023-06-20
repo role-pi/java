@@ -63,7 +63,7 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setForeground(SystemColor.scrollbar);
 		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("SF Pro Display", Font.BOLD, 18));
+		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 18));
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
@@ -71,12 +71,12 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		btnRemoveButton = new JButton("Remover");
 		panel_1.add(btnRemoveButton);
 		btnRemoveButton.addActionListener(this);
-		btnRemoveButton.setFont(new Font("SF Pro Display", Font.PLAIN, 17));
+		btnRemoveButton.setFont(new Font("Inter", Font.PLAIN, 16));
 		
 		btnNewButton = new JButton("Adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(this);
-		btnNewButton.setFont(new Font("SF Pro Display", Font.PLAIN, 17));
+		btnNewButton.setFont(new Font("Inter", Font.PLAIN, 16));
 		
 		model = new DefaultTableModel();
         model.addColumn("Nome");
@@ -87,14 +87,10 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
         table = new JTable(model);
         
         table.getDefaultEditor(String.class).addCellEditorListener(this);
-		table.setFont(new Font("SF Pro Display", Font.PLAIN, 16));
+		table.setFont(new Font("Inter", Font.PLAIN, 16));
 		table.setRowHeight(30);
 		
         TableColumn comboCol1 = table.getColumnModel().getColumn(0);
-        
-        CustomComboBoxEditor editor = new CustomComboBoxEditor(Insumo.allTipos());
-        editor.addCellEditorListener(this);
-        comboCol1.setCellEditor(editor);
 
 		table.setSelectionBackground(event.getColor().darker());
 		
@@ -144,7 +140,7 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		for (int i = 0; i <= model.getRowCount() - 1; i++) {
 			Usuario oldUsuario = evento.getUsuarios().get(i);
 			
-			String nome = String.valueOf(model.getValueAt(i, 2));
+			String nome = String.valueOf(model.getValueAt(i, 0));
 			if (nome.isEmpty()) {
 				nome = oldUsuario.getNome();
 			}

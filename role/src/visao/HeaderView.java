@@ -13,8 +13,15 @@ import java.awt.Component;
 import javax.swing.Box;
 
 public class HeaderView extends JPanel {
+	public HeaderView(String user) {
+		setup(user);
+	}
+	
 	public HeaderView() {
-        
+		setup("src/visao/Perfil.png");
+	}
+	
+	private void setup(String user) {
 		setBackground(Color.BLACK);
 		setMinimumSize(new Dimension(Integer.MIN_VALUE, 75));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -29,7 +36,7 @@ public class HeaderView extends JPanel {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		add(horizontalGlue);
 		
-		JPanel perfil = new ImageView("src/visao/Perfil.png", new Dimension(52, 52), 1.0);
+		JPanel perfil = new ImageView(user, new Dimension(52, 52), 1.0);
 		perfil.setSize(new Dimension(52, 52));
 		perfil.setBackground(new Color(0, 0, 0, 0));
 		add(perfil);
