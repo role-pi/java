@@ -23,7 +23,9 @@ import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -41,7 +43,8 @@ public class EditEventoWindow extends JFrame implements ActionListener {
     	this.evento = evento;
     	
         setTitle("Editar Evento");
-	    setSize(600, 350);
+	    setSize(418, 303);
+        setResizable(false);
 	    setLocationRelativeTo(null);
 	
 	    JPanel contentPane = new JPanel();
@@ -137,6 +140,7 @@ public class EditEventoWindow extends JFrame implements ActionListener {
     
         JButton cadastrarButton = new JButton("Atualizar");
         cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cadastrarButton.addActionListener(this);
         panel_4.add(cadastrarButton);
 	}
 
@@ -144,14 +148,14 @@ public class EditEventoWindow extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (nomeTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nome não pode estar vazio."); 
-//		}
-//		} else if (dataInicioTextField.getText().isEmpty()) {
-//			JOptionPane.showMessageDialog(this, "Data de início não pode estar vazia."); 
-//		} else if (dataFimTextField.getText().isEmpty()) {
-//			JOptionPane.showMessageDialog(this, "Data de fim não pode estar vazia."); 
 		} else {
+			LocalDateTime dataInicio = dataInicioPicker.getDate().atTime(horaInicioPicker.getTime());
+			LocalDateTime dataFim = dataFimPicker.getDate().atTime(horaFimPicker.getTime());
+
 			evento.setNome(nomeTextField.getText());
 			evento.setLocal(localTextField.getText());
+			evento.setDataInicio(dataInicio);
+			evento.setDataFim(dataFim);
 			setVisible(false);
 		}
 	}

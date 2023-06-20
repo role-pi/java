@@ -34,12 +34,15 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
     private InsumosDetailView parentWindow;
 
     public AddInsumoWindow(Evento event, InsumosDetailView parentWindow) {
+    	setResizable(false);
     	this.event = event;
     	this.parentWindow = parentWindow;
     	
         setTitle("Adicionar Insumo");
-        setSize(600, 350);
+        setSize(632, 329);
         setLocationRelativeTo(null);
+        
+        Dimension labelSize = new Dimension(70, 40);
 
         JPanel contentPane = new JPanel();
         setContentPane(contentPane);
@@ -59,6 +62,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 
         JLabel nomeLabel = new JLabel("Nome");
+        nomeLabel.setPreferredSize(labelSize);
         panel_2.add(nomeLabel);
         nomeTextField = new JTextField();
         panel_2.add(nomeTextField);
@@ -68,8 +72,10 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
 
         JLabel tipoLabel = new JLabel("Tipo");
+        tipoLabel.setPreferredSize(labelSize);
         panel_3.add(tipoLabel);
-        tipoComboBox = new JComboBox<>(Insumo.allTipos());
+//        tipoComboBox = new JComboBox<>(Insumo.allTipos());
+        tipoComboBox = new JComboBox<>();
         panel_3.add(tipoComboBox);
 
         JPanel panel_1 = new JPanel();
@@ -77,6 +83,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 
         JLabel descricaoLabel = new JLabel("Descrição");
+        descricaoLabel.setPreferredSize(labelSize);
         panel_1.add(descricaoLabel);
         descricaoTextField = new JTextField();
         panel_1.add(descricaoTextField);
@@ -86,9 +93,13 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
         JLabel valorLabel = new JLabel("Valor");
+        valorLabel.setPreferredSize(labelSize);
         panel.add(valorLabel);
         valorTextField = new JTextField();
         panel.add(valorTextField);
+        
+        Component verticalStrut = Box.createVerticalStrut(20);
+        panel_4.add(verticalStrut);
 
         cadastrarButton = new JButton("Adicionar");
         cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);

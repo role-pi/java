@@ -5,6 +5,7 @@ import java.awt.List;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -17,13 +18,13 @@ public class Evento {
 	private Color color;
 	private String nome;
 	private String local;
-	private String dataInicio;
-	private String dataFim;
+	private LocalDateTime dataInicio;
+	private LocalDateTime dataFim;
 	
 	private ArrayList<Insumo> insumos = new ArrayList<>();
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
 
-	public Evento(String emoji, Color color, String nome, String local, String dataInicio, String dataFim) {
+	public Evento(String emoji, Color color, String nome, String local, LocalDateTime dataInicio, LocalDateTime dataFim) {
 		super();
 		this.id = UUID.randomUUID();
 		this.emoji = emoji;
@@ -58,16 +59,16 @@ public class Evento {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getDataInicio() {
+	public LocalDateTime getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(String dataInicio) {
+	public void setDataInicio(LocalDateTime dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-	public String getDataFim() {
+	public LocalDateTime getDataFim() {
 		return dataFim;
 	}
-	public void setDataFim(String dataFim) {
+	public void setDataFim(LocalDateTime dataFim) {
 		this.dataFim = dataFim;
 	}
 	public ArrayList<Insumo> getInsumos() {
