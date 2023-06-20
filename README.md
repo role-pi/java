@@ -25,7 +25,7 @@ Há também uma única opção de visualização: visualizar eventos. Esta tela 
 
 **Fluxograma de uso do sistema**
 
-![Fluxograma drawio](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/3604d71a-3173-48bc-b635-5dd37df8fe99)
+![Fluxograma drawio](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/bbdd0b34-ab37-4b5f-8b33-1472916ead12)
 
 
 **Diagrama de casos de uso**
