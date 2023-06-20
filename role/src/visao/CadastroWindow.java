@@ -40,8 +40,8 @@ public class CadastroWindow extends JFrame implements ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(new MigLayout("gap rel 0, ins 0, wrap 1", "[500px,grow]", "[80px][grow]"));
         contentPane.setBackground(Color.black);
-        JPanel headerPanel = new HeaderView();
-        contentPane.add(headerPanel, "cell 0 0,grow");
+        JPanel cadastroHeaderPanel = new CadastroHeaderView();
+        contentPane.add(cadastroHeaderPanel, "cell 0 0,grow");
         
         panel = new JPanel();
         panel.setBackground(new Color(0, 0, 0));
