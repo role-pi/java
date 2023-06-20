@@ -7,9 +7,15 @@
 this.alunos = ["Ana Clara Castellain", "João Gabriel Pozzobon dos Santos", "Maiara Junches Seemann"];
 ```
 
-##  📝  Descrição textual das funcionalidades do sistema
+##  📝  Descrição textual do sistema
 
-O projeto rolê  é um sistema simplificado em Java baseado no aplicativo de mesmo nome sendo desenvolvido como Projeto Integrador pelo grupo. O sistema consiste em um organizador de eventos que visa facilitar os processos de criação, execução e acompanhamento de eventos, como festas, e encontros sociais como churrascos e festividades. Ele oferece algumas funcionalidades do aplicativo original como criação de eventos e informações, cadastro de insumos e relatório de gastos. O que ele não inclui é uma lista de tarefas, distribuição de gastos e cadastro de múltiplos participantes (visto que o sistema é para uso individual).
+O projeto rolê  é um sistema simplificado em Java baseado no aplicativo de mesmo nome sendo desenvolvido como Projeto Integrador pelo grupo. O sistema consiste em um organizador de eventos que visa facilitar os processos de criação, execução e acompanhamento de eventos, como festas, e encontros sociais como churrascos e festividades. Oferecendo funcionalidades do aplicativo original, só não inclui lista de tarefas, distribuição de gastos e cadastro de múltiplos participantes (visto que o sistema é para uso individual).
+
+## Funcionalidades
+
+- Criação de eventos e informações
+- Cadastro de insumos
+- Relatório de gastos
 
 ###  📝  Descrição textual do fluxo de telas do sistema
 
