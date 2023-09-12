@@ -1,6 +1,7 @@
 package visao;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -8,46 +9,37 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import controle.EventoDAO;
 import controle.UsuarioDAO;
-import modelo.Evento;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
-import java.awt.Component;
-
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 
 public class CadastroWindow extends JFrame implements ActionListener {
     private JPanel contentPane;
     private JTextField nomeTextField;
     private JButton newUsuarioButton;
     private JLabel inserirNome;
-    private JPanel painel;
     private JPanel cadastroPanel;
     private JPanel panel;
     private JPanel usuariosPanel;
     private Component verticalStrut;
     private Component verticalStrut_1;
     
-	List<Usuario> usuarios = new ArrayList<Usuario>();
+	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
     public CadastroWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,7 +91,7 @@ public class CadastroWindow extends JFrame implements ActionListener {
         verticalStrut = Box.createVerticalStrut(20);
         panel.add(verticalStrut);
         
-        HeaderView cadastroHeaderPanel = new HeaderView("src/main/java/visao/Usuário.png");
+        HeaderView cadastroHeaderPanel = new HeaderView();
         cadastroHeaderPanel.setBounds(0, 0, 500, 80);
         contentPane.add(cadastroHeaderPanel, "cell 0 0,grow");
         
@@ -152,15 +144,10 @@ public class CadastroWindow extends JFrame implements ActionListener {
 			if (nomeTextField.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Por favor, digite um nome de usuário");
 			} else {
-		        setVisible(false);
-		        
 		        Usuario usuario = new Usuario(0, nomeTextField.getText(), "");
-		        int id = UsuarioDAO.getInstance().insert(usuario);
-		        usuario.setId(id);
-		        UsuarioDAO.getInstance().setUsuarioCadastrado(usuario);
+		        UsuarioDAO.getInstance().insert(usuario);
 		        
-				MainWindow tela = new MainWindow();
-				tela.setVisible(true);
+		        update();
 			}
         }
     }

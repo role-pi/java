@@ -29,7 +29,7 @@ public class MainWindow extends JFrame implements ActionListener {
 	
 	private JButton newEventButton;
 	
-	List<Evento> eventos = new ArrayList<Evento>();
+	ArrayList<Evento> eventos = new ArrayList<Evento>();
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

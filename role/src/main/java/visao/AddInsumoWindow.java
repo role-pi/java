@@ -130,7 +130,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         String descricao = descricaoTextField.getText();
         double valor = Double.parseDouble(valorTextField.getText());
 
-        Insumo insumo = new Insumo(tipo, nome, descricao, new Transacao(valor, new Date(), new Usuario("João", "")));
+        Insumo insumo = new Insumo(tipo, nome, descricao, new Transacao(valor, new Date(), new Usuario(0, "João", "")));
         event.getInsumos().add(insumo);
     }
 }

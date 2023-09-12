@@ -17,17 +17,19 @@ import modelo.Usuario;
 
 public class EventoDAO implements DAO<Evento> {
     @Override
-    public List<Evento> list() {
+    public ArrayList<Evento> list() {
     	Conexao c = Conexao.getInstancia();
 
     	Connection con = c.conectar();
 
-    	String query = "SELECT * FROM eventos";
+    	String query = "SELECT * FROM eventos INNER JOIN eventos_has_usuarios ON eventos.id_evento = eventos_has_usuarios.eventos_id_evento WHERE eventos_has_usuarios.usuarios_id_usuario = ?";
 
-    	List<Evento> eventos = new ArrayList<Evento>();
+    	ArrayList<Evento> eventos = new ArrayList<Evento>();
     	
     	try {
     	    PreparedStatement ps = con.prepareStatement(query);
+    	    ps.setInt(1, UsuarioDAO.getInstance().getUsuarioSelecionado().getId());
+    	    
     	    ResultSet rs = ps.executeQuery();
 
     	    while (rs.next()) {
@@ -116,29 +118,7 @@ public class EventoDAO implements DAO<Evento> {
     private static EventoDAO instance = null;
 
     public EventoDAO() {
-//    	Usuario u1 = new Usuario("João Gabriel", "joao@role.com");
-//    	Usuario u2 = new Usuario("Ana Clara", "ana@role.com");
-//    	Usuario u3 = new Usuario("Maiara", "maiara@role.com");
     	
-//		Evento e1 = new Evento("✨", "Rolê na Fac", "Factory Antônio da Veiga", parseDateTime("2023-06-23 22:00"), parseDateTime("2023-06-24 05:00"));
-//		Evento e2 = new Evento("🌱", "Churrasco vegano", "Bela Vista Country Club", parseDateTime("2023-08-05 11:00"), parseDateTime("2023-08-05 15:00"));
-//		Evento e3 = new Evento("🎡", "Parque de diversões", "Beto Carrero", parseDateTime("2023-09-21 10:00"), null);
-		
-//		e1.getUsuarios().add(u1);
-//		e1.getUsuarios().add(u2);
-//		e1.getUsuarios().add(u3);
-//		
-//		e2.getUsuarios().add(u1);
-//		e2.getUsuarios().add(u2);
-//		e2.getUsuarios().add(u3);
-//		
-//		e3.getUsuarios().add(u1);
-//		e3.getUsuarios().add(u2);
-//		e3.getUsuarios().add(u3);
-		
-//		eventos.add(e1);
-//		eventos.add(e2);
-//		eventos.add(e3);
     }
     
     static LocalDateTime parseDateTime(String date) {

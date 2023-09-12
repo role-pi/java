@@ -18,16 +18,48 @@ public class UsuarioDAO implements DAO<Usuario> {
 	private static UsuarioDAO instance = null;
 
     @Override
-    public List<Usuario> list() {
+    public ArrayList<Usuario> list() {
     	Conexao c = Conexao.getInstancia();
 
     	Connection con = c.conectar();
 
     	String query = "SELECT * FROM usuarios";
 
-    	List<Usuario> usuarios = new ArrayList<Usuario>();
+    	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     	try {
 			PreparedStatement ps = con.prepareStatement(query);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id_usuario");
+				String nome = rs.getString("nome");
+				String email = rs.getString("email");
+				
+				Usuario u = new Usuario(id, nome, email);
+
+				usuarios.add(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+		c.fecharConexao();
+		return usuarios;
+	}
+    
+    public ArrayList<Usuario> list(Evento evento) {
+    	Conexao c = Conexao.getInstancia();
+
+    	Connection con = c.conectar();
+
+    	String query = "SELECT usuarios.* FROM usuarios "
+    			+ "INNER JOIN eventos_has_usuarios ON usuarios.id_usuario = eventos_has_usuarios.usuarios_id_usuario "
+    			+ "WHERE eventos_has_usuarios.eventos_id_evento = ?";
+
+    	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    	try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, evento.getId());
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -85,7 +117,8 @@ public class UsuarioDAO implements DAO<Usuario> {
 
         	Connection con = c.conectar();
 
-        	String query = "DELETE FROM usuarios WHERE id_usuario = ?";
+        	String query = "DELETE FROM usuarios "
+        			+ "WHERE id_usuario = ?";
         	
         	try {
         	    PreparedStatement ps = con.prepareStatement(query);

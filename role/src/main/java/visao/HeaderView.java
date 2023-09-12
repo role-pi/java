@@ -18,7 +18,7 @@ public class HeaderView extends JPanel {
 	}
 	
 	public HeaderView() {
-		setup("src/main/java/visao/Perfil.png");
+		setup("src/main/java/visao/Usuário.png");
 	}
 	
 	private void setup(String user) {

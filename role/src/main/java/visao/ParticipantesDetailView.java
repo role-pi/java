@@ -145,9 +145,7 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 				nome = oldUsuario.getNome();
 			}
 			
-			Usuario usuario = new Usuario(
-					nome,
-					String.valueOf(model.getValueAt(i, 1)));
+			Usuario usuario = new Usuario(0, nome, String.valueOf(model.getValueAt(i, 1)));
 			usuarios.add(usuario);
         }
 		evento.setUsuarios(usuarios);

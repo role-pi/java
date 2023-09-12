@@ -11,9 +11,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import controle.UsuarioDAO;
 import modelo.Evento;
+import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.Box;
 import java.awt.Component;
@@ -65,6 +68,8 @@ public class EventoWindow extends JFrame {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		
+		update();
+		
 		addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e){
                 parentWindow.update();
@@ -72,7 +77,9 @@ public class EventoWindow extends JFrame {
         });
 	}
 	
-	public static void main(String[] args) {
+	public void update() {
+    	evento.setUsuarios(UsuarioDAO.getInstance().list(evento));
 		
-	}
+		SwingUtilities.updateComponentTreeUI(this);
+    } 
 }
