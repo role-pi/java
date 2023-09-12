@@ -87,9 +87,27 @@ public class EventoDAO implements DAO<Evento> {
 
     public boolean delete(Evento event) {
         if (event != null) {
+        	Conexao c = Conexao.getInstancia();
+
+        	Connection con = c.conectar();
+
+        	String query = "DELETE FROM eventos WHERE id_evento = ?";
         	
-//            eventos.remove(event);
-            return true;
+        	try {
+        	    PreparedStatement ps = con.prepareStatement(query);
+        	    ps.setInt(1, event.getId());
+    			ps.executeUpdate();
+    			ResultSet rs = ps.getGeneratedKeys();
+    			
+        	    rs.close();
+        	    ps.close();
+
+        	    c.fecharConexao();
+
+                return true;
+        	} catch (SQLException e) {
+        	    e.printStackTrace();
+        	}
         }
         return false;
     }
