@@ -2,7 +2,7 @@ package visao;
 
 import modelo.Evento;
 import controle.EventoDAO;
-import controle.UsuarioManager;
+import controle.UsuarioDAO;
 
 import javax.swing.JFrame;
 
@@ -58,7 +58,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
 		titlePanel.setBackground(new Color(0, 0, 0, 0));
 		
-		String nome = UsuarioManager.getInstance().getUsuarioCadastrado().getNome();
+		String nome = UsuarioDAO.getInstance().getUsuarioCadastrado().getNome();
 		JLabel lblNewLabel = new JLabel(nome+", esses são seus próximos rolês");
 		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
 		titlePanel.add(lblNewLabel);

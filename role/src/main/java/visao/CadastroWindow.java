@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import controle.UsuarioManager;
+import controle.UsuarioDAO;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import java.awt.FlowLayout;
@@ -98,7 +98,7 @@ public class CadastroWindow extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Por favor, digite um nome de usuário para entrar no sistema");
 			} else {
 		        setVisible(false);
-		        UsuarioManager.getInstance().setUsuarioCadastrado(new Usuario(nometxt.getText(), ""));
+		        UsuarioDAO.getInstance().setUsuarioCadastrado(new Usuario(nometxt.getText(), ""));
 		        
 				MainWindow tela = new MainWindow();
 				tela.setVisible(true);

@@ -3,7 +3,7 @@ package controle;
 
 import modelo.Usuario;
 
-public class UsuarioManager {
+public class UsuarioDAO {
 	private Usuario usuarioCadastrado;
 	
 	// Singleton
@@ -16,15 +16,15 @@ public class UsuarioManager {
 		this.usuarioCadastrado = usuarioCadastrado;
 	}
 
-	private static UsuarioManager instance = null;
+	private static UsuarioDAO instance = null;
 	
-	private UsuarioManager() {
+	private UsuarioDAO() {
 		this.usuarioCadastrado = new Usuario("João", "");
     }
 
-    public static UsuarioManager getInstance() {
+    public static UsuarioDAO getInstance() {
         if (instance == null) {
-            instance = new UsuarioManager();
+            instance = new UsuarioDAO();
         }
         return instance;
     }
