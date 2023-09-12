@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class Evento {
-	private UUID id;
+	private int id;
 	
 	private String emoji;
 	private Color color;
@@ -25,9 +25,13 @@ public class Evento {
 	private ArrayList<Insumo> insumos = new ArrayList<>();
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
 
+	public Evento() {
+		
+	}
+	
 	public Evento(String emoji, String nome, String local, LocalDateTime dataInicio, LocalDateTime dataFim) {
 		super();
-		this.id = UUID.randomUUID();
+		this.id = 0;
 		this.emoji = emoji;
 		this.color = Evento.corEmoji(emoji);
 		this.nome = nome;
@@ -36,10 +40,10 @@ public class Evento {
 		this.dataFim = dataFim;
 	}
 
-	public UUID getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getEmoji() {

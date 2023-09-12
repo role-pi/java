@@ -1,12 +1,18 @@
 package controle;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import modelo.Evento;
+import modelo.Insumo;
 import modelo.Usuario;
 
 public class EventoDAO implements DAO<Evento> {
@@ -14,13 +20,71 @@ public class EventoDAO implements DAO<Evento> {
 
     @Override
     public List<Evento> list() {
-        return eventos;
+    	Conexao c = Conexao.getInstancia();
+
+    	Connection con = c.conectar();
+
+    	String query = "SELECT * FROM eventos";
+
+    	eventos.clear();
+    	
+    	try {
+    	    PreparedStatement ps = con.prepareStatement(query);
+    	    ResultSet rs = ps.executeQuery();
+
+    	    while (rs.next()) {
+    	        int id = rs.getInt("id");
+    	        String nome = rs.getString("nome");
+
+    	        Evento event = new Evento();
+    	        event.setId(id);
+    	        event.setNome(nome);
+    	        
+    	        List<Insumo> insumos = new ArrayList<Insumo>();
+
+    	        eventos.add(event);
+    	    }
+
+    	    rs.close();
+    	    ps.close();
+
+    	    c.fecharConexao();
+
+    	    return eventos;
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	}
+    	return Collections.emptyList();
     }
 
     public boolean insert(Evento event) {
         if (event != null) {
-            eventos.add(event);
-            return true;
+    		Conexao c = Conexao.getInstancia();
+    		
+    		Connection con = c.conectar();
+    		
+    		String query = "INSERT INTO eventos "
+    				+ "(nome) "
+    				+ "VALUES (?)";
+    		
+    		try {
+    			PreparedStatement ps = con.prepareStatement(query);
+    			
+    			ps.setString(1, event.getNome());
+    			ps.executeUpdate();
+    			ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    int insertId = rs.getInt(1);
+                    event.setId(insertId);
+                    eventos.add(event);
+                }
+                
+    			c.fecharConexao();
+
+    			return true;
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
         }
         return false;
     }
@@ -36,10 +100,6 @@ public class EventoDAO implements DAO<Evento> {
             return true;
         }
         return false;
-    }
-
-    public List<Evento> listaEventos() {
-        return eventos;
     }
 
     private static EventoDAO instance = null;
