@@ -16,8 +16,6 @@ import modelo.Insumo;
 import modelo.Usuario;
 
 public class EventoDAO implements DAO<Evento> {
-    private List<Evento> eventos = new ArrayList<Evento>();
-
     @Override
     public List<Evento> list() {
     	Conexao c = Conexao.getInstancia();
@@ -26,21 +24,19 @@ public class EventoDAO implements DAO<Evento> {
 
     	String query = "SELECT * FROM eventos";
 
-    	eventos.clear();
+    	List<Evento> eventos = new ArrayList<Evento>();
     	
     	try {
     	    PreparedStatement ps = con.prepareStatement(query);
     	    ResultSet rs = ps.executeQuery();
 
     	    while (rs.next()) {
-    	        int id = rs.getInt("id");
+    	        int id = rs.getInt("id_evento");
     	        String nome = rs.getString("nome");
 
     	        Evento event = new Evento();
     	        event.setId(id);
     	        event.setNome(nome);
-    	        
-    	        List<Insumo> insumos = new ArrayList<Insumo>();
 
     	        eventos.add(event);
     	    }
@@ -49,15 +45,14 @@ public class EventoDAO implements DAO<Evento> {
     	    ps.close();
 
     	    c.fecharConexao();
-
-    	    return eventos;
     	} catch (SQLException e) {
     	    e.printStackTrace();
     	}
-    	return Collections.emptyList();
+
+	    return eventos;
     }
 
-    public boolean insert(Evento event) {
+    public int insert(Evento event) {
         if (event != null) {
     		Conexao c = Conexao.getInstancia();
     		
@@ -75,28 +70,25 @@ public class EventoDAO implements DAO<Evento> {
     			ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     int insertId = rs.getInt(1);
-                    event.setId(insertId);
-                    eventos.add(event);
+        			return insertId;
                 }
                 
     			c.fecharConexao();
-
-    			return true;
     		} catch (SQLException e) {
     			e.printStackTrace();
     		}
         }
-        return false;
+        return 0;
     }
 
     public boolean update(Evento event) {
-    	// Não implementado pois não houve necessidade
         return false;
     }
 
     public boolean delete(Evento event) {
         if (event != null) {
-            eventos.remove(event);
+        	
+//            eventos.remove(event);
             return true;
         }
         return false;
@@ -125,9 +117,9 @@ public class EventoDAO implements DAO<Evento> {
 		e3.getUsuarios().add(u2);
 		e3.getUsuarios().add(u3);
 		
-		eventos.add(e1);
-		eventos.add(e2);
-		eventos.add(e3);
+//		eventos.add(e1);
+//		eventos.add(e2);
+//		eventos.add(e3);
     }
     
     static LocalDateTime parseDateTime(String date) {

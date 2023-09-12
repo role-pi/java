@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -27,6 +28,8 @@ public class MainWindow extends JFrame implements ActionListener {
 	private JPanel eventsPanel;
 	
 	private JButton newEventButton;
+	
+	List<Evento> eventos = new ArrayList<Evento>();
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,10 +111,10 @@ public class MainWindow extends JFrame implements ActionListener {
 	}
 	
 	public void update() {
-		List<Evento> events = EventoDAO.getInstance().list();
+		eventos = EventoDAO.getInstance().list();
 		
 		eventsPanel.removeAll();
-		for (Evento event : events) {
+		for (Evento event : eventos) {
 			JPanel eventListItem = new EventoItemView(event, this);
 			eventsPanel.add(eventListItem);
 			Component verticalStrut = Box.createVerticalStrut(5);
