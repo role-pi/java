@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,79 +13,111 @@ import modelo.Evento;
 import modelo.Usuario;
 
 public class UsuarioDAO implements DAO<Usuario> {
-	  private List<Usuario> usuarios = new ArrayList<Usuario>();
+	private Usuario usuarioSelecionado;
 
-	    @Override
-	    public List<Usuario> list() {
-	    	Conexao c = Conexao.getInstancia();
+	private static UsuarioDAO instance = null;
 
-	    	Connection con = c.conectar();
+    @Override
+    public List<Usuario> list() {
+    	Conexao c = Conexao.getInstancia();
 
-	    	String query = "SELECT * FROM usuários";
+    	Connection con = c.conectar();
 
-	    	usuarios.clear();
-	    	try {
-				PreparedStatement ps = con.prepareStatement(query);
+    	String query = "SELECT * FROM usuarios";
 
-				ResultSet rs = ps.executeQuery();
-				while (rs.next()) {
-					
-					int email = rs.getInt("email");
+    	List<Usuario> usuarios = new ArrayList<Usuario>();
+    	try {
+			PreparedStatement ps = con.prepareStatement(query);
 
-					String Nome = rs.getString("nome");
-					Usuario u = new Usuario();
-					u.setEmail(email);
-					u.setNome(nome);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id_usuario");
+				String nome = rs.getString("nome");
+				String email = rs.getString("email");
+				
+				Usuario u = new Usuario(id, nome, email);
 
-					usuarios.add(u);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+				usuarios.add(u);
 			}
-			c.fecharConexao();
-			return usuarios;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+    	
+		c.fecharConexao();
+		return usuarios;
+	}
 	    	
-	    	public boolean inserir(Usuario u) {
+	public int insert(Usuario u) {
+		Conexao c = Conexao.getInstancia();
+		Connection con = c.conectar();
 
-	    		Conexao c = Conexao.getInstacia();
-	    		Connection con = c.conectar();
+		String query = "INSERT INTO usuarios (email, nome) VALUES (?, ?)";
 
-	    		String query = "INSERT INTO usuarios " + "(email, nome) " + "VALUES (?, ?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(query,
+	                Statement.RETURN_GENERATED_KEYS);
 
-	    		try {
-	    			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, u.getEmail());
+			ps.setString(2, u.getNome());
 
-	    			ps.setInt(1, p.getEmail());
-	    			ps.setString(2, p.getNome());
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			
+            if (rs.next()) {
+                int insertId = rs.getInt(1);
+    			return insertId;
+            }
 
-	    			ps.executeUpdate();
+			c.fecharConexao();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public boolean update(Usuario u) {
+		return true;
+	}
+	
+	public boolean delete(Usuario usuario) {
+		if (usuario != null) {
+        	Conexao c = Conexao.getInstancia();
 
-	    			c.fecharConexao();
+        	Connection con = c.conectar();
 
-	    			return true;
-	    		} catch (SQLException e) {
-	    			e.printStackTrace();
-	    		}
-	    		return false;
-	    	
-	    }
-	private Usuario usuarioCadastrado;
+        	String query = "DELETE FROM usuarios WHERE id_usuario = ?";
+        	
+        	try {
+        	    PreparedStatement ps = con.prepareStatement(query);
+        	    ps.setInt(1, usuario.getId());
+    			ps.executeUpdate();
+    			ResultSet rs = ps.getGeneratedKeys();
+    			
+        	    rs.close();
+        	    ps.close();
+
+        	    c.fecharConexao();
+
+                return true;
+        	} catch (SQLException e) {
+        	    e.printStackTrace();
+        	}
+        }
+        return false;
+	}
 	
 	// Singleton
 	
-	public Usuario getUsuarioCadastrado() {
-		return usuarioCadastrado;
+	public Usuario getUsuarioSelecionado() {
+		return usuarioSelecionado;
 	}
 
 	public void setUsuarioCadastrado(Usuario usuarioCadastrado) {
-		this.usuarioCadastrado = usuarioCadastrado;
+		this.usuarioSelecionado = usuarioCadastrado;
 	}
-
-	private static UsuarioDAO instance = null;
 	
 	private UsuarioDAO() {
-		this.usuarioCadastrado = new Usuario("João", "");
+		this.usuarioSelecionado = new Usuario(1, "João", "");
     }
 
     public static UsuarioDAO getInstance() {

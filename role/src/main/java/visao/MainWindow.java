@@ -61,10 +61,10 @@ public class MainWindow extends JFrame implements ActionListener {
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
 		titlePanel.setBackground(new Color(0, 0, 0, 0));
 		
-		String nome = UsuarioDAO.getInstance().getUsuarioCadastrado().getNome();
-		JLabel lblNewLabel = new JLabel(nome+", esses são seus próximos rolês");
-		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
-		titlePanel.add(lblNewLabel);
+//		String nome = UsuarioDAO.getInstance().getUsuarioCadastrado().getNome();
+//		JLabel lblNewLabel = new JLabel(nome+", esses são seus próximos rolês");
+//		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
+//		titlePanel.add(lblNewLabel);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		titlePanel.add(horizontalGlue);
