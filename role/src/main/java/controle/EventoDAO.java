@@ -85,8 +85,30 @@ public class EventoDAO implements DAO<Evento> {
     }
 
     public boolean update(Evento event) {
-        return false;
-    }
+		if (event != null) {
+			Conexao c = Conexao.getInstancia();
+			Connection con = c.conectar();
+	
+			String query = "UPDATE eventos SET nome = ? WHERE id_evento = ?";
+	
+			try {
+				PreparedStatement ps = con.prepareStatement(query);
+				ps.setString(1, event.getNome());
+				ps.setInt(2, event.getId());
+	
+				int rowsUpdated = ps.executeUpdate();
+				
+				ps.close();
+				c.fecharConexao();
+	
+				return rowsUpdated > 0;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 
     public boolean delete(Evento event) {
         if (event != null) {
