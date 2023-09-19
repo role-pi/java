@@ -149,7 +149,7 @@ public class UsuarioDAO implements DAO<Usuario> {
 		this.usuarioSelecionado = usuarioCadastrado;
 	}
 	
-	private UsuarioDAO() {
+	public UsuarioDAO() {
 		this.usuarioSelecionado = new Usuario(1, "João", "");
     }
 
