@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -28,7 +27,7 @@ import controle.UsuarioDAO;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
-public class CadastroWindow extends JFrame implements ActionListener {
+public class CadastroWindow extends JFrame implements ActionListener, UpdatableView {
     private JPanel contentPane;
     private JTextField nomeTextField;
     private JButton newUsuarioButton;

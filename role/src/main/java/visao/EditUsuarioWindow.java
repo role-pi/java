@@ -17,18 +17,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Evento;
+import controle.UsuarioDAO;
 import modelo.Usuario;
-	
-public class AddParticipanteWindow extends JFrame implements ActionListener {
+
+public class EditUsuarioWindow extends JFrame implements ActionListener {
     private JTextField nomeTextField;
     private JTextField emailTextField;
     
-    private Evento event;
-    private ParticipantesDetailView parentWindow;
+    private Usuario usuario;
+    private UpdatableView parentWindow;
 
-    public AddParticipanteWindow(Evento event, ParticipantesDetailView parentWindow) {
-    	setTitle("Adicionar Participante");
+    public EditUsuarioWindow(Usuario usuario, UpdatableView parentWindow) {
+    	this.usuario = usuario;
+    	this.parentWindow = parentWindow;
+    	
+    	setTitle("editar usuário");
 	    setSize(418, 303);
         setResizable(false);
 	    setLocationRelativeTo(null);
@@ -54,6 +57,7 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
         JLabel nomeLabel = new JLabel("Nome");
         panel_2.add(nomeLabel);
         nomeTextField = new JTextField();
+        nomeTextField.setText(usuario.getNome());
         panel_2.add(nomeTextField);
 	    
 	    JPanel panel_1 = new JPanel();
@@ -63,6 +67,7 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
 	    JLabel localLabel = new JLabel("Email");
 	    panel_1.add(localLabel);
 	    emailTextField = new JTextField();
+	    emailTextField.setText(usuario.getEmail());
 	    panel_1.add(emailTextField);
         
         Component verticalStrut = Box.createVerticalStrut(20);
@@ -78,20 +83,19 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (nomeTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nome não pode estar vazio."); 
-		} else if (emailTextField.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Email não pode estar vazio."); 
+//		} else if (emailTextField.getText().isEmpty()) {
+//			JOptionPane.showMessageDialog(this, "Email não pode estar vazio."); 
 		} else {
-			cadastrarParticipante();
+	        String nome = nomeTextField.getText();
+	        String email = emailTextField.getText();
+	        
+	        usuario.setNome(nome);
+	        usuario.setEmail(email);
+	        
+	        UsuarioDAO.getInstance().update(usuario);
+	        
 			parentWindow.update();
 			dispose();
 		}
 	}
-    
-    private void cadastrarParticipante() {
-        String nome = nomeTextField.getText();
-        String email = emailTextField.getText();
-
-        Usuario usuario = new Usuario(0, nome, email);
-        event.getUsuarios().add(usuario);
-    }
 }

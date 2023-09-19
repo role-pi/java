@@ -1,9 +1,12 @@
 package visao;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -11,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
@@ -18,18 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import modelo.Evento;
-import modelo.Insumo;
-import modelo.Transacao;
 import modelo.Usuario;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 
 public class ParticipantesDetailView extends RoundedPanel implements ActionListener, CellEditorListener {
 	Evento evento;
@@ -68,25 +63,24 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_1.add(horizontalGlue_1);
 		
-		btnRemoveButton = new JButton("Remover");
+		btnRemoveButton = new JButton("remover");
 		panel_1.add(btnRemoveButton);
 		btnRemoveButton.addActionListener(this);
 		btnRemoveButton.setFont(new Font("Inter", Font.PLAIN, 16));
 		
-		btnNewButton = new JButton("Adicionar");
+		btnNewButton = new JButton("adicionar");
 		panel_1.add(btnNewButton);
 		btnNewButton.addActionListener(this);
 		btnNewButton.setFont(new Font("Inter", Font.PLAIN, 16));
 		
 		model = new DefaultTableModel();
-        model.addColumn("Nome");
-        model.addColumn("E-mail");
+        model.addColumn("NOME");
+        model.addColumn("EMAIL");
         
         update();
 
         table = new JTable(model);
         
-        table.getDefaultEditor(String.class).addCellEditorListener(this);
 		table.setFont(new Font("Inter", Font.PLAIN, 16));
 		table.setRowHeight(30);
 		

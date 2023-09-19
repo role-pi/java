@@ -1,27 +1,28 @@
 package visao;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import controle.EventoDAO;
-import modelo.Evento;
-import modelo.Insumo;
-import modelo.Transacao;
-import modelo.Usuario;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import controle.InsumoDAO;
+import modelo.Evento;
+import modelo.Insumo;
+import modelo.Transacao;
 
 public class AddInsumoWindow extends JFrame implements ActionListener {
     private JButton cadastrarButton;
@@ -31,12 +32,12 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
     private JComboBox<String> tipoComboBox;
     
     private Evento event;
-    private InsumosDetailView parentWindow;
+    private UpdatableView parentView;
 
-    public AddInsumoWindow(Evento event, InsumosDetailView parentWindow) {
+    public AddInsumoWindow(Evento event, UpdatableView parentWindow) {
     	setResizable(false);
     	this.event = event;
-    	this.parentWindow = parentWindow;
+    	this.parentView = parentWindow;
     	
         setTitle("Adicionar Insumo");
         setSize(632, 329);
@@ -118,19 +119,28 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
 	            JOptionPane.showMessageDialog(this, "Valor não pode estar vazio.");
 	        } else {
 	            cadastrarInsumo();
-	            parentWindow.update();
+	            parentView.update();
 	            dispose();
 	        }
     	}
     }
 
     private void cadastrarInsumo() {
-        String tipo = (String) tipoComboBox.getSelectedItem();
+    	int tipo = Arrays.asList(Insumo.allTipos()).indexOf(String.valueOf(tipoComboBox.getSelectedItem()));
         String nome = nomeTextField.getText();
         String descricao = descricaoTextField.getText();
         double valor = Double.parseDouble(valorTextField.getText());
 
-        Insumo insumo = new Insumo(tipo, nome, descricao, new Transacao(valor, new Date(), new Usuario(0, "João", "")));
-        event.getInsumos().add(insumo);
+        Insumo insumo = new Insumo();
+        insumo.setTipo(tipo);
+        insumo.setNome(nome);
+        insumo.setDescricao(descricao);
+        insumo.setEvento(event);
+        
+        Transacao transacao = new Transacao();
+        transacao.setValor(valor);
+        insumo.setTransacao(transacao);
+        
+        InsumoDAO.getInstance().insert(insumo);
     }
 }

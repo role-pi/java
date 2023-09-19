@@ -1,36 +1,33 @@
 package visao;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controle.EventoDAO;
 import controle.UsuarioDAO;
-import modelo.Evento;
 import modelo.Usuario;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.BoxLayout;
-import javax.swing.JPopupMenu;
-import javax.swing.JMenuItem;
 
 public class UsuarioItemView extends RoundedPanel implements ActionListener {
 	Usuario usuario;
 	
 	JButton btnSelecionar;
+	JButton btnEditar;
 	JButton btnRemover;
 	
-	CadastroWindow parentWindow;
+	UpdatableView parentWindow;
 	
-	public UsuarioItemView(Usuario usuario, CadastroWindow parentWindow) {
+	public UsuarioItemView(Usuario usuario, UpdatableView parentWindow) {
 		this.usuario = usuario;
 		this.parentWindow = parentWindow;
 		
@@ -45,10 +42,15 @@ public class UsuarioItemView extends RoundedPanel implements ActionListener {
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 		
-		JLabel lblNewLabel = new JLabel(usuario.getNome());
-		lblNewLabel.setForeground(Color.white);
-		verticalBox.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 14));
+		JLabel lblNome = new JLabel(usuario.getNome());
+		lblNome.setForeground(Color.white);
+		verticalBox.add(lblNome);
+		lblNome.setFont(new Font("Inter", Font.BOLD, 14));
+		
+		JLabel lblEmail = new JLabel(usuario.getEmail());
+		lblEmail.setForeground(Color.LIGHT_GRAY);
+		verticalBox.add(lblEmail);
+		lblEmail.setFont(new Font("Inter", Font.BOLD, 12));
 		
 		Component horizontalStrut = Box.createHorizontalGlue();
 		add(horizontalStrut);
@@ -63,18 +65,30 @@ public class UsuarioItemView extends RoundedPanel implements ActionListener {
 		panel.add(btnSelecionar);
 		btnSelecionar.addActionListener(this);
 		
+		btnEditar = new JButton("editar");
+		btnEditar.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panel.add(btnEditar);
+		btnEditar.addActionListener(this);
+		
 		btnRemover = new JButton("remover");
 		btnRemover.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panel.add(btnRemover);
 		btnRemover.addActionListener(this);
-		setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
+		
+		setMaximumSize(new Dimension(Integer.MAX_VALUE, 125));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSelecionar) {
-//			JFrame tela = new EventoWindow(event, parentWindow);
-//			tela.setVisible(true);
+			UsuarioDAO.getInstance().setUsuarioCadastrado(usuario);
+			JFrame tela = new MainWindow();
+			setVisible(false);
+			tela.setVisible(true);
+		} else if (e.getSource() == btnEditar) {
+			JFrame tela = new EditUsuarioWindow(usuario, parentWindow);
+			setVisible(false);
+			tela.setVisible(true);
 		} else if (e.getSource() == btnRemover) {
 			UsuarioDAO.getInstance().delete(usuario);
 			parentWindow.update();

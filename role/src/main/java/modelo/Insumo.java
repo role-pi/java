@@ -1,25 +1,40 @@
 package modelo;
 
-import java.util.UUID;
-
 public class Insumo {
-    private String tipo;
+    private int id;
+    private int tipo;
     private String nome;
     private String descricao;
+    
     private Transacao transacao;
+    private Evento evento;
+    
+    public Insumo() {
+    	
+    }
 
-    public Insumo(String tipo, String nome, String descricao, Transacao transacao) {
+    public Insumo(int tipo, String nome, String descricao, Transacao transacao, Evento evento) {
+    	this.id = 0;
         this.tipo = tipo;
         this.nome = nome;
         this.descricao = descricao;
+        this.setEvento(evento);
         this.setTransacao(transacao);
     }
-
-    public String getTipo() {
+    
+    public int getId() {
+		return id;
+	}
+    
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
@@ -49,5 +64,13 @@ public class Insumo {
 	
 	public static String[] allTipos() {
 		return new String[] { "Ingresso", "Comida", "Bebida", "Transporte" };
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 }

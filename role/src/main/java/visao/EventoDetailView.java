@@ -1,9 +1,14 @@
 package visao;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -11,11 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import modelo.Evento;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-
-public class EventoDetailView extends RoundedPanel implements ActionListener {
+public class EventoDetailView extends RoundedPanel implements ActionListener, UpdatableView {
 	Evento evento;
 
 	JLabel lblEmoji;
@@ -23,9 +24,12 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 	JLabel lblLocal;
 	JLabel lblData;
 	
-	public EventoDetailView (Evento evento) {
+	UpdatableView parentWindow;
+	
+	public EventoDetailView (Evento evento, UpdatableView parentWindow) {
 		super(evento.getColor());
 		this.evento = evento;
+		this.parentWindow = parentWindow;
 		setBackground(new Color(236, 236, 236));
 		
 		setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -60,7 +64,7 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		Component verticalGlue = Box.createVerticalGlue();
 		panel.add(verticalGlue);
 		
-		JButton btnNewButton = new JButton("Editar");
+		JButton btnNewButton = new JButton("editar");
 		panel.add(btnNewButton);
 		btnNewButton.setFont(new Font("Inter", Font.PLAIN, 16));
 		btnNewButton.addActionListener(this);
@@ -77,6 +81,7 @@ public class EventoDetailView extends RoundedPanel implements ActionListener {
 		lblLocal.setText(evento.getLocal());
 		lblData.setText(evento.dataCompleta());
 		this.gradient = evento.getColor();
+		parentWindow.update();
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 

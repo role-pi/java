@@ -1,28 +1,34 @@
 package visao;
 
-import modelo.Evento;
-import controle.EventoDAO;
-import controle.UsuarioDAO;
-
-import javax.swing.JFrame;
-
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import javax.swing.*;
-import java.awt.*;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-public class MainWindow extends JFrame implements ActionListener {
+import controle.EventoDAO;
+import controle.UsuarioDAO;
+import modelo.Evento;
+import modelo.Usuario;
+import net.miginfocom.swing.MigLayout;
+
+public class MainWindow extends JFrame implements ActionListener, UpdatableView {
 	private JTextField textField;
 	private JPanel contentPanel;
 	private JPanel eventsPanel;
@@ -61,10 +67,12 @@ public class MainWindow extends JFrame implements ActionListener {
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
 		titlePanel.setBackground(new Color(0, 0, 0, 0));
 		
-//		String nome = UsuarioDAO.getInstance().getUsuarioCadastrado().getNome();
-//		JLabel lblNewLabel = new JLabel(nome+", esses são seus próximos rolês");
-//		lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
-//		titlePanel.add(lblNewLabel);
+		Usuario usuario = UsuarioDAO.getInstance().getUsuarioSelecionado();
+		if (usuario != null) {
+			JLabel lblNewLabel = new JLabel(usuario.getNome()+", esses são seus próximos rolês");
+			lblNewLabel.setFont(new Font("Inter", Font.BOLD, 24));
+			titlePanel.add(lblNewLabel);
+		}
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		titlePanel.add(horizontalGlue);

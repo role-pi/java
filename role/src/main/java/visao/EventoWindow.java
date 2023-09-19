@@ -1,31 +1,29 @@
 package visao;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.Component;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import controle.UsuarioDAO;
 import modelo.Evento;
-import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.Box;
-import java.awt.Component;
 
-public class EventoWindow extends JFrame {
+public class EventoWindow extends JFrame implements UpdatableView {
 	Evento evento;
-	MainWindow parentWindow;
+	UpdatableView parentWindow;
 	
-	public EventoWindow(Evento evento, MainWindow parentWindow) {
+	public EventoWindow(Evento evento, UpdatableView parentWindow) {
+		this.evento = evento;
+		this.parentWindow = parentWindow;
+		
         setTitle(evento.getNome());
         
 		setSize(500, 400);
@@ -50,7 +48,7 @@ public class EventoWindow extends JFrame {
 		panel_1.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
-		JPanel panel_3 = new EventoDetailView(evento);
+		JPanel panel_3 = new EventoDetailView(evento, this);
 		panel_2.add(panel_3);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(10);
@@ -79,6 +77,7 @@ public class EventoWindow extends JFrame {
 	
 	public void update() {
     	evento.setUsuarios(UsuarioDAO.getInstance().list(evento));
+    	parentWindow.update();
 		
 		SwingUtilities.updateComponentTreeUI(this);
     } 

@@ -1,33 +1,31 @@
 package visao;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import org.httprpc.sierra.VerticalAlignment;
-import org.httprpc.sierra.DatePicker;
-import org.httprpc.sierra.TimePicker;
-
-import controle.EventoDAO;
-import modelo.Evento;
-import modelo.Insumo;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.httprpc.sierra.DatePicker;
+import org.httprpc.sierra.TimePicker;
+import org.httprpc.sierra.VerticalAlignment;
+
+import controle.EventoDAO;
+import modelo.Evento;
 
 public class EditEventoWindow extends JFrame implements ActionListener {
     private JTextField emojiTextField;
@@ -39,9 +37,9 @@ public class EditEventoWindow extends JFrame implements ActionListener {
     private TimePicker horaFimPicker;
     
     Evento evento;
-    EventoDetailView parentWindow;
+    UpdatableView parentWindow;
     
-    public EditEventoWindow(Evento evento, EventoDetailView parentWindow) {
+    public EditEventoWindow(Evento evento, UpdatableView parentWindow) {
     	this.evento = evento;
     	this.parentWindow = parentWindow;
     	
@@ -162,8 +160,6 @@ public class EditEventoWindow extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (nomeTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nome não pode estar vazio."); 
-//		} else if (emojiTextField.getText().length() > 1 || !isEmoji(emojiTextField.getText())) {
-//			JOptionPane.showMessageDialog(this, "Valor para o campo emoji é inválido."); 
 		} else {
 			LocalDateTime dataInicio = dataInicioPicker.getDate().atTime(horaInicioPicker.getTime());
 			LocalDateTime dataFim = dataFimPicker.getDate().atTime(horaFimPicker.getTime());
@@ -177,6 +173,7 @@ public class EditEventoWindow extends JFrame implements ActionListener {
 				evento.setLocal(localTextField.getText());
 				evento.setDataInicio(dataInicio);
 				evento.setDataFim(dataFim);
+				EventoDAO.getInstance().update(evento);
 				parentWindow.update();
 				dispose();
 			}

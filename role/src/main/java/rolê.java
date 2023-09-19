@@ -1,5 +1,3 @@
-import javax.swing.UIManager;
-
 import visao.OnboardingWindow;
 
 public class rolê {

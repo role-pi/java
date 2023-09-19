@@ -1,16 +1,10 @@
 package modelo;
 
 import java.awt.Color;
-import java.awt.List;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
-import java.util.UUID;
 
 public class Evento {
 	private int id;
@@ -35,7 +29,7 @@ public class Evento {
 		this.emoji = emoji;
 		this.color = Evento.corEmoji(emoji);
 		this.nome = nome;
-		this.setLocal(local);
+		this.local = local;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 	}
@@ -43,54 +37,75 @@ public class Evento {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getEmoji() {
 		return emoji;
 	}
+	
 	public void setEmoji(String emoji) {
 		this.emoji = emoji;
+		if(this.emoji == null) {
+			this.emoji = "";
+		}
+		this.color = Evento.corEmoji(emoji);
 	}
+	
 	public Color getColor() {
 		return color;
 	}
+	
 	public void setColor(Color color) {
 		this.color = color;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public LocalDateTime getDataInicio() {
 		return dataInicio;
 	}
+	
 	public void setDataInicio(LocalDateTime dataInicio) {
 		this.dataInicio = dataInicio;
 	}
+	
 	public LocalDateTime getDataFim() {
 		return dataFim;
 	}
+	
 	public void setDataFim(LocalDateTime dataFim) {
 		this.dataFim = dataFim;
 	}
+	
 	public ArrayList<Insumo> getInsumos() {
 		return insumos;
 	}
+	
 	public void setInsumos(ArrayList<Insumo> insumos) {
 		this.insumos = insumos;
 	}
+	
 	public ArrayList<Usuario> getUsuarios() {
 		return usuarios;
 	}
+	
 	public void setUsuarios(ArrayList<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
 	public String getLocal() {
 		return local;
 	}
+	
 	public void setLocal(String local) {
 		this.local = local;
 	}
@@ -125,14 +140,16 @@ public class Evento {
 	}
 	
 	public static Color corEmoji(String emoji) {
-		if (emoji.contentEquals("✨")) {
-			return new Color(249, 236, 170);
-		} else if  (emoji.contentEquals("🌱")) {
-			return new Color(212, 229, 195);
-		} else if (emoji.contentEquals("🎡")) {
-			return new Color(216, 197, 243);
-		} else if (emoji.contentEquals("🥶")) {
-			return new Color(156, 179, 255);
+		if(emoji != null) {
+			if (emoji.contentEquals("✨")) {
+				return new Color(249, 236, 170);
+			} else if  (emoji.contentEquals("🌱")) {
+				return new Color(212, 229, 195);
+			} else if (emoji.contentEquals("🎡")) {
+				return new Color(216, 197, 243);
+			} else if (emoji.contentEquals("🥶")) {
+				return new Color(156, 179, 255);
+		}
 		}
 		return new Color(200, 200, 200);
 	}
