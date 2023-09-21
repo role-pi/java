@@ -150,7 +150,7 @@ public class EditEventoWindow extends JFrame implements ActionListener {
         Component verticalStrut = Box.createVerticalStrut(20);
         panel_4.add(verticalStrut);
     
-        JButton cadastrarButton = new JButton("Atualizar");
+        JButton cadastrarButton = new JButton("atualizar");
         cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         cadastrarButton.addActionListener(this);
         panel_4.add(cadastrarButton);

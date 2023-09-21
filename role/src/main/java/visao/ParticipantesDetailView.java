@@ -85,7 +85,7 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		table.setFont(new Font("Inter", Font.PLAIN, 16));
 		table.setRowHeight(30);
 		
-        TableColumn comboCol1 = table.getColumnModel().getColumn(0);
+		table.setDefaultEditor(Object.class, null);
 
 		table.setSelectionBackground(event.getColor().darker());
 		

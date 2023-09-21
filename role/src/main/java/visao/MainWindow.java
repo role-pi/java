@@ -98,7 +98,7 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 		newEvent.add(textField);
 		textField.setColumns(10);
 		
-		newEventButton = new JButton("Adicionar");
+		newEventButton = new JButton("adicionar");
 		newEventButton.addActionListener(this);
 		newEventButton.setEnabled(!textField.getText().isEmpty());
 		

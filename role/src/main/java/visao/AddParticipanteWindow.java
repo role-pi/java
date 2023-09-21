@@ -38,7 +38,7 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
     	this.parentWindow = parentWindow;
     	
     	setTitle("adicionar participante");
-	    setSize(418, 303);
+	    setSize(300, 200);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -70,9 +70,8 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
             comboBoxModel.addElement(usuario);
         }
 
-        JButton cadastrarButton = new JButton("Adicionar");
-        cadastrarButton.setFont(new Font("Inter", Font.BOLD, 11));
-        cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton cadastrarButton = new JButton("adicionar");
+        cadastrarButton.setAlignmentX(CENTER_ALIGNMENT);
         cadastrarButton.addActionListener(this);
         panel_4.add(cadastrarButton);
     }

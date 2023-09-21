@@ -101,7 +101,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
         Component verticalStrut = Box.createVerticalStrut(20);
         panel_4.add(verticalStrut);
 
-        cadastrarButton = new JButton("Adicionar");
+        cadastrarButton = new JButton("adicionar");
         cadastrarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel_4.add(cadastrarButton);
 
