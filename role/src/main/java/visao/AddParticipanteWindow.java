@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,22 +20,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import controle.EventoDAO;
 import controle.UsuarioDAO;
-
-import javax.swing.DefaultComboBoxModel; // Importe esta classe
-
 import modelo.Evento;
 import modelo.Usuario;
 
 public class AddParticipanteWindow extends JFrame implements ActionListener {
-    private JComboBox<Usuario> usuariosComboBox; // Adicione o JComboBox
-
+    private JComboBox<Usuario> usuariosComboBox;
     private Evento event;
     private ParticipantesDetailView parentWindow;
+    
+    private List<Usuario> listaDeUsuarios;
 
     public AddParticipanteWindow(Evento event, ParticipantesDetailView parentWindow) {
-        setTitle("Adicionar Participante");
-        setSize(418, 303);
+    	this.event = event;
+    	event.setUsuarios(UsuarioDAO.getInstance().list(event));
+    	this.parentWindow = parentWindow;
+    	
+    	setTitle("adicionar participante");
+	    setSize(418, 303);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -51,7 +55,7 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
         panel_4.setSize(new Dimension(500, 100));
         panel_4.setMaximumSize(new Dimension(600, 250));
         panel_4.setFont(new Font("Inter", Font.BOLD, 13));
-
+        
         Component verticalStrut = Box.createVerticalStrut(20);
         panel_4.add(verticalStrut);
 
@@ -60,7 +64,7 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
         usuariosComboBox = new JComboBox<>(comboBoxModel);
         panel_4.add(usuariosComboBox);
         
-        List<Usuario> listaDeUsuarios = UsuarioDAO.getInstance().list();
+        listaDeUsuarios = UsuarioDAO.getInstance().list();
 
         for (Usuario usuario : listaDeUsuarios) {
             comboBoxModel.addElement(usuario);
@@ -78,11 +82,11 @@ public class AddParticipanteWindow extends JFrame implements ActionListener {
         if (usuariosComboBox.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Por favor, selecione um usuário.");
         } else {
-            Usuario usuarioSelecionado = (Usuario) usuariosComboBox.getSelectedItem();
-            event.getUsuarios().add(usuarioSelecionado);
+            int indice = usuariosComboBox.getSelectedIndex();
+            Usuario usuario = listaDeUsuarios.get(indice);
+            EventoDAO.getInstance().insert(event, usuario);
             parentWindow.update();
             dispose();
         }
     }
-
 }

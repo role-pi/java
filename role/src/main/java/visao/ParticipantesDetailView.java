@@ -23,10 +23,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import controle.UsuarioDAO;
 import modelo.Evento;
 import modelo.Usuario;
 
-public class ParticipantesDetailView extends RoundedPanel implements ActionListener, CellEditorListener {
+public class ParticipantesDetailView extends RoundedPanel implements ActionListener {
 	Evento evento;
 	DefaultTableModel model;
 	JTable table;
@@ -97,6 +98,7 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 	
 	public void update() {
 		model.setRowCount(0);
+		evento.setUsuarios(UsuarioDAO.getInstance().list(evento));
 		for (Usuario usuario : evento.getUsuarios()) {
 			model.addRow(new Object[]{usuario.getNome(), usuario.getEmail()});
 		}
@@ -125,26 +127,9 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
           }
           update();
       } else {
-          JOptionPane.showMessageDialog(null, "Selecione um insumo na tabela para remover.");
+          JOptionPane.showMessageDialog(null, "Selecione um participante na tabela para remover.");
       }
   }
-	
-	public void editar() {
-		ArrayList<Usuario> usuarios = new ArrayList<>();
-		for (int i = 0; i <= model.getRowCount() - 1; i++) {
-			Usuario oldUsuario = evento.getUsuarios().get(i);
-			
-			String nome = String.valueOf(model.getValueAt(i, 0));
-			if (nome.isEmpty()) {
-				nome = oldUsuario.getNome();
-			}
-			
-			Usuario usuario = new Usuario(0, nome, String.valueOf(model.getValueAt(i, 1)));
-			usuarios.add(usuario);
-        }
-		evento.setUsuarios(usuarios);
-		update();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -153,15 +138,5 @@ public class ParticipantesDetailView extends RoundedPanel implements ActionListe
 		} else if (e.getSource() == btnRemoveButton) {
 			remover();
 		}
-	}
-
-	@Override
-	public void editingStopped(ChangeEvent e) {
-		editar();
-	}
-
-	@Override
-	public void editingCanceled(ChangeEvent e) {
-		editar();
 	}
 }

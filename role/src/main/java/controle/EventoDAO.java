@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import modelo.Evento;
+import modelo.Usuario;
 
 public class EventoDAO implements DAO<Evento> {
     @Override
@@ -98,6 +99,38 @@ public class EventoDAO implements DAO<Evento> {
                     } catch (SQLException e) {
             			e.printStackTrace();
             		}
+                }
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
+
+			c.fecharConexao();
+        }
+        return 0;
+    }
+    
+    public int insert(Evento event, Usuario usuario) {
+        if (event != null) {
+    		Conexao c = Conexao.getInstancia();
+    		
+    		Connection con = c.conectar();
+    		
+    		String query = "INSERT INTO eventos_has_usuarios "
+    				+ "(eventos_id_evento, usuarios_id_usuario) "
+    				+ "VALUES (?, ?)";
+    		
+    		try {
+    			PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+    			
+    			ps.setInt(1, event.getId());
+    			ps.setInt(2, usuario.getId());
+    			ps.executeUpdate();
+    			ResultSet rs = ps.getGeneratedKeys();
+    			
+                if (rs.next()) {
+                    int insertId = rs.getInt(1);
+        			c.fecharConexao();
+            		return insertId;
                 }
     		} catch (SQLException e) {
     			e.printStackTrace();

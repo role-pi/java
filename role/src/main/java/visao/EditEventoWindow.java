@@ -43,7 +43,7 @@ public class EditEventoWindow extends JFrame implements ActionListener {
     	this.evento = evento;
     	this.parentWindow = parentWindow;
     	
-        setTitle("Editar Evento");
+        setTitle("editar evento");
 	    setSize(418, 371);
         setResizable(false);
 	    setLocationRelativeTo(null);

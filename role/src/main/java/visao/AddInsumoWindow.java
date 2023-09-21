@@ -39,7 +39,7 @@ public class AddInsumoWindow extends JFrame implements ActionListener {
     	this.event = event;
     	this.parentView = parentWindow;
     	
-        setTitle("Adicionar Insumo");
+        setTitle("adicionar insumo");
         setSize(632, 329);
         setLocationRelativeTo(null);
         
