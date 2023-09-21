@@ -20,7 +20,10 @@ public class EventoDAO implements DAO<Evento> {
 
     	Connection con = c.conectar();
 
-    	String query = "SELECT * FROM eventos INNER JOIN eventos_has_usuarios ON eventos.id_evento = eventos_has_usuarios.eventos_id_evento WHERE eventos_has_usuarios.usuarios_id_usuario = ?";
+    	String query = "SELECT * FROM eventos "
+    			+ "INNER JOIN eventos_has_usuarios ON eventos.id_evento = eventos_has_usuarios.eventos_id_evento "
+    			+ "WHERE eventos_has_usuarios.usuarios_id_usuario = ? "
+    			+ "GROUP BY eventos.id_evento";
 
     	ArrayList<Evento> eventos = new ArrayList<Evento>();
     	
@@ -88,17 +91,13 @@ public class EventoDAO implements DAO<Evento> {
             				+ "(eventos_id_evento, usuarios_id_usuario) "
             				+ "VALUES (?, ?)";
                     
-                    try {
-            			PreparedStatement ps2 = con.prepareStatement(query2);
-            			ps2.setInt(1,insertId);
-            			ps2.setInt(2, UsuarioDAO.getInstance().getUsuarioSelecionado().getId());
-            			ps2.executeUpdate();
-            			c.fecharConexao();
-                        
-            			return insertId;
-                    } catch (SQLException e) {
-            			e.printStackTrace();
-            		}
+        			PreparedStatement ps2 = con.prepareStatement(query2);
+        			ps2.setInt(1,insertId);
+        			ps2.setInt(2, UsuarioDAO.getInstance().getUsuarioSelecionado().getId());
+        			ps2.executeUpdate();
+        			c.fecharConexao();
+                    
+        			return insertId;
                 }
     		} catch (SQLException e) {
     			e.printStackTrace();

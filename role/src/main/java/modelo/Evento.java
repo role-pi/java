@@ -136,7 +136,10 @@ public class Evento {
 			data = "Sem data definida";
 		}
 		
-		return data + " • " + String.valueOf(usuarios.size()) + " participantes";
+		if (usuarios.size() > 0) {
+			return data + " • " + String.valueOf(usuarios.size()) + " participantes";
+		}
+		return data;
 	}
 	
 	public static Color corEmoji(String emoji) {
