@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class OnboardingWindow extends JFrame implements ActionListener {
-	
 	public OnboardingWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("rolê");

@@ -76,9 +76,7 @@ public class EventoWindow extends JFrame implements UpdatableView {
 	}
 	
 	public void update() {
-    	evento.setUsuarios(UsuarioDAO.getInstance().list(evento));
     	parentWindow.update();
-		
 		SwingUtilities.updateComponentTreeUI(this);
     } 
 }
