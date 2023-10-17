@@ -68,7 +68,8 @@ public class EventoDAO implements DAO<Evento> {
     }
 
     public int insert(Evento event) {
-        if (event != null) {
+    	Usuario usuario = UsuarioDAO.getInstance().getUsuarioSelecionado();
+        if (event != null && usuario != null) {
     		Conexao c = Conexao.getInstancia();
     		
     		Connection con = c.conectar();
@@ -93,7 +94,7 @@ public class EventoDAO implements DAO<Evento> {
                     
         			PreparedStatement ps2 = con.prepareStatement(query2);
         			ps2.setInt(1,insertId);
-        			ps2.setInt(2, UsuarioDAO.getInstance().getUsuarioSelecionado().getId());
+        			ps2.setInt(2, usuario.getId());
         			ps2.executeUpdate();
         			c.fecharConexao();
                     
