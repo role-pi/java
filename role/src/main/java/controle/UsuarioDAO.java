@@ -145,8 +145,8 @@ public class UsuarioDAO implements DAO<Usuario> {
 		return usuarioSelecionado;
 	}
 
-	public void setUsuarioCadastrado(Usuario usuarioCadastrado) {
-		this.usuarioSelecionado = usuarioCadastrado;
+	public void setUsuarioSelecionado(Usuario usuario) {
+		this.usuarioSelecionado = usuario;
 	}
 	
 	public UsuarioDAO() {

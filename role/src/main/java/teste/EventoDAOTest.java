@@ -24,7 +24,7 @@ public class EventoDAOTest {
 	
 	@Test
 	public void testInsertEventoErroSemUsuario() {
-		usuarioDAO.setUsuarioCadastrado(null);
+		usuarioDAO.setUsuarioSelecionado(null);
 		Evento evento = new Evento();
 		evento.setNome("Evento");
 		
@@ -40,7 +40,7 @@ public class EventoDAOTest {
 		assertTrue(usuarioId > 0);
 		usuario.setId(usuarioId);
 		
-		usuarioDAO.setUsuarioCadastrado(usuario);
+		usuarioDAO.setUsuarioSelecionado(usuario);
 		Evento evento = new Evento();
 		evento.setNome("Evento");
 		
@@ -54,7 +54,7 @@ public class EventoDAOTest {
 		Usuario usuario = new Usuario(0, "Nome", "teste@email.com");
 		int usuarioId = usuarioDAO.insert(usuario);
 		usuario.setId(usuarioId);
-		usuarioDAO.setUsuarioCadastrado(usuario);
+		usuarioDAO.setUsuarioSelecionado(usuario);
 		
 		Evento evento = new Evento();
 		evento.setNome("Evento");

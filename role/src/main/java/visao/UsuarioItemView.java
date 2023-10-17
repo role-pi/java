@@ -81,7 +81,7 @@ public class UsuarioItemView extends RoundedPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSelecionar) {
-			UsuarioDAO.getInstance().setUsuarioCadastrado(usuario);
+			UsuarioDAO.getInstance().setUsuarioSelecionado(usuario);
 			JFrame tela = new MainWindow();
 			setVisible(false);
 			tela.setVisible(true);
