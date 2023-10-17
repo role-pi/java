@@ -16,7 +16,7 @@ public class UsuarioDAOTest {
     
     public UsuarioDAOTest() {
     	this.usuarioDao = UsuarioDAO.getInstance();
-    	this.usuario = new Usuario(0, "Nome", "Email");
+    	this.usuario = new Usuario(0, "Nome", "teste@email.com");
     }
     
 	@Test
@@ -40,14 +40,14 @@ public class UsuarioDAOTest {
 		int insertId = usuarioDao.insert(usuario);
 		usuario.setId(insertId);
 	    usuario.setNome("Novo nome teste");
-	    usuario.setEmail("novotest@email.com");
+	    usuario.setEmail("novoteste@email.com");
 	    assertTrue(usuarioDao.update(usuario));
 	    Usuario usuarioUpdate = usuarioDao.list().stream()
 	            .filter(u -> u.getId() == insertId)
 	            .findFirst()
 	            .orElse(null);
 	    assertEquals("Novo nome teste", usuarioUpdate.getNome());
-	    assertEquals("novotest@email.com", usuarioUpdate.getEmail());
+	    assertEquals("novoteste@email.com", usuarioUpdate.getEmail());
 	}
 	
 	@Test
