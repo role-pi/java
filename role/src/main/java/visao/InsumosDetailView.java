@@ -145,26 +145,41 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 	
 	public void editarInsumos() {
 		for (int i = 0; i <= model.getRowCount() - 1; i++) {
+			boolean update = false;
+			
 			Insumo oldInsumo = evento.getInsumos().get(i);
 			Transacao oldTransacao = oldInsumo.getTransacao();
 
 			int tipo = Arrays.asList(Insumo.allTipos()).indexOf(String.valueOf(model.getValueAt(i, 0)));
+			if (oldInsumo.getTipo() != tipo)
+				update = true;
+			
 			oldInsumo.setTipo(tipo);
 			
 			String nome = String.valueOf(model.getValueAt(i, 1));
 			if (!nome.isEmpty()) {
+				if (oldInsumo.getNome() != nome)
+					update = true;
+				
 				oldInsumo.setNome(nome);
 			}
 			
 			String descricao = String.valueOf(model.getValueAt(i, 2));
 			if (!descricao.isEmpty()) {
+				if (oldInsumo.getDescricao() != descricao)
+					update = true;
+				
 				oldInsumo.setDescricao(descricao);
 			}
 
 			Double valor = Double.valueOf(String.valueOf(model.getValueAt(i, 3)).replaceAll("[^-\\d.]", ""));
+			if (oldTransacao.getValor() != valor)
+				update = true;
+			
 			oldTransacao.setValor(valor);
-		
-			InsumoDAO.getInstance().update(oldInsumo);
+			
+			if (update)
+				InsumoDAO.getInstance().update(oldInsumo);
         }
 		
 		update();

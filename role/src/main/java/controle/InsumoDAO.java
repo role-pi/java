@@ -112,9 +112,9 @@ public class InsumoDAO implements DAO<Insumo> {
         			ps2.executeUpdate();
         			
 
-        			ResultSet rs2 = ps.getGeneratedKeys();
+        			ResultSet rs2 = ps2.getGeneratedKeys();
                     if (rs2.next()) {
-                        int insertId2 = rs.getInt(1);
+                        int insertId2 = rs2.getInt(1);
                         insumo.getTransacao().setId(insertId2);
                     }
                     
