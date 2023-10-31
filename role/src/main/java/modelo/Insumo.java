@@ -2,22 +2,22 @@ package modelo;
 
 public class Insumo {
     private int id;
-    private int tipo;
-    private String nome;
-    private String descricao;
+    private int tipo = 0;
+    private String nome = "";
+    private String descricao = "";
     
-    private Transacao transacao;
-    private Evento evento;
+    private Transacao transacao = new Transacao();
+    private Evento evento = new Evento();
     
     public Insumo() {
     	
     }
 
     public Insumo(int tipo, String nome, String descricao, Transacao transacao, Evento evento) {
-    	this.id = 0;
-        this.tipo = tipo;
-        this.nome = nome;
-        this.descricao = descricao;
+    	this.setId(0);
+        this.setTipo(tipo);
+        this.setNome(nome);
+        this.setDescricao(descricao);
         this.setEvento(evento);
         this.setTransacao(transacao);
     }

@@ -40,7 +40,7 @@ public class InsumoDAO implements DAO<Insumo> {
     	try {
 			PreparedStatement ps = con.prepareStatement(query);
 	    	if (evento != null) {
-	    		ps.setInt(0, evento.getId());
+	    		ps.setInt(1, evento.getId());
 	    	}
 
 			ResultSet rs = ps.executeQuery();

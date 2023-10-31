@@ -88,22 +88,22 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 		titlePanel.add(gerarRelatorio);
 		gerarRelatorio.setFont(new Font("Inter", Font.PLAIN, 15));
 
-		gerarRelatorio.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Document document = new Document();
-
-				try {
-					PdfWriter.getInstance(document, new FileOutputStream("relatório em PDF"));
-					document.open();
-					document.add(new Paragraph("conteúdo do relatório em PDF."));
-					JOptionPane.showMessageDialog(null, "relatório em PDF gerado com sucesso!");
-				} catch (DocumentException | FileNotFoundException dex) {
-					dex.printStackTrace();
-				}
-				document.close();
-			}
-		});
+//		gerarRelatorio.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Document document = new Document();
+//
+//				try {
+//					PdfWriter.getInstance(document, new FileOutputStream("relatório em PDF"));
+//					document.open();
+//					document.add(new Paragraph("conteúdo do relatório em PDF."));
+//					JOptionPane.showMessageDialog(null, "relatório em PDF gerado com sucesso!");
+//				} catch (DocumentException | FileNotFoundException dex) {
+//					dex.printStackTrace();
+//				}
+//				document.close();
+//			}
+//		});
 
 		Component verticalStrut = Box.createVerticalStrut(10);
 		contentPanel.add(verticalStrut);

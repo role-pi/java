@@ -141,6 +141,27 @@ public class UsuarioDAO implements DAO<Usuario> {
         return false;
 	}
 	
+	public boolean clear() {
+    	Conexao c = Conexao.getInstancia();
+
+    	Connection con = c.conectar();
+
+    	String query = "DELETE FROM usuarios";
+    	
+    	try {
+    	    PreparedStatement ps = con.prepareStatement(query);
+			ps.executeUpdate();
+    	    ps.close();
+
+            return true;
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	} finally {
+    	    c.fecharConexao();
+    	}
+    	return false;
+	}
+	
 	// Singleton
 	
 	public Usuario getUsuarioSelecionado() {

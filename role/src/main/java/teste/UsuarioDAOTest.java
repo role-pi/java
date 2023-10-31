@@ -5,9 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import controle.UsuarioDAO;
+import modelo.Evento;
 import modelo.Usuario;
 
 public class UsuarioDAOTest {
@@ -18,6 +21,20 @@ public class UsuarioDAOTest {
     	this.usuarioDao = UsuarioDAO.getInstance();
     	this.usuario = new Usuario(0, "Nome", "teste@email.com");
     }
+    
+    @Test
+	public void testListUsuarios() {
+    	usuarioDao.clear();
+    	
+    	Usuario usuario1 = new Usuario(0, "Usuario 1", "teste1@email.com");
+		usuarioDao.insert(usuario1);
+		
+		Usuario usuario2 = new Usuario(0, "Usuario 2", "teste2@email.com");
+		usuarioDao.insert(usuario2);
+		
+		ArrayList<Usuario> usuarios = usuarioDao.list();
+		assertEquals(usuarios.size(), 2);
+	}
     
 	@Test
 	public void testInsertUsuario() {

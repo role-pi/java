@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public class Transacao {
 	private int id;
-	private double valor;
-    private LocalDateTime data;
-    private Usuario usuario;
+	private double valor = 0;
+    private LocalDateTime data = LocalDateTime.now();
+    private Usuario usuario = new Usuario();
     
     public Transacao() {
     	

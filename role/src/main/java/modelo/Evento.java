@@ -9,12 +9,12 @@ import java.util.Locale;
 public class Evento {
 	private int id;
 	
-	private String emoji;
-	private Color color;
-	private String nome;
-	private String local;
-	private LocalDateTime dataInicio;
-	private LocalDateTime dataFim;
+	private String emoji = "";
+	private Color color = Color.black;
+	private String nome = "";
+	private String local = "";
+	private LocalDateTime dataInicio = LocalDateTime.now();
+	private LocalDateTime dataFim = LocalDateTime.now();
 	
 	private ArrayList<Insumo> insumos = new ArrayList<>();
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
