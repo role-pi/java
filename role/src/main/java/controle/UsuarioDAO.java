@@ -55,9 +55,10 @@ public class UsuarioDAO implements DAO<Usuario> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.fecharConexao();
 		}
     	
-		c.fecharConexao();
 		return usuarios;
 	}
 	    	
@@ -81,10 +82,10 @@ public class UsuarioDAO implements DAO<Usuario> {
                 int insertId = rs.getInt(1);
     			return insertId;
             }
-
-			c.fecharConexao();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.fecharConexao();
 		}
 		return 0;
 	}
@@ -104,11 +105,12 @@ public class UsuarioDAO implements DAO<Usuario> {
 				int rowsUpdated = ps.executeUpdate();
 				
 				ps.close();
-				c.fecharConexao();
 	
 				return rowsUpdated > 0;
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				c.fecharConexao();
 			}
 		}
 		return false;
@@ -129,11 +131,11 @@ public class UsuarioDAO implements DAO<Usuario> {
     			ps.executeUpdate();
         	    ps.close();
 
-        	    c.fecharConexao();
-
                 return true;
         	} catch (SQLException e) {
         	    e.printStackTrace();
+        	} finally {
+        	    c.fecharConexao();
         	}
         }
         return false;

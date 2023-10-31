@@ -36,6 +36,7 @@ public class InsumoDAO implements DAO<Insumo> {
     	}
 
     	ArrayList<Insumo> insumos = new ArrayList<Insumo>();
+    	
     	try {
 			PreparedStatement ps = con.prepareStatement(query);
 	    	if (evento != null) {
@@ -68,9 +69,10 @@ public class InsumoDAO implements DAO<Insumo> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.fecharConexao();
 		}
     	
-		c.fecharConexao();
 		return insumos;
 	}
 
@@ -102,32 +104,26 @@ public class InsumoDAO implements DAO<Insumo> {
             				+ "(valor, data, usuarios_id_usuario, insumos_id_insumo) "
             				+ "VALUES (?, ?, ?, ?)";
                     
-                    try {
-            			PreparedStatement ps2 = con.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-            			ps2.setDouble(1, insumo.getTransacao().getValor());
-            			ps2.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-            			ps2.setInt(3, UsuarioDAO.getInstance().getUsuarioSelecionado().getId());
-            			ps2.setInt(4, insertId);
-            			ps2.executeUpdate();
-            			
+        			PreparedStatement ps2 = con.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+        			ps2.setDouble(1, insumo.getTransacao().getValor());
+        			ps2.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+        			ps2.setInt(3, UsuarioDAO.getInstance().getUsuarioSelecionado().getId());
+        			ps2.setInt(4, insertId);
+        			ps2.executeUpdate();
+        			
 
-            			ResultSet rs2 = ps.getGeneratedKeys();
-                        if (rs2.next()) {
-                            int insertId2 = rs.getInt(1);
-                            insumo.getTransacao().setId(insertId2);
-                        }
-            			
-            			c.fecharConexao();
-                        
-            			return insertId;
-                    } catch (SQLException e) {
-            			e.printStackTrace();
-            		}
+        			ResultSet rs2 = ps.getGeneratedKeys();
+                    if (rs2.next()) {
+                        int insertId2 = rs.getInt(1);
+                        insumo.getTransacao().setId(insertId2);
+                    }
+                    
+        			return insertId;
                 }
-
-    			c.fecharConexao();
     		} catch (SQLException e) {
     			e.printStackTrace();
+    		} finally {
+    			c.fecharConexao();
     		}
         }
         return 0;
@@ -152,21 +148,16 @@ public class InsumoDAO implements DAO<Insumo> {
     			
         		String query2 = "UPDATE transacoes SET valor = ? WHERE id_transacao = ?";
                 
-                try {
-        			PreparedStatement ps2 = con.prepareStatement(query2);
-        			ps2.setDouble(1, insumo.getTransacao().getValor());
-        			ps2.setInt(2, insumo.getTransacao().getId());
-        			ps2.executeUpdate();
-        			c.fecharConexao();
-                    
-        			return true;
-                } catch (SQLException e) {
-        			e.printStackTrace();
-        		}
-
-    			c.fecharConexao();
+    			PreparedStatement ps2 = con.prepareStatement(query2);
+    			ps2.setDouble(1, insumo.getTransacao().getValor());
+    			ps2.setInt(2, insumo.getTransacao().getId());
+    			ps2.executeUpdate();
+    			
+    			return true;
     		} catch (SQLException e) {
     			e.printStackTrace();
+    		} finally {
+    			c.fecharConexao();
     		}
         }
         return false;
@@ -186,11 +177,11 @@ public class InsumoDAO implements DAO<Insumo> {
     			ps.executeUpdate();
         	    ps.close();
 
-        	    c.fecharConexao();
-
                 return true;
         	} catch (SQLException e) {
         	    e.printStackTrace();
+        	} finally {
+        	    c.fecharConexao();
         	}
         }
         return false;

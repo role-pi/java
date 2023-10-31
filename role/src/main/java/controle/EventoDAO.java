@@ -58,11 +58,11 @@ public class EventoDAO implements DAO<Evento> {
 
     	    rs.close();
     	    ps.close();
-
-    	    c.fecharConexao();
     	} catch (SQLException e) {
     	    e.printStackTrace();
-    	}
+    	} finally {
+			c.fecharConexao();
+		}
 
 	    return eventos;
     }
@@ -96,15 +96,14 @@ public class EventoDAO implements DAO<Evento> {
         			ps2.setInt(1,insertId);
         			ps2.setInt(2, usuario.getId());
         			ps2.executeUpdate();
-        			c.fecharConexao();
                     
         			return insertId;
                 }
     		} catch (SQLException e) {
     			e.printStackTrace();
+    		} finally {
+    			c.fecharConexao();
     		}
-
-			c.fecharConexao();
         }
         return 0;
     }
@@ -134,9 +133,9 @@ public class EventoDAO implements DAO<Evento> {
                 }
     		} catch (SQLException e) {
     			e.printStackTrace();
+    		} finally {
+    			c.fecharConexao();
     		}
-
-			c.fecharConexao();
         }
         return 0;
     }
@@ -160,12 +159,13 @@ public class EventoDAO implements DAO<Evento> {
 				int rowsUpdated = ps.executeUpdate();
 				
 				ps.close();
-				c.fecharConexao();
 	
 				return rowsUpdated > 0;
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			} finally {
+    			c.fecharConexao();
+    		}
 		}
 		return false;
 	}
@@ -185,12 +185,12 @@ public class EventoDAO implements DAO<Evento> {
     			ps.executeUpdate();
         	    ps.close();
 
-        	    c.fecharConexao();
-
                 return true;
         	} catch (SQLException e) {
         	    e.printStackTrace();
-        	}
+        	} finally {
+    			c.fecharConexao();
+    		}
         }
         return false;
     }
