@@ -2,6 +2,8 @@ package teste;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -62,20 +64,79 @@ public class TransacaoDAOTest {
 	            .findFirst()
 	            .orElse(null);
 		assertNotNull(insumoGet1.getTransacao());
+		
+		Insumo insumoGet2 = insumoDao.list().stream()
+	            .filter(i -> i.getId() == insumo2.getId())
+	            .findFirst()
+	            .orElse(null);
+		assertNotNull(insumoGet2.getTransacao());
 	}
 	
 	@Test
 	public void testInsertTransacao () {
+		Usuario usuario = new Usuario(0, "Nome", "teste@email.com");
+		int usuarioId = usuarioDao.insert(usuario);
+		usuario.setId(usuarioId);
+		usuarioDao.setUsuarioSelecionado(usuario);
 		
-	}
-	
-	@Test
-	public void testUpdateTrasacao () {
+		Evento evento = new Evento();
+		evento.setNome("Evento");
+		int eventoId = eventoDao.insert(evento);
+		evento.setId(eventoId);
 		
+		Insumo insumo = new Insumo();
+		insumo.setNome("Ingresso");
+		insumo.setEvento(evento);
+		
+		Transacao transacao = new Transacao();
+		transacao.setValor(20);
+		insumo.setTransacao(transacao);
+		
+		int insumoId = insumoDao.insert(insumo);
+		insumo.setId(insumoId);
+		
+		transacao.setValor(100);
+		
+		assertTrue(insumoDao.update(insumo));
+		
+		Insumo insumoUpdate = insumoDao.list().stream()
+	            .filter(i -> i.getId() == insumoId)
+	            .findFirst()
+	            .orElse(null);
+	    
+	    assertEquals(insumoUpdate.getTransacao().getValor(), 100, 0.1);
 	}
 	
 	@Test
 	public void testDeleteTrasacao () {
+		Usuario usuario = new Usuario(0, "Nome", "teste@email.com");
+		int usuarioId = usuarioDao.insert(usuario);
+		usuario.setId(usuarioId);
+		usuarioDao.setUsuarioSelecionado(usuario);
+		
+		Evento evento = new Evento();
+		evento.setNome("Evento");
+		int eventoId = eventoDao.insert(evento);
+		evento.setId(eventoId);
+		
+		Insumo insumo = new Insumo();
+		insumo.setNome("Ingresso");
+		insumo.setEvento(evento);
+		
+		Transacao transacao = new Transacao();
+		transacao.setValor(20);
+		insumo.setTransacao(transacao);
+		
+		int insumoId = insumoDao.insert(insumo);
+		insumo.setId(insumoId);
+		
+		assertTrue(insumoDao.delete(insumo));
+		
+		Insumo insumoUpdate = insumoDao.list().stream()
+	            .filter(i -> i.getId() == insumoId)
+	            .findFirst()
+	            .orElse(null);
+		assertNull(insumoUpdate);
 		
 	}
 }

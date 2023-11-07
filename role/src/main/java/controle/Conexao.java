@@ -10,7 +10,7 @@ public class Conexao {
 	
 	private static final String DATABASE = "rolejava";
 	private static final String USER     = "root";
-	private static final String PSW      = "root";
+	private static final String PSW      = "aluno";
 	
 	public Conexao() {}
 	
