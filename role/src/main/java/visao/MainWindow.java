@@ -21,11 +21,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -129,38 +131,42 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 		Component verticalStrut = Box.createVerticalStrut(10);
 		contentPanel.add(verticalStrut);
 
-		eventsPanel = new JPanel();
-		eventsPanel.setBackground(Color.WHITE);
-		eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
-		update();
-		contentPanel.add(eventsPanel);
+		//
+		DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Tipo", "Mensagem"}, 0);
+        JTable messagesTable = new JTable(tableModel);
+        messagesTable.setFont(new Font("Inter", Font.PLAIN, 15));
 
-		Component verticalStrut_3 = Box.createVerticalStrut(5);
-		contentPanel.add(verticalStrut_3);
+        JScrollPane tableScrollPane = new JScrollPane(messagesTable);
+        tableScrollPane.setPreferredSize(new Dimension(500, 150));
 
-		JPanel newEvent = new RoundedPanel();
-		contentPanel.add(newEvent);
-		newEvent.setLayout(new BoxLayout(newEvent, BoxLayout.X_AXIS));
+        contentPanel.add(tableScrollPane);
 
-		textField = new JTextField();
-		textField.setToolTipText("...digite um evento");
-		newEvent.add(textField);
-		textField.setColumns(10);
+        Component verticalStrut_3 = Box.createVerticalStrut(5);
+        contentPanel.add(verticalStrut_3);
 
-		newEventButton = new JButton("adicionar");
-		newEventButton.addActionListener(this);
-		newEventButton.setEnabled(!textField.getText().isEmpty());
+        JPanel newEvent = new JPanel();
+        contentPanel.add(newEvent);
+        newEvent.setLayout(new BoxLayout(newEvent, BoxLayout.X_AXIS));
 
-		textField.addCaretListener(e -> {
-			newEventButton.setEnabled(!textField.getText().isEmpty());
-		});
+        textField = new JTextField();
+        textField.setToolTipText("...digite um evento");
+        newEvent.add(textField);
+        textField.setColumns(10);
 
-		newEvent.add(newEventButton);
+        JButton newEventButton = new JButton("adicionar");
+        newEventButton.addActionListener(this);
+        newEventButton.setEnabled(!textField.getText().isEmpty());
 
-		newEvent.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
-		newEvent.setBorder(new EmptyBorder(10, 10, 10, 10));
+        textField.addCaretListener(e -> {
+            newEventButton.setEnabled(!textField.getText().isEmpty());
+        });
 
-		setVisible(true);
+        newEvent.add(newEventButton);
+
+        newEvent.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
+        newEvent.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        setVisible(true);
 	}
 
 	public static void main(String[] args) {
@@ -170,28 +176,81 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 	public void update() {
 		eventos = EventoDAO.getInstance().list();
 
-		eventsPanel.removeAll();
-		for (Evento event : eventos) {
-			JPanel eventListItem = new EventoItemView(event, this);
-			eventsPanel.add(eventListItem);
-			Component verticalStrut = Box.createVerticalStrut(5);
-			eventsPanel.add(verticalStrut);
-		}
+        DefaultTableModel tableModel = null;
+		tableModel.setRowCount(0);
 
-		SwingUtilities.updateComponentTreeUI(this);
+        for (Evento event : eventos) {
+            tableModel.addRow(new Object[]{"Evento", event.getNome()});
+        }
+
+        tableModel.addRow(new Object[]{"Informação", "Você já participou de " + eventos.size() + " eventos."});
+        tableModel.addRow(new Object[]{"Informação", "Você gastou R$24.9 em insumos."});
+
+        SwingUtilities.updateComponentTreeUI(this);
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+        Object gerarRelatorio;
 		if (e.getSource() == newEventButton) {
-			if (textField.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Por favor, digite um nome para o evento.");
-			} else {
-				Evento event = new Evento("", textField.getText(), "", null, null);
-				EventoDAO.getInstance().insert(event);
-				textField.setText("");
-				update();
-			}
-		}
+            if (textField.getText().isEmpty()) {
+                addMessage("Erro", "Por favor, digite um nome para o evento.");
+            } else {
+                Evento event = new Evento("", textField.getText(), "", null, null);
+                EventoDAO.getInstance().insert(event);
+                textField.setText("");
+                update();
+            }
+        } else if (e.getSource() == gerarRelatorio) {
+        	
+        }
+            addMessage("Informação", "Relatório em PDF gerado com sucesso!");
+            addMessage("Informação", "Você já participou de " + eventos.size() + " eventos.");
+            addMessage("Informação", "Você gastou R$24.9 em insumos.");
+
+            Document document = new Document();
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+            int userSelection = fileChooser.showSaveDialog(this);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+
+                try {
+                    PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getAbsolutePath() + "Relatório.pdf"));
+                    document.open();
+
+                    eventos = EventoDAO.getInstance().list();
+
+                    int numEventos = eventos.size();
+                    document.add(new Paragraph("Você já participou de " + numEventos + " eventos."));
+
+                    double gastos = 24.9;
+                    document.add(new Paragraph("Você gastou R$" + gastos + " em insumos."));
+
+                    document.close();
+
+                    SwingUtilities.updateComponentTreeUI(this);
+
+                    JOptionPane.showMessageDialog(null, "Relatório em PDF gerado com sucesso!");
+                } catch (DocumentException | FileNotFoundException dex) {
+                    dex.printStackTrace();
+                }
 	}
 }
+
+	private void addMessage(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+    private void addMessage1(String tipo, String mensagem) {
+        DefaultTableModel tableModel;
+		tableModel.addRow(new Object[]{tipo, mensagem});
+    }
+
+    public static void main1(String[] args) {
+        MainWindow tela = new MainWindow();
+    }
