@@ -1,5 +1,6 @@
 package controle;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ public class Conexao {
 	
 	private static final String DATABASE = "rolejava";
 	private static final String USER     = "root";
-	private static final String PSW      = "aluno";
+	private static final String PSW      = "root";
 	
 	public Conexao() {}
 	
@@ -24,6 +25,7 @@ public class Conexao {
 	public Connection conectar() {
 		try {
 			conexao = DriverManager.getConnection("jdbc:mysql://localhost/"+ DATABASE + "?serverTimezone=UTC", USER, PSW);
+			runScript();
 		} catch (Exception e) { 
 			e.printStackTrace(); 
 		}
@@ -41,4 +43,13 @@ public class Conexao {
 
 		return true;
 	}
+	
+	public static void runScript() {
+        try {
+        	String path = new File(ClassLoader.getSystemClassLoader().getResource("scripts_role.sql").getFile()).toPath().toString();
+            SqlScriptRunner.runScript(path, conexao);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 }
