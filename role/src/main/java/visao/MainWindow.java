@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -92,24 +95,34 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Document document = new Document();
+				
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-				try {
-					PdfWriter.getInstance(document, new FileOutputStream("Relatório"));
-					document.open();
+				int userSelection = fileChooser.showSaveDialog(contentPane);
 
-					eventos = EventoDAO.getInstance().list();
-					
-					int numEventos = eventos.size();
-					document.add(new Paragraph("Você já participou de " + numEventos + " eventos."));
-					
-					double gastos = 24.9;
-					document.add(new Paragraph("Você gastou R$" + gastos + " em insumos."));
-					
-					JOptionPane.showMessageDialog(null, "Relatório em PDF gerado com sucesso!");
-				} catch (DocumentException | FileNotFoundException dex) {
-					dex.printStackTrace();
+				if (userSelection == JFileChooser.APPROVE_OPTION) {
+				    File fileToSave = fileChooser.getSelectedFile();
+
+					try {
+						PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getAbsolutePath()+"Relatório.pdf"));
+						document.open();
+	
+						eventos = EventoDAO.getInstance().list();
+						
+						int numEventos = eventos.size();
+						document.add(new Paragraph("Você já participou de " + numEventos + " eventos."));
+						
+						double gastos = 24.9;
+						document.add(new Paragraph("Você gastou R$" + gastos + " em insumos."));
+
+						document.close();
+						
+						JOptionPane.showMessageDialog(null, "Relatório em PDF gerado com sucesso!");
+					} catch (DocumentException | FileNotFoundException dex) {
+						dex.printStackTrace();
+					}
 				}
-				document.close();
 			}
 		});
 
