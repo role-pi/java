@@ -39,7 +39,7 @@ Após o cadastro inicial, o usuário é apresentado com uma lista de seus evento
 | :--: |
 | <img width="384" alt="Tela de Edição do Evento" src="https://github.com/role-pi/java/assets/41346220/53f7486b-8f52-4e6b-bc64-b64db5e02a4e"> |
 
-
+### Fluxograma de uso do sistema e Diagrama de casos de uso
 | Fluxograma de uso do sistema |
 | :--: |
 | ![Fluxograma](https://github.com/role-pi/estudo-de-caso-pds1/assets/111303609/91def2c5-b999-4ecd-92cc-5ac7225c9415) |
