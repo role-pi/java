@@ -4,7 +4,7 @@
 -- MySQL Workbench Forward Engineering
 -- DROP DATABASE role;--  
 
-DROP DATABASE IF EXISTS rolejava;
+-- DROP DATABASE IF EXISTS rolejava;
 
 CREATE DATABASE IF NOT EXISTS rolejava;
 

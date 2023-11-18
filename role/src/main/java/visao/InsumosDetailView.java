@@ -107,7 +107,7 @@ public class InsumosDetailView extends RoundedPanel implements ActionListener, C
 	
 	public void update() {
 		model.setRowCount(0);
-		evento.setInsumos(InsumoDAO.getInstance().list());
+		evento.setInsumos(InsumoDAO.getInstance().list(evento));
 		for (Insumo insumo : evento.getInsumos()) {
 			DecimalFormat df = new DecimalFormat("#,00");
 			model.addRow(new Object[]{Insumo.allTipos()[insumo.getTipo()], insumo.getNome(), insumo.getDescricao(), "R$ "+df.format(insumo.getTransacao().getValor())});

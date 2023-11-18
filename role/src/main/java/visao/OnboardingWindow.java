@@ -35,7 +35,7 @@ public class OnboardingWindow extends JFrame implements ActionListener {
     	texto.setFont(new Font("Inter", Font.PLAIN, 17));
     	contentPane.add(texto);
     	
-    	JPanel logo = new ImageView("src/main/java/visao/Logo.png", new Dimension(83, 33), 0.0);
+    	JPanel logo = new ImageView("resources/Logo.png", new Dimension(83, 33), 0.0);
     	logo.setLocation (50, 10);
     	logo.setSize(new Dimension(83, 83));
     	logo.setBackground(new Color(0, 0, 0, 0));
@@ -62,7 +62,7 @@ public class OnboardingWindow extends JFrame implements ActionListener {
     	
     	nextCadastro.addActionListener(this);
         
-        JPanel fundo = new ImageView("src/main/java/visao/Background.png", new Dimension(400, 400), 0.5);
+        JPanel fundo = new ImageView("resources/Background.png", new Dimension(400, 400), 0.5);
         fundo.setSize(400, 400);
 		contentPane.add(fundo);
 	}

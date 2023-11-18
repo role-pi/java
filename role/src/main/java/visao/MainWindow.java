@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -35,8 +37,11 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import controle.EventoDAO;
+import controle.InsumoDAO;
 import controle.UsuarioDAO;
 import modelo.Evento;
+import modelo.Insumo;
+import modelo.Transacao;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
@@ -101,7 +106,7 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 				if (userSelection == JFileChooser.APPROVE_OPTION) {
 				 File fileToSave = fileChooser.getSelectedFile();
 					try {
-						PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getAbsolutePath()+"Relatório.pdf"));
+						PdfWriter.getInstance(document, new FileOutputStream(fileToSave.getAbsolutePath()+".pdf"));
 						document.open();
 	
 						eventos = EventoDAO.getInstance().list();
@@ -109,8 +114,31 @@ public class MainWindow extends JFrame implements ActionListener, UpdatableView 
 						int numEventos = eventos.size();
 						document.add(new Paragraph("Você já participou de " + numEventos + " eventos."));
 						
-						double gastos = 24.9;
-						document.add(new Paragraph("Você gastou R$" + gastos + " em insumos."));
+						double total = 0.0;
+						Map<Integer, Integer> tipos = new HashMap<Integer, Integer>();
+						int maior = 0;
+						int tipo = 0;
+						
+						for (Evento evento : eventos) {
+							ArrayList<Insumo> insumos = InsumoDAO.getInstance().list(evento);
+							
+							for (Insumo insumo : insumos) {
+								Transacao transacao = insumo.getTransacao();
+								total+= transacao.getValor();
+								
+								int ocorrencias = tipos.getOrDefault(insumo.getTipo(), 0);
+								if (ocorrencias >= maior) {
+									maior = ocorrencias;
+									tipo = insumo.getTipo();
+								}
+								
+								tipos.put(insumo.getTipo(), ocorrencias+1);
+							}
+						}
+						
+						document.add(new Paragraph("Você gastou R$" + total + " em insumos."));
+						document.add(new Paragraph("Os seus gastos mais frequentes foram em "+Insumo.allTipos()[tipo]+"."));
+
 						document.close();
 						
 						JOptionPane.showMessageDialog(null, "Relatório em PDF gerado com sucesso!");

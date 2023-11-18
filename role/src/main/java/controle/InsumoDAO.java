@@ -70,7 +70,7 @@ public class InsumoDAO implements DAO<Insumo> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			c.fecharConexao();
+			c.desconectar();
 		}
     	
 		return insumos;
@@ -123,7 +123,7 @@ public class InsumoDAO implements DAO<Insumo> {
     		} catch (SQLException e) {
     			e.printStackTrace();
     		} finally {
-    			c.fecharConexao();
+    			c.desconectar();
     		}
         }
         return 0;
@@ -157,7 +157,7 @@ public class InsumoDAO implements DAO<Insumo> {
     		} catch (SQLException e) {
     			e.printStackTrace();
     		} finally {
-    			c.fecharConexao();
+    			c.desconectar();
     		}
         }
         return false;
@@ -181,7 +181,7 @@ public class InsumoDAO implements DAO<Insumo> {
         	} catch (SQLException e) {
         	    e.printStackTrace();
         	} finally {
-        	    c.fecharConexao();
+        	    c.desconectar();
         	}
         }
         return false;

@@ -17,7 +17,8 @@ public class Conexao {
 	
 	public static Conexao getInstancia() {
 		if (instancia == null) { 
-			instancia = new Conexao(); 
+			instancia = new Conexao();
+			instancia.runScript();
 		}
 		return instancia;	
 	}
@@ -25,14 +26,13 @@ public class Conexao {
 	public Connection conectar() {
 		try {
 			conexao = DriverManager.getConnection("jdbc:mysql://localhost/"+ DATABASE + "?serverTimezone=UTC", USER, PSW);
-			runScript();
 		} catch (Exception e) { 
 			e.printStackTrace(); 
 		}
 		return conexao;		
 	}
 	
-	public boolean fecharConexao() { 
+	public boolean desconectar() { 
 		try { 
 			conexao.close(); 
 		} 
@@ -44,10 +44,12 @@ public class Conexao {
 		return true;
 	}
 	
-	public static void runScript() {
+	public void runScript() {
         try {
+			conectar();
         	String path = new File(ClassLoader.getSystemClassLoader().getResource("scripts_role.sql").getFile()).toPath().toString();
             SqlScriptRunner.runScript(path, conexao);
+			desconectar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

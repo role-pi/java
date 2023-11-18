@@ -56,7 +56,7 @@ public class UsuarioDAO implements DAO<Usuario> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			c.fecharConexao();
+			c.desconectar();
 		}
     	
 		return usuarios;
@@ -85,7 +85,7 @@ public class UsuarioDAO implements DAO<Usuario> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			c.fecharConexao();
+			c.desconectar();
 		}
 		return 0;
 	}
@@ -110,7 +110,7 @@ public class UsuarioDAO implements DAO<Usuario> {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
-				c.fecharConexao();
+				c.desconectar();
 			}
 		}
 		return false;
@@ -135,7 +135,7 @@ public class UsuarioDAO implements DAO<Usuario> {
         	} catch (SQLException e) {
         	    e.printStackTrace();
         	} finally {
-        	    c.fecharConexao();
+        	    c.desconectar();
         	}
         }
         return false;
@@ -157,7 +157,7 @@ public class UsuarioDAO implements DAO<Usuario> {
     	} catch (SQLException e) {
     	    e.printStackTrace();
     	} finally {
-    	    c.fecharConexao();
+    	    c.desconectar();
     	}
     	return false;
 	}

@@ -15,7 +15,7 @@ public class HeaderView extends JPanel {
 	}
 	
 	public HeaderView() {
-		setup("src/main/java/visao/Usuário.png");
+		setup("resources/Usuário.png");
 	}
 	
 	private void setup(String user) {
@@ -25,7 +25,7 @@ public class HeaderView extends JPanel {
 
 		setBorder(new EmptyBorder(0, 20, 0, 20));
 		
-		JPanel imagem = new ImageView("src/main/java/visao/Logo.png", new Dimension(83, 33), 0.0);
+		JPanel imagem = new ImageView("resources/Logo.png", new Dimension(83, 33), 0.0);
 		imagem.setAlignmentX(Component.LEFT_ALIGNMENT);
 		imagem.setBackground(new Color(0, 0, 0, 0));
 		add(imagem);
